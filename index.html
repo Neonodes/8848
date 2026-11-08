@@ -166,31 +166,31 @@
             <!-- Altitude Tag Indicator -->
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 text-xs font-mono mb-8 backdrop-blur-md">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span data-i18n="hero_badge">HÖJD: 8 848 M ÖVER HAVET</span>
+                <span data-i18n="hero_badge">BASLÄGER • 8 848 METER UPP</span>
             </div>
 
-            <!-- Main Title -->
+            <!-- Main Title (Naturlig och levande ton) -->
             <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-6 leading-tight">
-                <span data-i18n="hero_title1">Nå Nya Höjder</span> <br/>
-                <span class="bg-gradient-to-r from-sky-400 via-indigo-200 to-teal-300 bg-clip-text text-transparent" data-i18n="hero_title2">Bortom Toppen</span>
+                <span data-i18n="hero_title1">Sätt sikte på toppen</span> <br/>
+                <span class="bg-gradient-to-r from-sky-400 via-indigo-200 to-teal-300 bg-clip-text text-transparent" data-i18n="hero_title2">och upptäck utsikten</span>
             </h1>
 
             <!-- Subtitle -->
             <p class="max-w-2xl mx-auto text-base sm:text-xl text-slate-300 font-light mb-10 leading-relaxed" data-i18n="hero_subtitle">
-                Välkommen till toppen. Vi kombinerar höghöjdsinspiration, digital elegans och nyskapande idéer för projekt som vill nå hela vägen upp.
+                Här samlas idéer, lekfulla projekt och höga ambitioner. Spana runt i kikaren, kasta dig ut i klättringen eller säg hej nedanför!
             </p>
 
             <!-- Interactive Easter Eggs Counter Badge -->
             <div class="flex flex-wrap justify-center items-center gap-4 mb-10">
                 <button onclick="toggleBinoculars()" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-semibold shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.02] transition-all flex items-center gap-3">
                     <i class="fa-solid fa-binoculars text-lg"></i>
-                    <span data-i18n="hero_btn_explore">Utforska med kikare</span>
+                    <span data-i18n="hero_btn_explore">Spana med kikaren</span>
                 </button>
 
                 <div class="glass-panel px-4 py-3 rounded-2xl flex items-center gap-3 border border-slate-700/60">
                     <i class="fa-solid fa-trophy text-amber-400 text-lg"></i>
                     <div class="text-left text-xs font-mono">
-                        <span class="text-slate-400 block" data-i18n="hero_treasures_label">Gömda skatter:</span>
+                        <span class="text-slate-400 block" data-i18n="hero_treasures_label">Hemligheter på berget:</span>
                         <span id="eggProgress" class="text-sky-300 font-bold text-sm">0 / 4 Hittade</span>
                     </div>
                 </div>
@@ -199,23 +199,23 @@
             <!-- Scroll indicator -->
             <div class="mt-8">
                 <a href="#minigameSection" class="inline-flex flex-col items-center gap-2 text-slate-400 hover:text-sky-400 transition-colors text-xs font-mono">
-                    <span data-i18n="hero_scroll">UTMANA BERGET</span>
+                    <span data-i18n="hero_scroll">BÖRJA KLÄTTRA</span>
                     <i class="fa-solid fa-chevron-down animate-bounce"></i>
                 </a>
             </div>
         </div>
 
-        <!-- Hidden Interactive Easter Eggs -->
-        <div id="egg1" class="easter-egg-target top-[28%] left-[12%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30" title="Click to inspect treasure" onclick="discoverEgg(1, 'Golden Ice Axe', 'Du hittade en förgylld isyxa från den första topexpeditionen!')">
+        <!-- Utspridda hemligheter på berget (Syns ENDAST vid aktivt kikarläge) -->
+        <div id="egg1" class="easter-egg-target top-[38%] left-[18%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30" title="Skatt hittad!" onclick="discoverEgg(1, 'Golden Ice Axe', 'Du hittade en förgylld isyxa undangömd i snön!')">
             <i class="fa-solid fa-wand-magic-sparkles text-lg animate-pulse"></i>
         </div>
-        <div id="egg2" class="easter-egg-target top-[35%] right-[15%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30" title="Click to inspect treasure" onclick="discoverEgg(2, 'Weather Station', 'Radiosignal mottagen: Toppvindar 12 m/s, -26°C. Klart väder!')">
+        <div id="egg2" class="easter-egg-target top-[62%] right-[22%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30" title="Skatt hittad!" onclick="discoverEgg(2, 'Weather Station', 'Radiosignal: Toppvindar 12 m/s, -26°C. Solsken!')">
             <i class="fa-solid fa-satellite-dish text-lg animate-bounce"></i>
         </div>
-        <div id="egg3" class="easter-egg-target top-[68%] left-[8%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30" title="Click to inspect treasure" onclick="discoverEgg(3, 'Snow Leopard', 'Sällsynt iakttagelse! En snöleopard rör sig stolt längs kammen.')">
+        <div id="egg3" class="easter-egg-target top-[82%] left-[32%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30" title="Skatt hittad!" onclick="discoverEgg(3, 'Snow Leopard', 'Sällsynt iakttagelse! En snöleopard vilar på klippkanten.')">
             <i class="fa-solid fa-cat text-lg"></i>
         </div>
-        <div id="egg4" class="easter-egg-target top-[22%] left-[48%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30" title="Click to inspect treasure" onclick="discoverEgg(4, 'Summit Flag', 'Grattis! Du har nått den högsta punkten på Mount Everest!')">
+        <div id="egg4" class="easter-egg-target top-[18%] right-[28%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30" title="Skatt hittad!" onclick="discoverEgg(4, 'Summit Flag', 'Här är det! Du har nått den allra högsta punkten!')">
             <i class="fa-solid fa-flag text-lg"></i>
         </div>
     </section>
@@ -225,10 +225,10 @@
         <div class="max-w-4xl mx-auto">
             
             <div class="text-center mb-12">
-                <span class="text-sky-400 font-mono text-xs tracking-wider uppercase" data-i18n="game_tag">MINISPEL &bull; SUMMIT ASCENT</span>
+                <span class="text-sky-400 font-mono text-xs tracking-wider uppercase" data-i18n="game_tag">MINISPEL &bull; EXPEDITIONEN</span>
                 <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2" data-i18n="game_title">Klättra till 8 848 Meter</h2>
                 <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-xl mx-auto" data-i18n="game_desc">
-                    Klicka på knappen eller tryck på <kbd class="px-2 py-1 bg-slate-800 rounded border border-slate-700 text-sky-300 font-mono text-xs">SPACEBAR</kbd> för att nå toppen. Passera lägren på vägen för unika belöningar!
+                    Klicka på knappen eller tryck på <kbd class="px-2 py-1 bg-slate-800 rounded border border-slate-700 text-sky-300 font-mono text-xs">SPACEBAR</kbd> för att ta dig uppåt. Passera lägren på vägen!
                 </p>
             </div>
 
@@ -257,7 +257,7 @@
 
                 <!-- Current Camp / Status banner -->
                 <div id="campStatusBanner" class="mb-8 p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-center font-mono text-xs text-slate-300">
-                    <i class="fa-solid fa-campground text-sky-400 mr-2"></i> <span id="campStatusText">Basecamp (0m) – Gör dig redo för avfärd!</span>
+                    <i class="fa-solid fa-campground text-sky-400 mr-2"></i> <span id="campStatusText">Basecamp (0m) – Snöra kängorna och börja klättringen!</span>
                 </div>
 
                 <!-- Game Stats & Action Button -->
@@ -300,10 +300,10 @@
         <div class="max-w-3xl mx-auto">
             
             <div class="text-center mb-12">
-                <span class="text-sky-400 font-mono text-xs tracking-wider uppercase" data-i18n="contact_tag">KONTAKT &bull; EPOST</span>
-                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2" data-i18n="contact_title">Hör Av Dig</h2>
+                <span class="text-sky-400 font-mono text-xs tracking-wider uppercase" data-i18n="contact_tag">KONTAKT &bull; HÖR AV DIG</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2" data-i18n="contact_title">Skicka en hälsning</h2>
                 <p class="text-slate-400 text-sm sm:text-base mt-2" data-i18n="contact_desc">
-                    Skicka ett meddelande direkt genom formuläret nedan.
+                    Har du en idé, en fråga eller vill bara bolla något? Skriv ett rad nedan.
                 </p>
             </div>
 
@@ -322,20 +322,20 @@
 
                     <div>
                         <label class="block text-xs font-mono text-slate-300 mb-2 uppercase" data-i18n="form_msg">Meddelande</label>
-                        <textarea id="senderMessage" rows="4" required placeholder="Berätta om ditt projekt eller ställ en fråga..." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm"></textarea>
+                        <textarea id="senderMessage" rows="4" required placeholder="Skriv din hälsning här..." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm"></textarea>
                     </div>
 
                     <div class="flex items-center justify-end pt-2">
                         <button type="submit" id="submitBtn" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 transition-all flex items-center justify-center gap-2">
                             <i class="fa-solid fa-paper-plane"></i>
-                            <span data-i18n="form_send">Skicka Meddelande</span>
+                            <span data-i18n="form_send">Skicka meddelande</span>
                         </button>
                     </div>
                 </form>
 
                 <!-- Feedback Toast inside container -->
                 <div id="formSuccessMessage" class="hidden mt-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-sm text-center">
-                    <i class="fa-solid fa-circle-check mr-2"></i> <span data-i18n="form_success">Tack! Ditt meddelande har skickats. Vi återkommer snart.</span>
+                    <i class="fa-solid fa-circle-check mr-2"></i> <span data-i18n="form_success">Tack! Ditt meddelande har skickats. Vi hör av oss!</span>
                 </div>
                 <div id="formErrorMessage" class="hidden mt-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm text-center">
                     <i class="fa-solid fa-circle-exclamation mr-2"></i> <span id="errorText">Kunde inte skicka meddelande. Försök igen.</span>
@@ -373,29 +373,29 @@
                 nav_binoculars: "Kikarläge",
                 nav_climb: "Klättra (8848m)",
                 nav_contact: "Kontakt",
-                hero_badge: "HÖJD: 8 848 M ÖVER HAVET",
-                hero_title1: "Nå Nya Höjder",
-                hero_title2: "Bortom Toppen",
-                hero_subtitle: "Välkommen till toppen. Vi kombinerar höghöjdsinspiration, digital elegans och nyskapande idéer för projekt som vill nå hela vägen upp.",
-                hero_btn_explore: "Utforska med kikare",
-                hero_treasures_label: "Gömda skatter:",
-                hero_scroll: "UTMANA BERGET",
-                game_tag: "MINISPEL • SUMMIT ASCENT",
+                hero_badge: "BASLÄGER • 8 848 METER UPP",
+                hero_title1: "Sätt sikte på toppen",
+                hero_title2: "och upptäck utsikten",
+                hero_subtitle: "Här samlas idéer, lekfulla projekt och höga ambitioner. Spana runt i kikaren, kasta dig ut i klättringen eller säg hej nedanför!",
+                hero_btn_explore: "Spana med kikaren",
+                hero_treasures_label: "Hemligheter på berget:",
+                hero_scroll: "BÖRJA KLÄTTRA",
+                game_tag: "MINISPEL • EXPEDITIONEN",
                 game_title: "Klättra till 8 848 Meter",
-                game_desc: "Klicka på knappen eller tryck på SPACEBAR för att nå toppen. Passera lägren på vägen för unika belöningar!",
+                game_desc: "Klicka på knappen eller tryck på SPACEBAR för att ta dig uppåt. Passera lägren på vägen!",
                 game_current_alt: "Aktuell Höjd:",
                 game_time: "TID",
                 game_btn_climb: "KLÄTTRA!",
                 game_record: "BÄSTA TID",
                 game_reset: "Nollställ klättring",
-                contact_tag: "KONTAKT • EPOST",
-                contact_title: "Hör Av Dig",
-                contact_desc: "Skicka ett meddelande direkt genom formuläret nedan.",
+                contact_tag: "KONTAKT • HÖR AV DIG",
+                contact_title: "Skicka en hälsning",
+                contact_desc: "Har du en idé, en fråga eller vill bara bolla något? Skriv ett rad nedan.",
                 form_name: "Ditt Namn",
                 form_email: "E-postadress",
                 form_msg: "Meddelande",
-                form_send: "Skicka Meddelande",
-                form_success: "Tack! Ditt meddelande har skickats. Vi återkommer snart.",
+                form_send: "Skicka meddelande",
+                form_success: "Tack! Ditt meddelande har skickats. Vi hör av oss!",
                 footer_rights: "Alla rättigheter förbehållna.",
                 footer_elev: "Höjd: 8 848m"
             },
@@ -404,29 +404,29 @@
                 nav_binoculars: "Binoculars Mode",
                 nav_climb: "Climb (8848m)",
                 nav_contact: "Contact",
-                hero_badge: "ELEVATION: 8,848M ABOVE SEA LEVEL",
-                hero_title1: "Reach New Heights",
-                hero_title2: "Beyond the Summit",
-                hero_subtitle: "Welcome to the summit. Combining high-altitude inspiration, digital elegance, and innovative ideas for projects aiming all the way to the top.",
-                hero_btn_explore: "Explore with Binoculars",
-                hero_treasures_label: "Hidden Treasures:",
-                hero_scroll: "CHALLENGE THE MOUNTAIN",
-                game_tag: "MINIGAME • SUMMIT ASCENT",
+                hero_badge: "BASECAMP • 8,848 METERS UP",
+                hero_title1: "Set your sights high",
+                hero_title2: "and discover the view",
+                hero_subtitle: "A home for ideas, playful projects, and high ambitions. Look around with binoculars, take on the climb, or say hello below!",
+                hero_btn_explore: "Look with Binoculars",
+                hero_treasures_label: "Mountain secrets:",
+                hero_scroll: "START CLIMBING",
+                game_tag: "MINIGAME • THE EXPEDITION",
                 game_title: "Climb to 8,848 Meters",
-                game_desc: "Click the button or hit your SPACEBAR to reach the summit. Pass camps along the way for unique rewards!",
+                game_desc: "Click the button or hit your SPACEBAR to ascend. Pass camps along the way!",
                 game_current_alt: "Current Altitude:",
                 game_time: "TIME",
                 game_btn_climb: "CLIMB UP!",
                 game_record: "BEST RECORD",
                 game_reset: "Reset Climb",
-                contact_tag: "CONTACT • EMAIL",
-                contact_title: "Get in Touch",
-                contact_desc: "Send a message directly through the form below.",
+                contact_tag: "CONTACT • GET IN TOUCH",
+                contact_title: "Send a message",
+                contact_desc: "Got an idea, a question, or just want to connect? Drop a line below.",
                 form_name: "Your Name",
                 form_email: "Email Address",
                 form_msg: "Message",
-                form_send: "Send Message",
-                form_success: "Thank you! Your message has been sent. We'll get back to you soon.",
+                form_send: "Send message",
+                form_success: "Thank you! Your message has been sent. We'll be in touch!",
                 footer_rights: "All rights reserved.",
                 footer_elev: "Elevation: 8,848m"
             }
@@ -452,7 +452,6 @@
             setLanguage(currentLang === 'sv' ? 'en' : 'sv');
         }
 
-        // Init language on load
         setLanguage(currentLang);
 
         /* =========================================================
@@ -553,7 +552,7 @@
             if (binocularsActive) {
                 document.body.classList.add('binoculars-active');
                 btn.classList.add('bg-sky-500', 'text-slate-950', 'border-sky-400');
-                showToast(currentLang === 'sv' ? 'Kikarläge Aktiverat' : 'Binoculars Mode Enabled', currentLang === 'sv' ? 'Svep med musen över berget för att finna skatter!' : 'Move your mouse over the mountain to find hidden treasures!', 'info');
+                showToast(currentLang === 'sv' ? 'Kikarläge Aktiverat' : 'Binoculars Mode Enabled', currentLang === 'sv' ? 'Svep med musen över sidan för att hitta bergets hemligheter!' : 'Move your mouse around to find mountain secrets!', 'info');
             } else {
                 document.body.classList.remove('binoculars-active');
                 btn.classList.remove('bg-sky-500', 'text-slate-950', 'border-sky-400');
@@ -582,11 +581,11 @@
                 targetEl.classList.add('ring-4', 'ring-emerald-400', 'scale-125');
             }
 
-            showToast(`${currentLang === 'sv' ? 'Skatt Hittad' : 'Treasure Found'}: ${title}`, desc, 'success');
+            showToast(`${currentLang === 'sv' ? 'Hemlighet Hittad' : 'Secret Found'}: ${title}`, desc, 'success');
 
             if (discoveredEggs.size === 4) {
                 setTimeout(() => {
-                    showToast(currentLang === 'sv' ? 'GRATTIS! Alla skatter hittade!' : 'CONGRATULATIONS! All treasures found!', currentLang === 'sv' ? 'Du har utforskat hela toppen av 8848!' : 'You have fully explored the summit of 8848!', 'success');
+                    showToast(currentLang === 'sv' ? 'GRATTIS! Alla hemligheter hittade!' : 'CONGRATULATIONS! All secrets found!', currentLang === 'sv' ? 'Du har utforskat varenda vrå av 8848!' : 'You have fully explored 8848!', 'success');
                 }, 1200);
             }
         }
@@ -630,21 +629,20 @@
             const percent = (currentAltitude / 8848) * 100;
             document.getElementById('altitudeBar').style.width = `${percent}%`;
 
-            // Check milestone camps and give rewards/notifications
             const banner = document.getElementById('campStatusText');
             
             if (currentAltitude >= 2200 && !passedCamps.c1) {
                 passedCamps.c1 = true;
-                banner.textContent = currentLang === 'sv' ? 'Camp 1 (2,200m) nådd! Extra syrgas säkrad 🧊' : 'Camp 1 (2,200m) reached! Extra oxygen secured 🧊';
-                showToast(currentLang === 'sv' ? 'Camp 1 Säkrat!' : 'Camp 1 Secured!', currentLang === 'sv' ? 'Du passerade isfallet galant.' : 'You successfully navigated the icefall.', 'success');
+                banner.textContent = currentLang === 'sv' ? 'Camp 1 (2,200m) nådd! Fint flyt i klättringen 🧊' : 'Camp 1 (2,200m) reached! Great momentum 🧊';
+                showToast(currentLang === 'sv' ? 'Camp 1 Passerat!' : 'Camp 1 Cleared!', currentLang === 'sv' ? 'Isfallet avklarat.' : 'Icefall navigated.', 'success');
             } else if (currentAltitude >= 4400 && !passedCamps.c2) {
                 passedCamps.c2 = true;
                 banner.textContent = currentLang === 'sv' ? 'Camp 2 (4,400m) nådd! Halvvägs upp, fantastisk vy ⛺' : 'Camp 2 (4,400m) reached! Halfway up, amazing view ⛺';
-                showToast(currentLang === 'sv' ? 'Camp 2 Nått!' : 'Camp 2 Reached!', currentLang === 'sv' ? 'Vädret är stabilt. Fortsätt uppåt!' : 'Weather is stable. Keep pushing!', 'success');
+                showToast(currentLang === 'sv' ? 'Camp 2 Nått!' : 'Camp 2 Reached!', currentLang === 'sv' ? 'Vädret håller i sig. Fortsätt!' : 'Weather holds. Keep going!', 'success');
             } else if (currentAltitude >= 6600 && !passedCamps.c3) {
                 passedCamps.c3 = true;
-                banner.textContent = currentLang === 'sv' ? 'Camp 3 (6,600m) nådd! Dödszonen påbörjad ⚠️' : 'Camp 3 (6,600m) reached! Death zone entered ⚠️';
-                showToast(currentLang === 'sv' ? 'Dödszonen (Camp 3)!' : 'Death Zone (Camp 3)!', currentLang === 'sv' ? 'Tunn luft, men du håller ett grymt tempo!' : 'Thin air, but you are keeping an awesome pace!', 'success');
+                banner.textContent = currentLang === 'sv' ? 'Camp 3 (6,600m) nådd! Tunn luft i dödszonen ⚠️' : 'Camp 3 (6,600m) reached! Thin air in the death zone ⚠️';
+                showToast(currentLang === 'sv' ? 'Dödszonen (Camp 3)!' : 'Death Zone (Camp 3)!', currentLang === 'sv' ? 'Kämpa på, toppen är nära!' : 'Push through, the summit is near!', 'success');
             }
 
             if (currentAltitude >= 8848 && !passedCamps.summit) {
@@ -652,7 +650,7 @@
                 clearInterval(gameInterval);
                 const finalTime = gameTimer.toFixed(1);
                 banner.textContent = currentLang === 'sv' ? '🏆 TOPPEN NÅDD! Mount Everest erövrat!' : '🏆 SUMMIT REACHED! Mount Everest conquered!';
-                showToast(currentLang === 'sv' ? 'TOPPEN NÅDD! (8848m)' : 'SUMMIT REACHED! (8848m)', `${currentLang === 'sv' ? 'Din tid' : 'Your time'}: ${finalTime}s!`, 'success');
+                showToast(currentLang === 'sv' ? 'TOPPEN NÅDD! (8848m)' : 'SUMMIT REACHED! (8848m)', `${currentLang === 'sv' ? 'Tid' : 'Time'}: ${finalTime}s!`, 'success');
 
                 if (!bestRecord || gameTimer < parseFloat(bestRecord)) {
                     bestRecord = gameTimer;
@@ -672,7 +670,7 @@
             document.getElementById('altitudeDisplay').textContent = '0 m';
             document.getElementById('altitudeBar').style.width = '0%';
             document.getElementById('gameTimer').textContent = '0.0s';
-            document.getElementById('campStatusText').textContent = currentLang === 'sv' ? 'Basecamp (0m) – Gör dig redo för avfärd!' : 'Basecamp (0m) – Get ready for departure!';
+            document.getElementById('campStatusText').textContent = currentLang === 'sv' ? 'Basecamp (0m) – Snöra kängorna och börja klättringen!' : 'Basecamp (0m) – Lace up and start climbing!';
         }
 
         document.addEventListener('keydown', (e) => {
@@ -715,7 +713,7 @@
 
                 if (response.ok) {
                     formMsg.classList.remove('hidden');
-                    showToast(currentLang === 'sv' ? 'Meddelande Skickat' : 'Message Sent', currentLang === 'sv' ? `Tack ${payload.name}, ditt meddelande levererades.` : `Thank you ${payload.name}, your message was delivered.`, 'success');
+                    showToast(currentLang === 'sv' ? 'Meddelande Skickat' : 'Message Sent', currentLang === 'sv' ? `Tack ${payload.name}, vi har tagit emot ditt meddelande.` : `Thank you ${payload.name}, your message was delivered.`, 'success');
                     document.getElementById('contactForm').reset();
                 } else {
                     errorText.textContent = result.error || (currentLang === 'sv' ? 'Kunde inte skicka.' : 'Could not send.');
@@ -726,7 +724,7 @@
                 errorMsg.classList.remove('hidden');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>${currentLang === 'sv' ? 'Skicka Meddelande' : 'Send Message'}</span>`;
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>${currentLang === 'sv' ? 'Skicka meddelande' : 'Send message'}</span>`;
             }
         }
 
