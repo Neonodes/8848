@@ -206,16 +206,16 @@
         </div>
 
         <!-- Hidden Interactive Easter Eggs -->
-        <div id="egg1" class="easter-egg-target top-[38%] left-[18%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30" title="Skatt hittad!" onclick="discoverEgg(1, 'Golden Ice Axe', 'Du hittade en förgylld isyxa undangömd i snön!')">
+        <div id="egg1" class="easter-egg-target top-[38%] left-[18%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30" title="Skatt hittad!" onclick="discoverEgg(1, 'Golden Ice Axe', currentLang === 'sv' ? 'Du hittade en förgylld isyxa undangömd i snön!' : 'You found a gilded ice axe hidden in the snow!')">
             <i class="fa-solid fa-wand-magic-sparkles text-lg animate-pulse"></i>
         </div>
-        <div id="egg2" class="easter-egg-target top-[62%] right-[22%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30" title="Skatt hittad!" onclick="discoverEgg(2, 'Weather Station', 'Radiosignal: Toppvindar 12 m/s, -26°C. Solsken!')">
+        <div id="egg2" class="easter-egg-target top-[62%] right-[22%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30" title="Skatt hittad!" onclick="discoverEgg(2, 'Weather Station', currentLang === 'sv' ? 'Radiosignal: Toppvindar 12 m/s, -26°C. Solsken!' : 'Radio signal: Summit winds 12 m/s, -26°C. Sunshine!')">
             <i class="fa-solid fa-satellite-dish text-lg animate-bounce"></i>
         </div>
-        <div id="egg3" class="easter-egg-target top-[82%] left-[32%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30" title="Skatt hittad!" onclick="discoverEgg(3, 'Snow Leopard', 'Sällsynt iakttagelse! En snöleopard vilar på klippkanten.')">
+        <div id="egg3" class="easter-egg-target top-[82%] left-[32%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30" title="Skatt hittad!" onclick="discoverEgg(3, 'Snow Leopard', currentLang === 'sv' ? 'Sällsynt iakttagelse! En snöleopard vilar på klippkanten.' : 'Rare sighting! A snow leopard resting on the ledge.')">
             <i class="fa-solid fa-cat text-lg"></i>
         </div>
-        <div id="egg4" class="easter-egg-target top-[18%] right-[28%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30" title="Skatt hittad!" onclick="discoverEgg(4, 'Summit Flag', 'Här är det! Du har nått den allra högsta punkten!')">
+        <div id="egg4" class="easter-egg-target top-[18%] right-[28%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30" title="Skatt hittad!" onclick="discoverEgg(4, 'Summit Flag', currentLang === 'sv' ? 'Här är det! Du har nått den allra högsta punkten!' : 'Here it is! You reached the highest point!')">
             <i class="fa-solid fa-flag text-lg"></i>
         </div>
     </section>
@@ -312,17 +312,17 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-xs font-mono text-slate-300 mb-2 uppercase" data-i18n="form_name">Ditt Namn</label>
-                            <input type="text" id="senderName" required placeholder="t.ex. Anna Andersson" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm">
+                            <input type="text" id="senderName" required data-i18n-placeholder="ph_name" placeholder="t.ex. Anna Andersson" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-mono text-slate-300 mb-2 uppercase" data-i18n="form_email">E-postadress</label>
-                            <input type="email" id="senderEmail" required placeholder="anna@foretag.se" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm">
+                            <input type="email" id="senderEmail" required data-i18n-placeholder="ph_email" placeholder="anna@foretag.se" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm">
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-xs font-mono text-slate-300 mb-2 uppercase" data-i18n="form_msg">Meddelande</label>
-                        <textarea id="senderMessage" rows="4" required placeholder="Skriv din hälsning här..." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm"></textarea>
+                        <textarea id="senderMessage" rows="4" required data-i18n-placeholder="ph_msg" placeholder="Skriv din hälsning här..." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm"></textarea>
                     </div>
 
                     <div class="flex items-center justify-end pt-2">
@@ -338,7 +338,7 @@
                     <i class="fa-solid fa-circle-check mr-2"></i> <span data-i18n="form_success">Tack! Ditt meddelande har skickats. Vi hör av oss!</span>
                 </div>
                 <div id="formErrorMessage" class="hidden mt-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm text-center">
-                    <i class="fa-solid fa-circle-exclamation mr-2"></i> <span id="errorText">Kunde inte skicka meddelande. Försök igen.</span>
+                    <i class="fa-solid fa-circle-exclamation mr-2"></i> <span id="errorText" data-i18n="form_error">Kunde inte skicka meddelande. Försök igen.</span>
                 </div>
             </div>
         </div>
@@ -394,14 +394,26 @@
                 status_c2: "Camp 2 (4,400m) nådd! Halvvägs upp, fantastisk vy ⛺",
                 status_c3: "Camp 3 (6,600m) nådd! Tunn luft i dödszonen ⚠️",
                 status_summit: "🏆 TOPPEN NÅDD! Mount Everest erövrat!",
+                toast_c1_title: "Camp 1 Passerat!",
+                toast_c1_desc: "Isfallet avklarat.",
+                toast_c2_title: "Camp 2 Nått!",
+                toast_c2_desc: "Vädret håller i sig. Fortsätt!",
+                toast_c3_title: "Dödszonen (Camp 3)!",
+                toast_c3_desc: "Kämpa på, toppen är nära!",
+                toast_summit_title: "TOPPEN NÅDD! (8848m)",
+                toast_record_title: "NYTT REKORD!",
                 contact_tag: "KONTAKT • HÖR AV DIG",
                 contact_title: "Skicka en hälsning",
                 contact_desc: "Har du en idé, en fråga eller vill bara bolla något? Skriv en rad nedan.",
                 form_name: "Ditt Namn",
                 form_email: "E-postadress",
                 form_msg: "Meddelande",
+                ph_name: "t.ex. Anna Andersson",
+                ph_email: "anna@foretag.se",
+                ph_msg: "Skriv din hälsning här...",
                 form_send: "Skicka meddelande",
                 form_success: "Tack! Ditt meddelande har skickats. Vi hör av oss!",
+                form_error: "Kunde inte skicka meddelande. Försök igen.",
                 footer_rights: "Alla rättigheter förbehållna.",
                 footer_elev: "Höjd: 8 848m"
             },
@@ -431,14 +443,26 @@
                 status_c2: "Camp 2 (4,400m) reached! Halfway up, amazing view ⛺",
                 status_c3: "Camp 3 (6,600m) reached! Thin air in the death zone ⚠️",
                 status_summit: "🏆 SUMMIT REACHED! Mount Everest conquered!",
+                toast_c1_title: "Camp 1 Cleared!",
+                toast_c1_desc: "Icefall navigated.",
+                toast_c2_title: "Camp 2 Reached!",
+                toast_c2_desc: "Weather holds. Keep going!",
+                toast_c3_title: "Death Zone (Camp 3)!",
+                toast_c3_desc: "Push through, the summit is near!",
+                toast_summit_title: "SUMMIT REACHED! (8848m)",
+                toast_record_title: "NEW RECORD!",
                 contact_tag: "CONTACT • GET IN TOUCH",
                 contact_title: "Send a message",
                 contact_desc: "Got an idea, a question, or just want to connect? Drop a line below.",
                 form_name: "Your Name",
                 form_email: "Email Address",
                 form_msg: "Message",
+                ph_name: "e.g. John Doe",
+                ph_email: "john@domain.com",
+                ph_msg: "Drop your message here...",
                 form_send: "Send message",
                 form_success: "Thank you! Your message has been sent. We'll be in touch!",
+                form_error: "Could not send message. Please try again.",
                 footer_rights: "All rights reserved.",
                 footer_elev: "Elevation: 8,848m"
             }
@@ -452,6 +476,7 @@
             document.getElementById('langLabel').textContent = lang.toUpperCase();
             document.documentElement.lang = lang;
 
+            // Update text contents
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[lang][key]) {
@@ -459,18 +484,17 @@
                 }
             });
 
-            // Update camp status banner text dynamically on language switch
-            const banner = document.getElementById('campStatusText');
+            // Update placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
+                }
+            });
+
+            // Update camp status banner text dynamically if game hasn't started or is at basecamp
             if (currentAltitude === 0) {
-                banner.textContent = translations[lang]['status_base'];
-            } else if (currentAltitude >= 8848) {
-                banner.textContent = translations[lang]['status_summit'];
-            } else if (currentAltitude >= 6600) {
-                banner.textContent = translations[lang]['status_c3'];
-            } else if (currentAltitude >= 4400) {
-                banner.textContent = translations[lang]['status_c2'];
-            } else if (currentAltitude >= 2200) {
-                banner.textContent = translations[lang]['status_c1'];
+                document.getElementById('campStatusText').textContent = translations[lang]['status_base'];
             }
         }
 
@@ -600,7 +624,7 @@
             if (discoveredEggs.has(id)) return;
 
             discoveredEggs.add(id);
-            document.getElementById('eggProgress').textContent = `${discoveredEggs.size} / 4 ${translations[currentLang]['found_text'] || 'Hittade'}`;
+            document.getElementById('eggProgress').textContent = `${discoveredEggs.size} / 4 ${translations[currentLang]['found_text']}`;
 
             const targetEl = document.getElementById(`egg${id}`);
             if (targetEl) {
@@ -659,30 +683,30 @@
             
             if (currentAltitude >= 2200 && !passedCamps.c1) {
                 passedCamps.c1 = true;
-                banner.textContent = translations[currentLang]['status_c1'] || 'Camp 1 reached!';
-                showToast(currentLang === 'sv' ? 'Camp 1 Passerat!' : 'Camp 1 Cleared!', currentLang === 'sv' ? 'Isfallet avklarat.' : 'Icefall navigated.', 'success');
+                banner.textContent = translations[currentLang]['status_c1'];
+                showToast(translations[currentLang]['toast_c1_title'], translations[currentLang]['toast_c1_desc'], 'success');
             } else if (currentAltitude >= 4400 && !passedCamps.c2) {
                 passedCamps.c2 = true;
-                banner.textContent = translations[currentLang]['status_c2'] || 'Camp 2 reached!';
-                showToast(currentLang === 'sv' ? 'Camp 2 Nått!' : 'Camp 2 Reached!', currentLang === 'sv' ? 'Vädret håller i sig. Fortsätt!' : 'Weather holds. Keep going!', 'success');
+                banner.textContent = translations[currentLang]['status_c2'];
+                showToast(translations[currentLang]['toast_c2_title'], translations[currentLang]['toast_c2_desc'], 'success');
             } else if (currentAltitude >= 6600 && !passedCamps.c3) {
                 passedCamps.c3 = true;
-                banner.textContent = translations[currentLang]['status_c3'] || 'Camp 3 reached!';
-                showToast(currentLang === 'sv' ? 'Dödszonen (Camp 3)!' : 'Death Zone (Camp 3)!', currentLang === 'sv' ? 'Kämpa på, toppen är nära!' : 'Push through, the summit is near!', 'success');
+                banner.textContent = translations[currentLang]['status_c3'];
+                showToast(translations[currentLang]['toast_c3_title'], translations[currentLang]['toast_c3_desc'], 'success');
             }
 
             if (currentAltitude >= 8848 && !passedCamps.summit) {
                 passedCamps.summit = true;
                 clearInterval(gameInterval);
                 const finalTime = gameTimer.toFixed(1);
-                banner.textContent = translations[currentLang]['status_summit'] || 'Summit reached!';
-                showToast(currentLang === 'sv' ? 'TOPPEN NÅDD! (8848m)' : 'SUMMIT REACHED! (8848m)', `${currentLang === 'sv' ? 'Tid' : 'Time'}: ${finalTime}s!`, 'success');
+                banner.textContent = translations[currentLang]['status_summit'];
+                showToast(translations[currentLang]['toast_summit_title'], `${currentLang === 'sv' ? 'Tid' : 'Time'}: ${finalTime}s!`, 'success');
 
                 if (!bestRecord || gameTimer < parseFloat(bestRecord)) {
                     bestRecord = gameTimer;
                     localStorage.setItem('8848_best_record', bestRecord);
                     document.getElementById('bestRecord').textContent = `${finalTime}s`;
-                    showToast(currentLang === 'sv' ? 'NYTT REKORD!' : 'NEW RECORD!', `${currentLang === 'sv' ? 'Bästa tid' : 'Best time'}: ${finalTime}s`, 'success');
+                    showToast(translations[currentLang]['toast_record_title'], `${currentLang === 'sv' ? 'Bästa tid' : 'Best time'}: ${finalTime}s`, 'success');
                 }
             }
         }
@@ -750,7 +774,7 @@
                 errorMsg.classList.remove('hidden');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>${translations[currentLang]['form_send'] || 'Skicka meddelande'}</span>`;
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>${translations[currentLang]['form_send']}</span>`;
             }
         }
 
