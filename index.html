@@ -77,6 +77,27 @@
             opacity: 1;
         }
 
+        /* Hidden Easter Eggs by default, revealed ONLY when Binoculars mode is active */
+        .easter-egg-target {
+            position: absolute;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 20;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .binoculars-active .easter-egg-target {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -90,20 +111,6 @@
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #38BDF8;
-        }
-
-        /* Easter Egg hot spots */
-        .easter-egg-target {
-            position: absolute;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 20;
         }
     </style>
 </head>
@@ -162,8 +169,8 @@
 
             <!-- Main Title -->
             <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-6 leading-tight">
-                Reach New Heights With <br/>
-                <span class="bg-gradient-to-r from-sky-400 via-indigo-200 to-teal-300 bg-clip-text text-transparent">Precision &amp; Vision</span>
+                Reach New Heights <br/>
+                <span class="bg-gradient-to-r from-sky-400 via-indigo-200 to-teal-300 bg-clip-text text-transparent">Beyond the Summit</span>
             </h1>
 
             <!-- Subtitle -->
@@ -196,7 +203,7 @@
             </div>
         </div>
 
-        <!-- Hidden Interactive Easter Eggs -->
+        <!-- Hidden Interactive Easter Eggs (Visible ONLY when Binoculars mode is ON) -->
         <div id="egg1" class="easter-egg-target top-[28%] left-[12%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30" title="Click to inspect treasure" onclick="discoverEgg(1, 'Golden Ice Axe 8848', 'You found a gilded ice axe from the first summit expedition!')">
             <i class="fa-solid fa-wand-magic-sparkles text-lg animate-pulse"></i>
         </div>
