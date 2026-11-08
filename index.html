@@ -68,15 +68,15 @@
             inset: 0;
             z-index: 40;
             opacity: 0;
-            transition: opacity 0.4s ease;
-            background: radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 99%, rgba(3, 7, 18, 0.96) 100%);
+            transition: opacity 0.3s ease;
+            background: radial-gradient(circle 180px at var(--mouse-x, 50vw) var(--mouse-y, 50vh), transparent 99%, rgba(3, 7, 18, 0.96) 100%);
         }
 
         .binoculars-active #binocularsOverlay {
             opacity: 1;
         }
 
-        /* Hidden Easter Eggs by default, revealed ONLY when Binoculars mode is active */
+        /* Easter Egg Targets (Secrets) */
         .easter-egg-target {
             position: absolute;
             width: 44px;
@@ -86,7 +86,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease, opacity 0.3s ease;
             z-index: 50;
             opacity: 0;
             pointer-events: none;
@@ -95,6 +95,10 @@
         .binoculars-active .easter-egg-target {
             opacity: 1;
             pointer-events: auto;
+        }
+
+        .easter-egg-target:hover {
+            transform: scale(1.25);
         }
 
         ::-webkit-scrollbar {
@@ -162,7 +166,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 z-20">
+    <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 z-10">
         <div class="max-w-4xl mx-auto text-center relative">
             
             <!-- Altitude Tag Indicator -->
@@ -173,7 +177,8 @@
 
             <!-- Main Title -->
             <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-6 leading-tight">
-                <span class="bg-gradient-to-r from-sky-400 via-indigo-200 to-teal-300 bg-clip-text text-transparent" data-i18n="hero_title">Högt spel på hög höjd</span>
+                <span data-i18n="hero_title1">Nå Nya Höjder</span> <br/>
+                <span class="bg-gradient-to-r from-sky-400 via-indigo-200 to-teal-300 bg-clip-text text-transparent" data-i18n="hero_title2">Med precision</span>
             </h1>
 
             <!-- Subtitle -->
@@ -207,22 +212,22 @@
         </div>
 
         <!-- Hidden Interactive Easter Eggs -->
-        <div id="egg1" class="easter-egg-target top-[28%] left-[15%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(1, 'Golden Ice Axe', currentLang === 'sv' ? 'Du hittade en förgylld isyxa undangömd i snön!' : 'You found a gilded ice axe hidden in the snow!')">
+        <div id="egg1" class="easter-egg-target top-[28%] left-[15%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(1, 'Golden Ice Axe', 'Du hittade en förgylld isyxa undangömd i snön!')">
             <i class="fa-solid fa-wand-magic-sparkles text-lg animate-pulse"></i>
         </div>
-        <div id="egg2" class="easter-egg-target top-[35%] right-[18%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(2, 'Weather Station', currentLang === 'sv' ? 'Radiosignal: Toppvindar 12 m/s, -26°C. Solsken!' : 'Radio signal: Summit winds 12 m/s, -26°C. Sunshine!')">
+        <div id="egg2" class="easter-egg-target top-[35%] right-[18%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(2, 'Weather Station', 'Radiosignal: Toppvindar 12 m/s, -26°C. Solsken!')">
             <i class="fa-solid fa-satellite-dish text-lg animate-bounce"></i>
         </div>
-        <div id="egg3" class="easter-egg-target top-[68%] left-[12%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(3, 'Snow Leopard', currentLang === 'sv' ? 'Sällsynt iakttagelse! En snöleopard vilar på klippkanten.' : 'Rare sighting! A snow leopard resting on the ledge.')">
+        <div id="egg3" class="easter-egg-target top-[68%] left-[12%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(3, 'Snow Leopard', 'Sällsynt iakttagelse! En snöleopard vilar på klippkanten.')">
             <i class="fa-solid fa-cat text-lg"></i>
         </div>
-        <div id="egg4" class="easter-egg-target top-[22%] left-[52%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(4, 'Summit Flag', currentLang === 'sv' ? 'Här är det! Du har nått den allra högsta punkten!' : 'Here it is! You reached the highest point!')">
+        <div id="egg4" class="easter-egg-target top-[22%] left-[52%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(4, 'Summit Flag', 'Här är det! Du har nått den allra högsta punkten!')">
             <i class="fa-solid fa-flag text-lg"></i>
         </div>
     </section>
 
     <!-- Summit Ascent Minigame Section -->
-    <section id="minigameSection" class="relative z-20 py-20 px-4 sm:px-6 border-t border-slate-800/80 bg-slate-950/60 backdrop-blur-sm">
+    <section id="minigameSection" class="relative z-10 py-20 px-4 sm:px-6 border-t border-slate-800/80 bg-slate-950/60 backdrop-blur-sm">
         <div class="max-w-4xl mx-auto">
             
             <div class="text-center mb-12">
@@ -273,7 +278,7 @@
 
                     <!-- Main Climbing Button -->
                     <div class="text-center">
-                        <button id="climbBtn" onclick="climbStep()" class="w-full sm:w-auto px-8 py-5 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-lg shadow-lg shadow-emerald-500/20 hover:scale-105 active:scale-95 transition-all">
+                        <button id="climbBtn" type="button" onclick="climbStep()" class="w-full sm:w-auto px-8 py-5 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-lg shadow-lg shadow-emerald-500/20 hover:scale-105 active:scale-95 transition-all cursor-pointer">
                             <i class="fa-solid fa-person-boot-hiking mr-2"></i> <span data-i18n="game_btn_climb">KLÄTTRA!</span>
                         </button>
                     </div>
@@ -288,7 +293,7 @@
 
                 <!-- Reset Button -->
                 <div class="mt-6 text-center">
-                    <button onclick="resetGame()" class="text-xs text-slate-400 hover:text-slate-200 transition-colors underline font-mono" data-i18n="game_reset">
+                    <button onclick="resetGame()" type="button" class="text-xs text-slate-400 hover:text-slate-200 transition-colors underline font-mono cursor-pointer" data-i18n="game_reset">
                         Nollställ klättring
                     </button>
                 </div>
@@ -297,7 +302,7 @@
     </section>
 
     <!-- Contact Form Section -->
-    <section id="contactSection" class="relative z-20 py-20 px-4 sm:px-6">
+    <section id="contactSection" class="relative z-10 py-20 px-4 sm:px-6">
         <div class="max-w-3xl mx-auto">
             
             <div class="text-center mb-12">
@@ -327,7 +332,7 @@
                     </div>
 
                     <div class="flex items-center justify-end pt-2">
-                        <button type="submit" id="submitBtn" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 transition-all flex items-center justify-center gap-2">
+                        <button type="submit" id="submitBtn" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 transition-all flex items-center justify-center gap-2 cursor-pointer">
                             <i class="fa-solid fa-paper-plane"></i>
                             <span data-i18n="form_send">Skicka meddelande</span>
                         </button>
@@ -346,7 +351,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="relative z-20 py-8 px-6 border-t border-slate-800/80 text-center text-xs text-slate-500 font-mono">
+    <footer class="relative z-10 py-8 px-6 border-t border-slate-800/80 text-center text-xs text-slate-500 font-mono">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
                 &copy; <span id="yearSpan"></span> 8848. <span data-i18n="footer_rights">Alla rättigheter förbehållna.</span>
@@ -375,7 +380,8 @@
                 nav_climb: "Klättra (8848m)",
                 nav_contact: "Kontakt",
                 hero_badge: "BASLÄGER • 8 848 METER UPP",
-                hero_title: "Högt spel på hög höjd",
+                hero_title1: "Nå Nya Höjder",
+                hero_title2: "Med precision",
                 hero_subtitle: "Här samlas idéer, lekfulla projekt och höga ambitioner. Spana runt i kikaren, kasta dig ut i klättringen eller skriv en rad nedanför!",
                 hero_btn_explore: "Spana med kikaren",
                 hero_treasures_label: "Hemligheter på berget:",
@@ -415,7 +421,15 @@
                 form_success: "Tack! Ditt meddelande har skickats. Vi hör av oss!",
                 form_error: "Kunde inte skicka meddelande. Försök igen.",
                 footer_rights: "Alla rättigheter förbehållna.",
-                footer_elev: "Höjd: 8 848m"
+                footer_elev: "Höjd: 8 848m",
+                egg_axe_title: "Förgylld Isyxa",
+                egg_axe_desc: "Du hittade en förgylld isyxa undangömd i snön!",
+                egg_weather_title: "Väderstation",
+                egg_weather_desc: "Radiosignal: Toppvindar 12 m/s, -26°C. Solsken!",
+                egg_leopard_title: "Snöleopard",
+                egg_leopard_desc: "Sällsynt iakttagelse! En snöleopard vilar på klippkanten.",
+                egg_flag_title: "Toppflaggan",
+                egg_flag_desc: "Här är det! Du har nått den allra högsta punkten!"
             },
             en: {
                 nav_sub: "High Altitude Vision",
@@ -423,7 +437,8 @@
                 nav_climb: "Climb (8848m)",
                 nav_contact: "Contact",
                 hero_badge: "BASECAMP • 8,848 METERS UP",
-                hero_title: "High Altitudes & High Scores",
+                hero_title1: "Reach New Heights",
+                hero_title2: "With Precision",
                 hero_subtitle: "A home for ideas, playful projects, and high ambitions. Look around with binoculars, take on the climb, or say hello below!",
                 hero_btn_explore: "Look with Binoculars",
                 hero_treasures_label: "Mountain secrets:",
@@ -463,7 +478,15 @@
                 form_success: "Thank you! Your message has been sent. We'll be in touch!",
                 form_error: "Could not send message. Please try again.",
                 footer_rights: "All rights reserved.",
-                footer_elev: "Elevation: 8,848m"
+                footer_elev: "Elevation: 8,848m",
+                egg_axe_title: "Golden Ice Axe",
+                egg_axe_desc: "You found a gilded ice axe hidden in the snow!",
+                egg_weather_title: "Weather Station",
+                egg_weather_desc: "Radio signal: Summit winds 12 m/s, -26°C. Sunshine!",
+                egg_leopard_title: "Snow Leopard",
+                egg_leopard_desc: "Rare sighting! A snow leopard resting on the ledge.",
+                egg_flag_title: "Summit Flag",
+                egg_flag_desc: "Here it is! You reached the highest point!"
             }
         };
 
@@ -475,7 +498,7 @@
             document.getElementById('langLabel').textContent = lang.toUpperCase();
             document.documentElement.lang = lang;
 
-            // Update text contents
+            // Update all text elements
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[lang][key]) {
@@ -617,7 +640,7 @@
             }
         }
 
-        document.addEventListener('mousemove', (e) => {
+        window.addEventListener('mousemove', (e) => {
             if (!binocularsActive) return;
             document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
             document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
@@ -628,7 +651,7 @@
            ========================================================= */
         const discoveredEggs = new Set();
 
-        function discoverEgg(id, title, desc) {
+        function discoverEgg(id, titleKey, descKey) {
             if (discoveredEggs.has(id)) return;
 
             discoveredEggs.add(id);
@@ -638,6 +661,9 @@
             if (targetEl) {
                 targetEl.classList.add('ring-4', 'ring-emerald-400', 'scale-125');
             }
+
+            const title = translations[currentLang][`egg_${id === 1 ? 'axe' : id === 2 ? 'weather' : id === 3 ? 'leopard' : 'flag'}_title` calculation] || titleKey;
+            const desc = translations[currentLang][`egg_${id === 1 ? 'axe' : id === 2 ? 'weather' : id === 3 ? 'leopard' : 'flag'}_desc`] || descKey;
 
             showToast(`${currentLang === 'sv' ? 'Hemlighet Hittad' : 'Secret Found'}: ${title}`, desc, 'success');
 
@@ -731,7 +757,7 @@
             document.getElementById('campStatusText').textContent = translations[currentLang]['status_base'];
         }
 
-        document.addEventListener('keydown', (e) => {
+        window.addEventListener('keydown', (e) => {
             if (e.code === 'Space' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
                 e.preventDefault();
                 climbStep();
