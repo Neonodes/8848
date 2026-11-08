@@ -61,22 +61,20 @@
             cursor: crosshair;
         }
 
-        /* Binoculars Spotlight Overlay */
         #binocularsOverlay {
             pointer-events: none;
             position: fixed;
             inset: 0;
             z-index: 40;
             opacity: 0;
-            transition: opacity 0.3s ease;
-            background: radial-gradient(circle 180px at var(--mouse-x, 50vw) var(--mouse-y, 50vh), transparent 99%, rgba(3, 7, 18, 0.96) 100%);
+            transition: opacity 0.4s ease;
+            background: radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 99%, rgba(3, 7, 18, 0.96) 100%);
         }
 
         .binoculars-active #binocularsOverlay {
             opacity: 1;
         }
 
-        /* Easter Egg Targets (Secrets) */
         .easter-egg-target {
             position: absolute;
             width: 44px;
@@ -86,8 +84,8 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: transform 0.2s ease, opacity 0.3s ease;
-            z-index: 50;
+            transition: all 0.3s ease;
+            z-index: 20;
             opacity: 0;
             pointer-events: none;
         }
@@ -95,10 +93,6 @@
         .binoculars-active .easter-egg-target {
             opacity: 1;
             pointer-events: auto;
-        }
-
-        .easter-egg-target:hover {
-            transform: scale(1.25);
         }
 
         ::-webkit-scrollbar {
@@ -212,16 +206,16 @@
         </div>
 
         <!-- Hidden Interactive Easter Eggs -->
-        <div id="egg1" class="easter-egg-target top-[28%] left-[15%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(1, 'Golden Ice Axe', 'Du hittade en förgylld isyxa undangömd i snön!')">
+        <div id="egg1" class="easter-egg-target top-[38%] left-[18%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30" title="Skatt hittad!" onclick="discoverEgg(1, 'Golden Ice Axe', 'Du hittade en förgylld isyxa undangömd i snön!')">
             <i class="fa-solid fa-wand-magic-sparkles text-lg animate-pulse"></i>
         </div>
-        <div id="egg2" class="easter-egg-target top-[35%] right-[18%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(2, 'Weather Station', 'Radiosignal: Toppvindar 12 m/s, -26°C. Solsken!')">
+        <div id="egg2" class="easter-egg-target top-[62%] right-[22%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30" title="Skatt hittad!" onclick="discoverEgg(2, 'Weather Station', 'Radiosignal: Toppvindar 12 m/s, -26°C. Solsken!')">
             <i class="fa-solid fa-satellite-dish text-lg animate-bounce"></i>
         </div>
-        <div id="egg3" class="easter-egg-target top-[68%] left-[12%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(3, 'Snow Leopard', 'Sällsynt iakttagelse! En snöleopard vilar på klippkanten.')">
+        <div id="egg3" class="easter-egg-target top-[82%] left-[32%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30" title="Skatt hittad!" onclick="discoverEgg(3, 'Snow Leopard', 'Sällsynt iakttagelse! En snöleopard vilar på klippkanten.')">
             <i class="fa-solid fa-cat text-lg"></i>
         </div>
-        <div id="egg4" class="easter-egg-target top-[22%] left-[52%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(4, 'Summit Flag', 'Här är det! Du har nått den allra högsta punkten!')">
+        <div id="egg4" class="easter-egg-target top-[18%] right-[28%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30" title="Skatt hittad!" onclick="discoverEgg(4, 'Summit Flag', 'Här är det! Du har nått den allra högsta punkten!')">
             <i class="fa-solid fa-flag text-lg"></i>
         </div>
     </section>
@@ -278,7 +272,7 @@
 
                     <!-- Main Climbing Button -->
                     <div class="text-center">
-                        <button id="climbBtn" type="button" onclick="climbStep()" class="w-full sm:w-auto px-8 py-5 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-lg shadow-lg shadow-emerald-500/20 hover:scale-105 active:scale-95 transition-all cursor-pointer">
+                        <button id="climbBtn" onclick="climbStep()" class="w-full sm:w-auto px-8 py-5 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-lg shadow-lg shadow-emerald-500/20 hover:scale-105 active:scale-95 transition-all">
                             <i class="fa-solid fa-person-boot-hiking mr-2"></i> <span data-i18n="game_btn_climb">KLÄTTRA!</span>
                         </button>
                     </div>
@@ -293,7 +287,7 @@
 
                 <!-- Reset Button -->
                 <div class="mt-6 text-center">
-                    <button onclick="resetGame()" type="button" class="text-xs text-slate-400 hover:text-slate-200 transition-colors underline font-mono cursor-pointer" data-i18n="game_reset">
+                    <button onclick="resetGame()" class="text-xs text-slate-400 hover:text-slate-200 transition-colors underline font-mono" data-i18n="game_reset">
                         Nollställ klättring
                     </button>
                 </div>
@@ -318,21 +312,21 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-xs font-mono text-slate-300 mb-2 uppercase" data-i18n="form_name">Ditt Namn</label>
-                            <input type="text" id="senderName" required data-i18n-placeholder="ph_name" placeholder="t.ex. Anna Andersson" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm">
+                            <input type="text" id="senderName" required placeholder="t.ex. Anna Andersson" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-mono text-slate-300 mb-2 uppercase" data-i18n="form_email">E-postadress</label>
-                            <input type="email" id="senderEmail" required data-i18n-placeholder="ph_email" placeholder="anna@foretag.se" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm">
+                            <input type="email" id="senderEmail" required placeholder="anna@foretag.se" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm">
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-xs font-mono text-slate-300 mb-2 uppercase" data-i18n="form_msg">Meddelande</label>
-                        <textarea id="senderMessage" rows="4" required data-i18n-placeholder="ph_msg" placeholder="Skriv din hälsning här..." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm"></textarea>
+                        <textarea id="senderMessage" rows="4" required placeholder="Skriv din hälsning här..." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm"></textarea>
                     </div>
 
                     <div class="flex items-center justify-end pt-2">
-                        <button type="submit" id="submitBtn" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 transition-all flex items-center justify-center gap-2 cursor-pointer">
+                        <button type="submit" id="submitBtn" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 transition-all flex items-center justify-center gap-2">
                             <i class="fa-solid fa-paper-plane"></i>
                             <span data-i18n="form_send">Skicka meddelande</span>
                         </button>
@@ -344,7 +338,7 @@
                     <i class="fa-solid fa-circle-check mr-2"></i> <span data-i18n="form_success">Tack! Ditt meddelande har skickats. Vi hör av oss!</span>
                 </div>
                 <div id="formErrorMessage" class="hidden mt-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm text-center">
-                    <i class="fa-solid fa-circle-exclamation mr-2"></i> <span id="errorText" data-i18n="form_error">Kunde inte skicka meddelande. Försök igen.</span>
+                    <i class="fa-solid fa-circle-exclamation mr-2"></i> <span id="errorText">Kunde inte skicka meddelande. Försök igen.</span>
                 </div>
             </div>
         </div>
@@ -400,36 +394,16 @@
                 status_c2: "Camp 2 (4,400m) nådd! Halvvägs upp, fantastisk vy ⛺",
                 status_c3: "Camp 3 (6,600m) nådd! Tunn luft i dödszonen ⚠️",
                 status_summit: "🏆 TOPPEN NÅDD! Mount Everest erövrat!",
-                toast_c1_title: "Camp 1 Passerat!",
-                toast_c1_desc: "Isfallet avklarat.",
-                toast_c2_title: "Camp 2 Nått!",
-                toast_c2_desc: "Vädret håller i sig. Fortsätt!",
-                toast_c3_title: "Dödszonen (Camp 3)!",
-                toast_c3_desc: "Kämpa på, toppen är nära!",
-                toast_summit_title: "TOPPEN NÅDD! (8848m)",
-                toast_record_title: "NYTT REKORD!",
                 contact_tag: "KONTAKT • HÖR AV DIG",
                 contact_title: "Skicka en hälsning",
                 contact_desc: "Har du en idé, en fråga eller vill bara bolla något? Skriv en rad nedan.",
                 form_name: "Ditt Namn",
                 form_email: "E-postadress",
                 form_msg: "Meddelande",
-                ph_name: "t.ex. Anna Andersson",
-                ph_email: "anna@foretag.se",
-                ph_msg: "Skriv din hälsning här...",
                 form_send: "Skicka meddelande",
                 form_success: "Tack! Ditt meddelande har skickats. Vi hör av oss!",
-                form_error: "Kunde inte skicka meddelande. Försök igen.",
                 footer_rights: "Alla rättigheter förbehållna.",
-                footer_elev: "Höjd: 8 848m",
-                egg_axe_title: "Förgylld Isyxa",
-                egg_axe_desc: "Du hittade en förgylld isyxa undangömd i snön!",
-                egg_weather_title: "Väderstation",
-                egg_weather_desc: "Radiosignal: Toppvindar 12 m/s, -26°C. Solsken!",
-                egg_leopard_title: "Snöleopard",
-                egg_leopard_desc: "Sällsynt iakttagelse! En snöleopard vilar på klippkanten.",
-                egg_flag_title: "Toppflaggan",
-                egg_flag_desc: "Här är det! Du har nått den allra högsta punkten!"
+                footer_elev: "Höjd: 8 848m"
             },
             en: {
                 nav_sub: "High Altitude Vision",
@@ -457,36 +431,16 @@
                 status_c2: "Camp 2 (4,400m) reached! Halfway up, amazing view ⛺",
                 status_c3: "Camp 3 (6,600m) reached! Thin air in the death zone ⚠️",
                 status_summit: "🏆 SUMMIT REACHED! Mount Everest conquered!",
-                toast_c1_title: "Camp 1 Cleared!",
-                toast_c1_desc: "Icefall navigated.",
-                toast_c2_title: "Camp 2 Reached!",
-                toast_c2_desc: "Weather holds. Keep going!",
-                toast_c3_title: "Death Zone (Camp 3)!",
-                toast_c3_desc: "Push through, the summit is near!",
-                toast_summit_title: "SUMMIT REACHED! (8848m)",
-                toast_record_title: "NEW RECORD!",
                 contact_tag: "CONTACT • GET IN TOUCH",
                 contact_title: "Send a message",
                 contact_desc: "Got an idea, a question, or just want to connect? Drop a line below.",
                 form_name: "Your Name",
                 form_email: "Email Address",
                 form_msg: "Message",
-                ph_name: "e.g. John Doe",
-                ph_email: "john@domain.com",
-                ph_msg: "Drop your message here...",
                 form_send: "Send message",
                 form_success: "Thank you! Your message has been sent. We'll be in touch!",
-                form_error: "Could not send message. Please try again.",
                 footer_rights: "All rights reserved.",
-                footer_elev: "Elevation: 8,848m",
-                egg_axe_title: "Golden Ice Axe",
-                egg_axe_desc: "You found a gilded ice axe hidden in the snow!",
-                egg_weather_title: "Weather Station",
-                egg_weather_desc: "Radio signal: Summit winds 12 m/s, -26°C. Sunshine!",
-                egg_leopard_title: "Snow Leopard",
-                egg_leopard_desc: "Rare sighting! A snow leopard resting on the ledge.",
-                egg_flag_title: "Summit Flag",
-                egg_flag_desc: "Here it is! You reached the highest point!"
+                footer_elev: "Elevation: 8,848m"
             }
         };
 
@@ -498,7 +452,6 @@
             document.getElementById('langLabel').textContent = lang.toUpperCase();
             document.documentElement.lang = lang;
 
-            // Update all text elements
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[lang][key]) {
@@ -506,15 +459,7 @@
                 }
             });
 
-            // Update placeholders
-            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-                const key = el.getAttribute('data-i18n-placeholder');
-                if (translations[lang][key]) {
-                    el.placeholder = translations[lang][key];
-                }
-            });
-
-            // Update camp status banner text dynamically based on current game state
+            // Update camp status banner text dynamically on language switch
             const banner = document.getElementById('campStatusText');
             if (currentAltitude === 0) {
                 banner.textContent = translations[lang]['status_base'];
@@ -640,7 +585,7 @@
             }
         }
 
-        window.addEventListener('mousemove', (e) => {
+        document.addEventListener('mousemove', (e) => {
             if (!binocularsActive) return;
             document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
             document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
@@ -651,19 +596,16 @@
            ========================================================= */
         const discoveredEggs = new Set();
 
-        function discoverEgg(id, titleKey, descKey) {
+        function discoverEgg(id, title, desc) {
             if (discoveredEggs.has(id)) return;
 
             discoveredEggs.add(id);
-            document.getElementById('eggProgress').textContent = `${discoveredEggs.size} / 4 ${translations[currentLang]['found_text']}`;
+            document.getElementById('eggProgress').textContent = `${discoveredEggs.size} / 4 ${translations[currentLang]['found_text'] || 'Hittade'}`;
 
             const targetEl = document.getElementById(`egg${id}`);
             if (targetEl) {
                 targetEl.classList.add('ring-4', 'ring-emerald-400', 'scale-125');
             }
-
-            const title = translations[currentLang][`egg_${id === 1 ? 'axe' : id === 2 ? 'weather' : id === 3 ? 'leopard' : 'flag'}_title` calculation] || titleKey;
-            const desc = translations[currentLang][`egg_${id === 1 ? 'axe' : id === 2 ? 'weather' : id === 3 ? 'leopard' : 'flag'}_desc`] || descKey;
 
             showToast(`${currentLang === 'sv' ? 'Hemlighet Hittad' : 'Secret Found'}: ${title}`, desc, 'success');
 
@@ -717,30 +659,30 @@
             
             if (currentAltitude >= 2200 && !passedCamps.c1) {
                 passedCamps.c1 = true;
-                banner.textContent = translations[currentLang]['status_c1'];
-                showToast(translations[currentLang]['toast_c1_title'], translations[currentLang]['toast_c1_desc'], 'success');
+                banner.textContent = translations[currentLang]['status_c1'] || 'Camp 1 reached!';
+                showToast(currentLang === 'sv' ? 'Camp 1 Passerat!' : 'Camp 1 Cleared!', currentLang === 'sv' ? 'Isfallet avklarat.' : 'Icefall navigated.', 'success');
             } else if (currentAltitude >= 4400 && !passedCamps.c2) {
                 passedCamps.c2 = true;
-                banner.textContent = translations[currentLang]['status_c2'];
-                showToast(translations[currentLang]['toast_c2_title'], translations[currentLang]['toast_c2_desc'], 'success');
+                banner.textContent = translations[currentLang]['status_c2'] || 'Camp 2 reached!';
+                showToast(currentLang === 'sv' ? 'Camp 2 Nått!' : 'Camp 2 Reached!', currentLang === 'sv' ? 'Vädret håller i sig. Fortsätt!' : 'Weather holds. Keep going!', 'success');
             } else if (currentAltitude >= 6600 && !passedCamps.c3) {
                 passedCamps.c3 = true;
-                banner.textContent = translations[currentLang]['status_c3'];
-                showToast(translations[currentLang]['toast_c3_title'], translations[currentLang]['toast_c3_desc'], 'success');
+                banner.textContent = translations[currentLang]['status_c3'] || 'Camp 3 reached!';
+                showToast(currentLang === 'sv' ? 'Dödszonen (Camp 3)!' : 'Death Zone (Camp 3)!', currentLang === 'sv' ? 'Kämpa på, toppen är nära!' : 'Push through, the summit is near!', 'success');
             }
 
             if (currentAltitude >= 8848 && !passedCamps.summit) {
                 passedCamps.summit = true;
                 clearInterval(gameInterval);
                 const finalTime = gameTimer.toFixed(1);
-                banner.textContent = translations[currentLang]['status_summit'];
-                showToast(translations[currentLang]['toast_summit_title'], `${currentLang === 'sv' ? 'Tid' : 'Time'}: ${finalTime}s!`, 'success');
+                banner.textContent = translations[currentLang]['status_summit'] || 'Summit reached!';
+                showToast(currentLang === 'sv' ? 'TOPPEN NÅDD! (8848m)' : 'SUMMIT REACHED! (8848m)', `${currentLang === 'sv' ? 'Tid' : 'Time'}: ${finalTime}s!`, 'success');
 
                 if (!bestRecord || gameTimer < parseFloat(bestRecord)) {
                     bestRecord = gameTimer;
                     localStorage.setItem('8848_best_record', bestRecord);
                     document.getElementById('bestRecord').textContent = `${finalTime}s`;
-                    showToast(translations[currentLang]['toast_record_title'], `${currentLang === 'sv' ? 'Bästa tid' : 'Best time'}: ${finalTime}s`, 'success');
+                    showToast(currentLang === 'sv' ? 'NYTT REKORD!' : 'NEW RECORD!', `${currentLang === 'sv' ? 'Bästa tid' : 'Best time'}: ${finalTime}s`, 'success');
                 }
             }
         }
@@ -757,7 +699,7 @@
             document.getElementById('campStatusText').textContent = translations[currentLang]['status_base'];
         }
 
-        window.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', (e) => {
             if (e.code === 'Space' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
                 e.preventDefault();
                 climbStep();
@@ -800,7 +742,7 @@
                     showToast(currentLang === 'sv' ? 'Meddelande Skickat' : 'Message Sent', currentLang === 'sv' ? `Tack ${payload.name}, vi har tagit emot ditt meddelande.` : `Thank you ${payload.name}, your message was delivered.`, 'success');
                     document.getElementById('contactForm').reset();
                 } else {
-                    errorText.textContent = result.error || translations[currentLang]['form_error'];
+                    errorText.textContent = result.error || (currentLang === 'sv' ? 'Kunde inte skicka.' : 'Could not send.');
                     errorMsg.classList.remove('hidden');
                 }
             } catch (err) {
@@ -808,7 +750,7 @@
                 errorMsg.classList.remove('hidden');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>${translations[currentLang]['form_send']}</span>`;
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>${translations[currentLang]['form_send'] || 'Skicka meddelande'}</span>`;
             }
         }
 
