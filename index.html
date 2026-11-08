@@ -1,421 +1,624 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>8848.nu – Ideas, Games & Fun Projects</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --text: #f8fafc;
-      --text-dim: #94a3b8;
-      --accent: #38bdf8;
-      --accent-hover: #0284c7;
-      --success: #22c55e;
-      --error: #ef4444;
-      --game-bg: #090d16;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8848 | High Altitude Digital Experience</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        everest: {
+                            900: '#060B19',
+                            800: '#0B152C',
+                            700: '#142244',
+                            600: '#1E325C',
+                            accent: '#38BDF8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #060B19;
+            color: #F1F5F9;
+            overflow-x: hidden;
+        }
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding: 2rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+        /* Glassmorphism styles */
+        .glass-panel {
+            background: rgba(11, 21, 44, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-    .container {
-      max-width: 700px;
-      width: 100%;
-    }
+        .glass-card {
+            background: rgba(15, 28, 57, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-    header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
+        /* Binoculars / Spotlight overlay effect */
+        .binoculars-active {
+            cursor: crosshair;
+        }
 
-    header h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 0.8rem;
-      color: var(--accent);
-      letter-spacing: -0.5px;
-    }
+        #binocularsOverlay {
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 40;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            background: radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 99%, rgba(3, 7, 18, 0.96) 100%);
+        }
 
-    header p {
-      font-size: 1.15rem;
-      color: var(--text-dim);
-    }
+        .binoculars-active #binocularsOverlay {
+            opacity: 1;
+        }
 
-    .card {
-      background-color: var(--card-bg);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      margin-bottom: 2rem;
-      border: 1px solid #334155;
-    }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060B19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E325C;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38BDF8;
+        }
 
-    h2 {
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-      color: var(--text);
-    }
-
-    /* Spotter / Viewfinder section */
-    .spotter-container {
-      background-color: var(--game-bg);
-      border-radius: 8px;
-      padding: 1.5rem;
-      text-align: center;
-      border: 1px solid #1e293b;
-      margin-bottom: 2rem;
-    }
-
-    .viewfinder {
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 1rem;
-      border-radius: 50%;
-      border: 4px solid var(--accent);
-      background: radial-gradient(circle, #1e293b 0%, #090d16 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-      user-select: none;
-      transition: transform 0.2s ease;
-    }
-
-    /* Climbing game */
-    .game-container {
-      background-color: var(--game-bg);
-      border-radius: 8px;
-      padding: 1.5rem;
-      text-align: center;
-      border: 1px solid #1e293b;
-    }
-
-    .game-stats {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: var(--accent);
-    }
-
-    .game-screen {
-      height: 140px;
-      background: linear-gradient(to bottom, #1e293b, #0f172a);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 1rem;
-      border: 1px dashed #475569;
-    }
-
-    #climber {
-      font-size: 2.5rem;
-      transition: transform 0.1s ease;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .btn-action {
-      background-color: var(--success);
-      color: #0f172a;
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: transform 0.1s, background-color 0.2s;
-    }
-
-    .btn-action:hover {
-      background-color: #16a34a;
-    }
-
-    .btn-action:active {
-      transform: scale(0.95);
-    }
-
-    /* Form */
-    .form-group {
-      margin-bottom: 1.2rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.4rem;
-      font-weight: 500;
-      color: var(--text-dim);
-      font-size: 0.95rem;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 0.8rem 1rem;
-      border-radius: 6px;
-      border: 1px solid #334155;
-      background-color: #0f172a;
-      color: var(--text);
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    input:focus, textarea:focus {
-      border-color: var(--accent);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 110px;
-    }
-
-    button[type="submit"] {
-      width: 100%;
-      padding: 0.9rem;
-      border: none;
-      border-radius: 6px;
-      background-color: var(--accent);
-      color: #0f172a;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-
-    button[type="submit"]:hover {
-      background-color: var(--accent-hover);
-    }
-
-    button[type="submit"]:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    #statusMessage {
-      margin-top: 1rem;
-      padding: 0.8rem;
-      border-radius: 6px;
-      text-align: center;
-      display: none;
-      font-weight: 500;
-    }
-
-    #statusMessage.success {
-      display: block;
-      background-color: rgba(34, 197, 94, 0.15);
-      color: var(--success);
-      border: 1px solid var(--success);
-    }
-
-    #statusMessage.error {
-      display: block;
-      background-color: rgba(239, 68, 68, 0.15);
-      color: var(--error);
-      border: 1px solid var(--error);
-    }
-
-    footer {
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 0.9rem;
-      margin-top: 1rem;
-    }
-  </style>
+        /* Easter Egg hot spots */
+        .easter-egg-target {
+            position: absolute;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 20;
+        }
+    </style>
 </head>
-<body>
+<body class="relative min-h-screen text-slate-100 selection:bg-sky-500 selection:text-white">
 
-  <div class="container">
-    <header>
-      <h1>Ideas, Games & Fun Projects!</h1>
-      <p>Welcome to 8848.nu – high altitudes, creative ideas, and playful challenges.</p>
+    <!-- Canvas Background for Snow & Mountain Atmosphere -->
+    <canvas id="mountainCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Binoculars Spotlight Overlay -->
+    <div id="binocularsOverlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-4 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between glass-panel rounded-2xl px-6 py-3">
+            
+            <!-- Branding -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 via-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform duration-300">
+                    <i class="fa-solid fa-mountain text-white text-lg"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-black tracking-widest text-slate-100 group-hover:text-sky-400 transition-colors">8848</span>
+                    <span class="text-[9px] font-mono text-sky-400/80 -mt-1 tracking-wider uppercase">High Altitude Vision</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links & Action Buttons -->
+            <div class="flex items-center gap-3 sm:gap-6">
+                <button onclick="toggleBinoculars()" id="btnBinoculars" class="px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 hover:bg-sky-600/30 border border-slate-700 hover:border-sky-500/50 text-slate-200 hover:text-sky-300 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-binoculars text-sky-400"></i>
+                    <span class="hidden sm:inline">Binoculars Mode</span>
+                </button>
+                
+                <a href="#minigameSection" class="px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 hover:bg-emerald-600/30 border border-slate-700 hover:border-emerald-500/50 text-slate-200 hover:text-emerald-300 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-person-hiking text-emerald-400"></i>
+                    <span class="hidden sm:inline">Climb (8848m)</span>
+                </a>
+
+                <a href="#contactSection" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-sky-500 hover:bg-sky-400 text-slate-950 shadow-md shadow-sky-500/20 hover:shadow-sky-500/40 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Contact</span>
+                </a>
+            </div>
+        </div>
     </header>
 
-    <!-- Spotter / Viewfinder section -->
-    <section class="card">
-      <h2>🔭 Viewfinder at the Summit</h2>
-      <div class="spotter-container">
-        <div class="viewfinder" id="viewfinder">🏔️</div>
-        <p id="spotterText" style="margin-bottom: 1rem; color: var(--text-dim);">What can you spot on the horizon?</p>
-        <button class="btn-action" id="spotBtn">Look Around!</button>
-      </div>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 z-10">
+        <div class="max-w-4xl mx-auto text-center relative">
+            
+            <!-- Altitude Tag Indicator -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 text-xs font-mono mb-8 backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>ELEVATION: 8,848M ABOVE SEA LEVEL</span>
+            </div>
+
+            <!-- Main Title -->
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-6 leading-tight">
+                Reach New Heights With <br/>
+                <span class="bg-gradient-to-r from-sky-400 via-indigo-200 to-teal-300 bg-clip-text text-transparent">Precision &amp; Vision</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="max-w-2xl mx-auto text-base sm:text-xl text-slate-300 font-light mb-10 leading-relaxed">
+                Welcome to the summit. Combining high-altitude inspiration, digital elegance, and innovative ideas for projects aiming all the way to the top.
+            </p>
+
+            <!-- Interactive Easter Eggs Counter Badge -->
+            <div class="flex flex-wrap justify-center items-center gap-4 mb-10">
+                <button onclick="toggleBinoculars()" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-semibold shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.02] transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-binoculars text-lg"></i>
+                    <span>Explore with Binoculars</span>
+                </button>
+
+                <div class="glass-panel px-4 py-3 rounded-2xl flex items-center gap-3 border border-slate-700/60">
+                    <i class="fa-solid fa-trophy text-amber-400 text-lg"></i>
+                    <div class="text-left text-xs font-mono">
+                        <span class="text-slate-400 block">Hidden Treasures:</span>
+                        <span id="eggProgress" class="text-sky-300 font-bold text-sm">0 / 4 Found</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="mt-8">
+                <a href="#minigameSection" class="inline-flex flex-col items-center gap-2 text-slate-400 hover:text-sky-400 transition-colors text-xs font-mono">
+                    <span>CHALLENGE THE MOUNTAIN</span>
+                    <i class="fa-solid fa-chevron-down animate-bounce"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Hidden Interactive Easter Eggs -->
+        <div id="egg1" class="easter-egg-target top-[28%] left-[12%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30" title="Click to inspect treasure" onclick="discoverEgg(1, 'Golden Ice Axe 8848', 'You found a gilded ice axe from the first summit expedition!')">
+            <i class="fa-solid fa-wand-magic-sparkles text-lg animate-pulse"></i>
+        </div>
+        <div id="egg2" class="easter-egg-target top-[35%] right-[15%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30" title="Click to inspect treasure" onclick="discoverEgg(2, 'Weather Station 8848m', 'Radio signal received: Summit winds 12 m/s, -26°C. Clear skies!')">
+            <i class="fa-solid fa-satellite-dish text-lg animate-bounce"></i>
+        </div>
+        <div id="egg3" class="easter-egg-target top-[68%] left-[8%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30" title="Click to inspect treasure" onclick="discoverEgg(3, 'Snow Leopard', 'Rare sighting! A majestic snow leopard moves gracefully along the ridge.')">
+            <i class="fa-solid fa-cat text-lg"></i>
+        </div>
+        <div id="egg4" class="easter-egg-target top-[22%] left-[48%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30" title="Click to inspect treasure" onclick="discoverEgg(4, '8848 Summit Flag', 'Congratulations! You have reached the highest peak on Mount Everest!')">
+            <i class="fa-solid fa-flag text-lg"></i>
+        </div>
     </section>
 
-    <!-- Climbing Game -->
-    <section class="card">
-      <h2>🧗‍♂️ Mount Everest Challenge</h2>
-      <div class="game-container">
-        <div class="game-stats">
-          <span>Altitude: <strong id="altitude">0</strong> / 8848m</span>
-          <span>Clicks: <strong id="clicks">0</strong></span>
+    <!-- Summit Ascent Minigame Section -->
+    <section id="minigameSection" class="relative z-10 py-20 px-4 sm:px-6 border-t border-slate-800/80 bg-slate-950/60 backdrop-blur-sm">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="text-center mb-12">
+                <span class="text-sky-400 font-mono text-xs tracking-wider uppercase">MINIGAME &bull; SUMMIT ASCENT</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Climb to 8,848 Meters</h2>
+                <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-xl mx-auto">
+                    Click the button fast or hit your <kbd class="px-2 py-1 bg-slate-800 rounded border border-slate-700 text-sky-300 font-mono text-xs">SPACEBAR</kbd> to reach the summit before running out of oxygen!
+                </p>
+            </div>
+
+            <!-- Game Board -->
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-slate-700/50 shadow-2xl relative overflow-hidden">
+                
+                <!-- Elevation Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center text-sm font-mono mb-2">
+                        <span class="text-slate-300">Current Altitude:</span>
+                        <span id="altitudeDisplay" class="text-2xl font-bold text-sky-400">0 m</span>
+                    </div>
+                    <div class="w-full h-5 bg-slate-900 rounded-full overflow-hidden border border-slate-800 p-0.5">
+                        <div id="altitudeBar" class="h-full bg-gradient-to-r from-teal-500 via-sky-500 to-indigo-500 rounded-full transition-all duration-150 w-0"></div>
+                    </div>
+                    <div class="flex justify-between text-[11px] font-mono text-slate-500 mt-1">
+                        <span>0m (Basecamp)</span>
+                        <span>4400m (Camp 3)</span>
+                        <span>8848m (Summit)</span>
+                    </div>
+                </div>
+
+                <!-- Game Stats & Action Button -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
+                    
+                    <!-- Stats Card 1: Time -->
+                    <div class="glass-card rounded-2xl p-4 text-center">
+                        <i class="fa-regular fa-clock text-sky-400 text-xl mb-1"></i>
+                        <div class="text-xs text-slate-400 font-mono">TIME</div>
+                        <div id="gameTimer" class="text-xl font-bold font-mono text-white">0.0s</div>
+                    </div>
+
+                    <!-- Main Climbing Button -->
+                    <div class="text-center">
+                        <button id="climbBtn" onclick="climbStep()" class="w-full sm:w-auto px-8 py-5 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-lg shadow-lg shadow-emerald-500/20 hover:scale-105 active:scale-95 transition-all">
+                            <i class="fa-solid fa-person-boot-hiking mr-2"></i> CLIMB UP!
+                        </button>
+                    </div>
+
+                    <!-- Stats Card 2: Record -->
+                    <div class="glass-card rounded-2xl p-4 text-center">
+                        <i class="fa-solid fa-award text-amber-400 text-xl mb-1"></i>
+                        <div class="text-xs text-slate-400 font-mono">BEST RECORD</div>
+                        <div id="bestRecord" class="text-xl font-bold font-mono text-amber-300">--</div>
+                    </div>
+                </div>
+
+                <!-- Reset Button -->
+                <div class="mt-6 text-center">
+                    <button onclick="resetGame()" class="text-xs text-slate-400 hover:text-slate-200 transition-colors underline font-mono">
+                        Reset Climb
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="game-screen">
-          <div id="climber" title="Click me to climb!">🧗‍♂️</div>
-        </div>
-        <button class="btn-action" id="climbBtn">Climb Up!</button>
-      </div>
     </section>
 
-    <!-- Contact Form -->
-    <main class="card">
-      <h2>📬 Get in Touch!</h2>
-      <form id="contactForm">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required placeholder="Your name">
+    <!-- Contact Form Section -->
+    <section id="contactSection" class="relative z-10 py-20 px-4 sm:px-6">
+        <div class="max-w-3xl mx-auto">
+            
+            <div class="text-center mb-12">
+                <span class="text-sky-400 font-mono text-xs tracking-wider uppercase">CONTACT &bull; EMAIL</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Get in Touch</h2>
+                <p class="text-slate-400 text-sm sm:text-base mt-2">
+                    Send a message directly through the form below or drop an email.
+                </p>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-slate-700/60 shadow-2xl">
+                <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-mono text-slate-300 mb-2 uppercase">Your Name</label>
+                            <input type="text" id="senderName" required placeholder="e.g. John Doe" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono text-slate-300 mb-2 uppercase">Email Address</label>
+                            <input type="email" id="senderEmail" required placeholder="john@domain.com" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-mono text-slate-300 mb-2 uppercase">Message</label>
+                        <textarea id="senderMessage" rows="4" required placeholder="Tell us about your project or ask a question..." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm"></textarea>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                        <a href="mailto:info@8848.nu" class="text-xs text-sky-400 hover:underline font-mono flex items-center gap-2">
+                            <i class="fa-regular fa-envelope"></i>
+                            <span>Open in mail client (info@8848.nu)</span>
+                        </a>
+
+                        <button type="submit" id="submitBtn" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Send Message</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Feedback Toast inside container -->
+                <div id="formSuccessMessage" class="hidden mt-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-sm text-center">
+                    <i class="fa-solid fa-circle-check mr-2"></i> Thank you! Your message has been sent. We'll get back to you soon.
+                </div>
+                <div id="formErrorMessage" class="hidden mt-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm text-center">
+                    <i class="fa-solid fa-circle-exclamation mr-2"></i> <span id="errorText">Could not send message. Please try again.</span>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" required placeholder="your.email@domain.com">
+    <!-- Footer -->
+    <footer class="relative z-10 py-8 px-6 border-t border-slate-800/80 text-center text-xs text-slate-500 font-mono">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                &copy; <span id="yearSpan"></span> 8848. All rights reserved.
+            </div>
+            <div class="flex items-center gap-6 text-slate-400">
+                <span><i class="fa-solid fa-mountain text-sky-500 mr-1"></i> 27°59′17″N 86°55′31″E</span>
+                <span>Elevation: 8,848m</span>
+            </div>
         </div>
-
-        <div class="form-group">
-          <label for="subject">Subject (optional)</label>
-          <input type="text" id="subject" name="subject" placeholder="What is this regarding?">
-        </div>
-
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" required placeholder="Write your message here..."></textarea>
-        </div>
-
-        <button type="submit" id="submitBtn">Send Message</button>
-      </form>
-
-      <div id="statusMessage"></div>
-    </main>
-
-    <footer>
-      <p>&copy; 2026 8848.nu – High altitudes & good ideas.</p>
     </footer>
-  </div>
 
-  <script>
-    // Viewfinder logic
-    const discoveries = [
-      { emoji: "🏔️", text: "A snow-capped mountain peak glowing in the sunset!" },
-      { emoji: "🐆", text: "Whoa! A rare snow leopard spotted on the ridge!" },
-      { emoji: "🦅", text: "An eagle soaring gracefully across the valley." },
-      { emoji: "🚀", text: "A new exciting project heading up!" },
-      { emoji: "☕", text: "A steaming fresh cup of coffee at base camp." },
-      { emoji: "⛺", text: "The tent camp set up at 6,000 meters." }
-    ];
-    
-    const viewfinder = document.getElementById('viewfinder');
-    const spotterText = document.getElementById('spotterText');
-    const spotBtn = document.getElementById('spotBtn');
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
 
-    spotBtn.addEventListener('click', () => {
-      const randomItem = discoveries[Math.floor(Math.random() * discoveries.length)];
-      viewfinder.style.transform = 'scale(0.8) rotate(15deg)';
-      setTimeout(() => {
-        viewfinder.textContent = randomItem.emoji;
-        spotterText.textContent = randomItem.text;
-        viewfinder.style.transform = 'scale(1) rotate(0deg)';
-      }, 150);
-    });
+    <!-- MAIN JAVASCRIPT LOGIC -->
+    <script>
+        document.getElementById('yearSpan').textContent = new Date().getFullYear();
 
-    // Climbing game logic
-    let altitude = 0;
-    let totalClicks = 0;
-    const altitudeEl = document.getElementById('altitude');
-    const clicksEl = document.getElementById('clicks');
-    const climberEl = document.getElementById('climber');
-    const climbBtn = document.getElementById('climbBtn');
+        /* 1. CANVAS MOUNTAIN & SNOW ANIMATION */
+        const canvas = document.getElementById('mountainCanvas');
+        const ctx = canvas.getContext('2d');
 
-    function climb() {
-      if (altitude >= 8848) return;
-      
-      totalClicks++;
-      altitude += Math.floor(Math.random() * 350) + 150; // 150-500m per click
-      
-      if (altitude >= 8848) {
-        altitude = 8848;
-        climberEl.textContent = '🏆';
-        climbBtn.textContent = 'Summit Reached! 🎉';
-        climbBtn.style.backgroundColor = '#38bdf8';
-      }
-      altitudeEl.textContent = altitude;
-      clicksEl.textContent = totalClicks;
-      
-      climberEl.style.transform = 'translateY(-10px) scale(1.2)';
-      setTimeout(() => {
-        climberEl.style.transform = 'translateY(0) scale(1)';
-      }, 100);
-    }
+        let snowflakes = [];
+        const flakeCount = 90;
 
-    climbBtn.addEventListener('click', climb);
-    climberEl.addEventListener('click', climb);
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initSnowflakes();
+        }
 
-    // Contact form logic to Cloudflare Worker
-    const form = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const statusMessage = document.getElementById('statusMessage');
+        function initSnowflakes() {
+            snowflakes = [];
+            for (let i = 0; i < flakeCount; i++) {
+                snowflakes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2.5 + 0.5,
+                    density: Math.random() * 1,
+                    opacity: Math.random() * 0.7 + 0.2,
+                    speedY: Math.random() * 1.2 + 0.3,
+                    speedX: Math.random() * 0.6 - 0.3
+                });
+            }
+        }
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+        function drawMountainSilhouette() {
+            const w = canvas.width;
+            const h = canvas.height;
 
-      statusMessage.className = '';
-      statusMessage.style.display = 'none';
-      submitBtn.disabled = true;
-      const originalBtnText = submitBtn.textContent;
-      submitBtn.textContent = 'Sending...';
+            ctx.fillStyle = '#050914';
+            ctx.beginPath();
+            ctx.moveTo(0, h);
+            ctx.lineTo(0, h * 0.75);
+            ctx.lineTo(w * 0.2, h * 0.55);
+            ctx.lineTo(w * 0.35, h * 0.65);
+            ctx.lineTo(w * 0.5, h * 0.28); // Peak 8848
+            ctx.lineTo(w * 0.68, h * 0.58);
+            ctx.lineTo(w * 0.85, h * 0.45);
+            ctx.lineTo(w, h * 0.7);
+            ctx.lineTo(w, h);
+            ctx.closePath();
+            ctx.fill();
 
-      const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
-      };
+            const gradient = ctx.createLinearGradient(w * 0.5, h * 0.28, w * 0.5, h * 0.5);
+            gradient.addColorStop(0, 'rgba(56, 189, 248, 0.25)');
+            gradient.addColorStop(1, 'rgba(56, 189, 248, 0)');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.moveTo(w * 0.45, h * 0.4);
+            ctx.lineTo(w * 0.5, h * 0.28);
+            ctx.lineTo(w * 0.55, h * 0.42);
+            ctx.closePath();
+            ctx.fill();
+        }
 
-      try {
-        const response = await fetch('https://api.8848.nu', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
+        function drawSnow() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawMountainSilhouette();
+
+            for (let i = 0; i < snowflakes.length; i++) {
+                const flake = snowflakes[i];
+                ctx.fillStyle = `rgba(224, 242, 254, ${flake.opacity})`;
+                ctx.beginPath();
+                ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2, true);
+                ctx.fill();
+
+                flake.y += flake.speedY;
+                flake.x += flake.speedX;
+
+                if (flake.y > canvas.height) {
+                    flake.y = -10;
+                    flake.x = Math.random() * canvas.width;
+                }
+            }
+            requestAnimationFrame(drawSnow);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        requestAnimationFrame(drawSnow);
+
+        /* 2. BINOCULARS MODE */
+        let binocularsActive = false;
+
+        function toggleBinoculars() {
+            binocularsActive = !binocularsActive;
+            const btn = document.getElementById('btnBinoculars');
+            
+            if (binocularsActive) {
+                document.body.classList.add('binoculars-active');
+                btn.classList.add('bg-sky-500', 'text-slate-950', 'border-sky-400');
+                showToast('Binoculars Mode Enabled', 'Move your mouse over the mountain to find hidden treasures!', 'info');
+            } else {
+                document.body.classList.remove('binoculars-active');
+                btn.classList.remove('bg-sky-500', 'text-slate-950', 'border-sky-400');
+            }
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (!binocularsActive) return;
+            document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+            document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
         });
 
-        const result = await response.json();
+        /* 3. EASTER EGG DISCOVERY */
+        const discoveredEggs = new Set();
 
-        if (response.ok) {
-          statusMessage.textContent = 'Thank you! Your message has been sent.';
-          statusMessage.className = 'success';
-          form.reset();
-        } else {
-          statusMessage.textContent = result.error || 'Something went wrong. Please try again.';
-          statusMessage.className = 'error';
+        function discoverEgg(id, title, desc) {
+            if (discoveredEggs.has(id)) {
+                showToast(title, 'You have already discovered this treasure!', 'info');
+                return;
+            }
+
+            discoveredEggs.add(id);
+            document.getElementById('eggProgress').textContent = `${discoveredEggs.size} / 4 Found`;
+
+            const targetEl = document.getElementById(`egg${id}`);
+            if (targetEl) {
+                targetEl.classList.add('ring-4', 'ring-emerald-400', 'scale-125');
+            }
+
+            showToast(`Treasure Found: ${title}`, desc, 'success');
+
+            if (discoveredEggs.size === 4) {
+                setTimeout(() => {
+                    showToast('CONGRATULATIONS! All 4 Treasures Found!', 'You have fully explored the summit of 8848!', 'success');
+                }, 1200);
+            }
         }
-      } catch (err) {
-        statusMessage.textContent = 'Could not connect to the server. Check your connection.';
-        statusMessage.className = 'error';
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalBtnText;
-      }
-    });
-  </script>
 
+        /* 4. SUMMIT ASCENT MINIGAME */
+        let currentAltitude = 0;
+        let gameTimer = 0;
+        let gameInterval = null;
+        let gameStarted = false;
+        let bestRecord = localStorage.getItem('8848_best_record') || null;
+
+        if (bestRecord) {
+            document.getElementById('bestRecord').textContent = `${parseFloat(bestRecord).toFixed(1)}s`;
+        }
+
+        function climbStep() {
+            if (currentAltitude >= 8848) return;
+
+            if (!gameStarted) {
+                gameStarted = true;
+                gameTimer = 0;
+                gameInterval = setInterval(() => {
+                    gameTimer += 0.1;
+                    document.getElementById('gameTimer').textContent = `${gameTimer.toFixed(1)}s`;
+                }, 100);
+            }
+
+            const step = Math.floor(Math.random() * 250) + 350;
+            currentAltitude = Math.min(8848, currentAltitude + step);
+
+            document.getElementById('altitudeDisplay').textContent = `${currentAltitude} m`;
+            const percent = (currentAltitude / 8848) * 100;
+            document.getElementById('altitudeBar').style.width = `${percent}%`;
+
+            if (currentAltitude >= 8848) {
+                clearInterval(gameInterval);
+                const finalTime = gameTimer.toFixed(1);
+                showToast('SUMMIT REACHED! (8848m)', `Your time: ${finalTime} seconds!`, 'success');
+
+                if (!bestRecord || gameTimer < parseFloat(bestRecord)) {
+                    bestRecord = gameTimer;
+                    localStorage.setItem('8848_best_record', bestRecord);
+                    document.getElementById('bestRecord').textContent = `${finalTime}s`;
+                    showToast('NEW RECORD!', `New best time: ${finalTime}s`, 'success');
+                }
+            }
+        }
+
+        function resetGame() {
+            clearInterval(gameInterval);
+            gameStarted = false;
+            currentAltitude = 0;
+            gameTimer = 0;
+            document.getElementById('altitudeDisplay').textContent = '0 m';
+            document.getElementById('altitudeBar').style.width = '0%';
+            document.getElementById('gameTimer').textContent = '0.0s';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                climbStep();
+            }
+        });
+
+        /* 5. CONTACT FORM HANDLER WITH CLOUDFLARE WORKER INTEGRATION */
+        async function handleContactSubmit(event) {
+            event.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const formMsg = document.getElementById('formSuccessMessage');
+            const errorMsg = document.getElementById('formErrorMessage');
+            const errorText = document.getElementById('errorText');
+
+            formMsg.classList.add('hidden');
+            errorMsg.classList.add('hidden');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Sending...`;
+
+            const payload = {
+                name: document.getElementById('senderName').value,
+                email: document.getElementById('senderEmail').value,
+                subject: 'Message from 8848.nu',
+                message: document.getElementById('senderMessage').value
+            };
+
+            try {
+                const response = await fetch('https://api.8848.nu', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    formMsg.classList.remove('hidden');
+                    showToast('Message Sent', `Thank you ${payload.name}, your message was delivered.`, 'success');
+                    document.getElementById('contactForm').reset();
+                } else {
+                    errorText.textContent = result.error || 'Could not send message. Please try again.';
+                    errorMsg.classList.remove('hidden');
+                }
+            } catch (err) {
+                errorText.textContent = 'Could not connect to the server.';
+                errorMsg.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>Send Message</span>`;
+            }
+        }
+
+        /* 6. TOAST NOTIFICATION SYSTEM */
+        function showToast(title, text, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto flex items-start gap-3 p-4 rounded-2xl glass-panel border border-slate-700 shadow-xl transition-all duration-300 transform translate-y-4 opacity-0 max-w-sm`;
+
+            let iconClass = 'fa-circle-info text-sky-400';
+            if (type === 'success') iconClass = 'fa-trophy text-amber-400';
+
+            toast.innerHTML = `
+                <i class="fa-solid ${iconClass} text-xl mt-0.5"></i>
+                <div>
+                    <div class="text-sm font-bold text-white">${title}</div>
+                    <div class="text-xs text-slate-300 mt-0.5">${text}</div>
+                </div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+    </script>
 </body>
 </html>
