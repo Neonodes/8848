@@ -492,9 +492,18 @@
                 }
             });
 
-            // Update camp status banner text dynamically if game hasn't started or is at basecamp
+            // Update camp status banner text dynamically based on current game state
+            const banner = document.getElementById('campStatusText');
             if (currentAltitude === 0) {
-                document.getElementById('campStatusText').textContent = translations[lang]['status_base'];
+                banner.textContent = translations[lang]['status_base'];
+            } else if (currentAltitude >= 8848) {
+                banner.textContent = translations[lang]['status_summit'];
+            } else if (currentAltitude >= 6600) {
+                banner.textContent = translations[lang]['status_c3'];
+            } else if (currentAltitude >= 4400) {
+                banner.textContent = translations[lang]['status_c2'];
+            } else if (currentAltitude >= 2200) {
+                banner.textContent = translations[lang]['status_c1'];
             }
         }
 
@@ -766,7 +775,7 @@
                     showToast(currentLang === 'sv' ? 'Meddelande Skickat' : 'Message Sent', currentLang === 'sv' ? `Tack ${payload.name}, vi har tagit emot ditt meddelande.` : `Thank you ${payload.name}, your message was delivered.`, 'success');
                     document.getElementById('contactForm').reset();
                 } else {
-                    errorText.textContent = result.error || (currentLang === 'sv' ? 'Kunde inte skicka.' : 'Could not send.');
+                    errorText.textContent = result.error || translations[currentLang]['form_error'];
                     errorMsg.classList.remove('hidden');
                 }
             } catch (err) {
