@@ -66,7 +66,7 @@
             pointer-events: none;
             position: fixed;
             inset: 0;
-            z-index: 30;
+            z-index: 40;
             opacity: 0;
             transition: opacity 0.4s ease;
             background: radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 99%, rgba(3, 7, 18, 0.96) 100%);
@@ -87,7 +87,7 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            z-index: 40;
+            z-index: 50;
             opacity: 0;
             pointer-events: none;
         }
@@ -162,7 +162,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 z-10">
+    <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 z-20">
         <div class="max-w-4xl mx-auto text-center relative">
             
             <!-- Altitude Tag Indicator -->
@@ -207,22 +207,22 @@
         </div>
 
         <!-- Hidden Interactive Easter Eggs -->
-        <div id="egg1" class="easter-egg-target top-[38%] left-[18%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(1, 'Golden Ice Axe', currentLang === 'sv' ? 'Du hittade en förgylld isyxa undangömd i snön!' : 'You found a gilded ice axe hidden in the snow!')">
+        <div id="egg1" class="easter-egg-target top-[28%] left-[15%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(1, 'Golden Ice Axe', currentLang === 'sv' ? 'Du hittade en förgylld isyxa undangömd i snön!' : 'You found a gilded ice axe hidden in the snow!')">
             <i class="fa-solid fa-wand-magic-sparkles text-lg animate-pulse"></i>
         </div>
-        <div id="egg2" class="easter-egg-target top-[62%] right-[22%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(2, 'Weather Station', currentLang === 'sv' ? 'Radiosignal: Toppvindar 12 m/s, -26°C. Solsken!' : 'Radio signal: Summit winds 12 m/s, -26°C. Sunshine!')">
+        <div id="egg2" class="easter-egg-target top-[35%] right-[18%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(2, 'Weather Station', currentLang === 'sv' ? 'Radiosignal: Toppvindar 12 m/s, -26°C. Solsken!' : 'Radio signal: Summit winds 12 m/s, -26°C. Sunshine!')">
             <i class="fa-solid fa-satellite-dish text-lg animate-bounce"></i>
         </div>
-        <div id="egg3" class="easter-egg-target top-[82%] left-[32%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(3, 'Snow Leopard', currentLang === 'sv' ? 'Sällsynt iakttagelse! En snöleopard vilar på klippkanten.' : 'Rare sighting! A snow leopard resting on the ledge.')">
+        <div id="egg3" class="easter-egg-target top-[68%] left-[12%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(3, 'Snow Leopard', currentLang === 'sv' ? 'Sällsynt iakttagelse! En snöleopard vilar på klippkanten.' : 'Rare sighting! A snow leopard resting on the ledge.')">
             <i class="fa-solid fa-cat text-lg"></i>
         </div>
-        <div id="egg4" class="easter-egg-target top-[18%] right-[28%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(4, 'Summit Flag', currentLang === 'sv' ? 'Här är det! Du har nått den allra högsta punkten!' : 'Here it is! You reached the highest point!')">
+        <div id="egg4" class="easter-egg-target top-[22%] left-[52%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(4, 'Summit Flag', currentLang === 'sv' ? 'Här är det! Du har nått den allra högsta punkten!' : 'Here it is! You reached the highest point!')">
             <i class="fa-solid fa-flag text-lg"></i>
         </div>
     </section>
 
     <!-- Summit Ascent Minigame Section -->
-    <section id="minigameSection" class="relative z-10 py-20 px-4 sm:px-6 border-t border-slate-800/80 bg-slate-950/60 backdrop-blur-sm">
+    <section id="minigameSection" class="relative z-20 py-20 px-4 sm:px-6 border-t border-slate-800/80 bg-slate-950/60 backdrop-blur-sm">
         <div class="max-w-4xl mx-auto">
             
             <div class="text-center mb-12">
@@ -297,7 +297,7 @@
     </section>
 
     <!-- Contact Form Section -->
-    <section id="contactSection" class="relative z-10 py-20 px-4 sm:px-6">
+    <section id="contactSection" class="relative z-20 py-20 px-4 sm:px-6">
         <div class="max-w-3xl mx-auto">
             
             <div class="text-center mb-12">
@@ -346,7 +346,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="relative z-10 py-8 px-6 border-t border-slate-800/80 text-center text-xs text-slate-500 font-mono">
+    <footer class="relative z-20 py-8 px-6 border-t border-slate-800/80 text-center text-xs text-slate-500 font-mono">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
                 &copy; <span id="yearSpan"></span> 8848. <span data-i18n="footer_rights">Alla rättigheter förbehållna.</span>
