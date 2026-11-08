@@ -61,11 +61,12 @@
             cursor: crosshair;
         }
 
+        /* Binoculars Spotlight Overlay */
         #binocularsOverlay {
             pointer-events: none;
             position: fixed;
             inset: 0;
-            z-index: 40;
+            z-index: 30;
             opacity: 0;
             transition: opacity 0.4s ease;
             background: radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 99%, rgba(3, 7, 18, 0.96) 100%);
@@ -75,6 +76,7 @@
             opacity: 1;
         }
 
+        /* Hidden Easter Eggs by default, revealed ONLY when Binoculars mode is active */
         .easter-egg-target {
             position: absolute;
             width: 44px;
@@ -85,7 +87,7 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            z-index: 20;
+            z-index: 40;
             opacity: 0;
             pointer-events: none;
         }
@@ -171,8 +173,7 @@
 
             <!-- Main Title -->
             <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-6 leading-tight">
-                <span data-i18n="hero_title1">Nå Nya Höjder</span> <br/>
-                <span class="bg-gradient-to-r from-sky-400 via-indigo-200 to-teal-300 bg-clip-text text-transparent" data-i18n="hero_title2">Med precision</span>
+                <span class="bg-gradient-to-r from-sky-400 via-indigo-200 to-teal-300 bg-clip-text text-transparent" data-i18n="hero_title">Högt spel på hög höjd</span>
             </h1>
 
             <!-- Subtitle -->
@@ -206,16 +207,16 @@
         </div>
 
         <!-- Hidden Interactive Easter Eggs -->
-        <div id="egg1" class="easter-egg-target top-[38%] left-[18%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30" title="Skatt hittad!" onclick="discoverEgg(1, 'Golden Ice Axe', currentLang === 'sv' ? 'Du hittade en förgylld isyxa undangömd i snön!' : 'You found a gilded ice axe hidden in the snow!')">
+        <div id="egg1" class="easter-egg-target top-[38%] left-[18%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(1, 'Golden Ice Axe', currentLang === 'sv' ? 'Du hittade en förgylld isyxa undangömd i snön!' : 'You found a gilded ice axe hidden in the snow!')">
             <i class="fa-solid fa-wand-magic-sparkles text-lg animate-pulse"></i>
         </div>
-        <div id="egg2" class="easter-egg-target top-[62%] right-[22%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30" title="Skatt hittad!" onclick="discoverEgg(2, 'Weather Station', currentLang === 'sv' ? 'Radiosignal: Toppvindar 12 m/s, -26°C. Solsken!' : 'Radio signal: Summit winds 12 m/s, -26°C. Sunshine!')">
+        <div id="egg2" class="easter-egg-target top-[62%] right-[22%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(2, 'Weather Station', currentLang === 'sv' ? 'Radiosignal: Toppvindar 12 m/s, -26°C. Solsken!' : 'Radio signal: Summit winds 12 m/s, -26°C. Sunshine!')">
             <i class="fa-solid fa-satellite-dish text-lg animate-bounce"></i>
         </div>
-        <div id="egg3" class="easter-egg-target top-[82%] left-[32%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30" title="Skatt hittad!" onclick="discoverEgg(3, 'Snow Leopard', currentLang === 'sv' ? 'Sällsynt iakttagelse! En snöleopard vilar på klippkanten.' : 'Rare sighting! A snow leopard resting on the ledge.')">
+        <div id="egg3" class="easter-egg-target top-[82%] left-[32%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(3, 'Snow Leopard', currentLang === 'sv' ? 'Sällsynt iakttagelse! En snöleopard vilar på klippkanten.' : 'Rare sighting! A snow leopard resting on the ledge.')">
             <i class="fa-solid fa-cat text-lg"></i>
         </div>
-        <div id="egg4" class="easter-egg-target top-[18%] right-[28%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30" title="Skatt hittad!" onclick="discoverEgg(4, 'Summit Flag', currentLang === 'sv' ? 'Här är det! Du har nått den allra högsta punkten!' : 'Here it is! You reached the highest point!')">
+        <div id="egg4" class="easter-egg-target top-[18%] right-[28%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30 shadow-lg" title="Skatt hittad!" onclick="discoverEgg(4, 'Summit Flag', currentLang === 'sv' ? 'Här är det! Du har nått den allra högsta punkten!' : 'Here it is! You reached the highest point!')">
             <i class="fa-solid fa-flag text-lg"></i>
         </div>
     </section>
@@ -374,8 +375,7 @@
                 nav_climb: "Klättra (8848m)",
                 nav_contact: "Kontakt",
                 hero_badge: "BASLÄGER • 8 848 METER UPP",
-                hero_title1: "Nå Nya Höjder",
-                hero_title2: "Med precision",
+                hero_title: "Högt spel på hög höjd",
                 hero_subtitle: "Här samlas idéer, lekfulla projekt och höga ambitioner. Spana runt i kikaren, kasta dig ut i klättringen eller skriv en rad nedanför!",
                 hero_btn_explore: "Spana med kikaren",
                 hero_treasures_label: "Hemligheter på berget:",
@@ -423,8 +423,7 @@
                 nav_climb: "Climb (8848m)",
                 nav_contact: "Contact",
                 hero_badge: "BASECAMP • 8,848 METERS UP",
-                hero_title1: "Reach New Heights",
-                hero_title2: "With Precision",
+                hero_title: "High Altitudes & High Scores",
                 hero_subtitle: "A home for ideas, playful projects, and high ambitions. Look around with binoculars, take on the climb, or say hello below!",
                 hero_btn_explore: "Look with Binoculars",
                 hero_treasures_label: "Mountain secrets:",
