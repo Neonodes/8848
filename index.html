@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>8848 | High Altitude Digital Experience</title>
+    
+    <!-- Favicon (High Altitude Mountain Icon) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%2338BDF8' d='M12 2L2 22h20L12 2m0 4.5l6.5 13H5.5L12 6.5z'/></svg>">
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -136,12 +140,12 @@
             <!-- Navigation Links & Action Buttons -->
             <div class="flex items-center gap-2 sm:gap-4">
                 <!-- Language Toggle Button -->
-                <button onclick="toggleLanguage()" id="langToggleBtn" class="px-3 py-2 rounded-xl text-xs font-mono font-bold bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-sky-400 transition-all flex items-center gap-1.5" title="Byt språk / Change Language">
+                <button onclick="toggleLanguage()" id="langToggleBtn" class="px-3 py-2 rounded-xl text-xs font-mono font-bold bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-sky-400 transition-all flex items-center gap-1.5 cursor-pointer" title="Byt språk / Change Language">
                     <i class="fa-solid fa-globe"></i>
                     <span id="langLabel">SV</span>
                 </button>
 
-                <button onclick="toggleBinoculars()" id="btnBinoculars" class="px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 hover:bg-sky-600/30 border border-slate-700 hover:border-sky-500/50 text-slate-200 hover:text-sky-300 transition-all flex items-center gap-2">
+                <button onclick="toggleBinoculars()" id="btnBinoculars" class="px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 hover:bg-sky-600/30 border border-slate-700 hover:border-sky-500/50 text-slate-200 hover:text-sky-300 transition-all flex items-center gap-2 cursor-pointer">
                     <i class="fa-solid fa-binoculars text-sky-400"></i>
                     <span class="hidden sm:inline" data-i18n="nav_binoculars">Kikarläge</span>
                 </button>
@@ -151,10 +155,11 @@
                     <span class="hidden sm:inline" data-i18n="nav_climb">Klättra (8848m)</span>
                 </a>
 
-                <a href="#contactSection" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-sky-500 hover:bg-sky-400 text-slate-950 shadow-md shadow-sky-500/20 hover:shadow-sky-500/40 transition-all flex items-center gap-2">
+                <!-- Contact Trigger Button (Opens Modal) -->
+                <button onclick="openContactModal()" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-sky-500 hover:bg-sky-400 text-slate-950 shadow-md shadow-sky-500/20 hover:shadow-sky-500/40 transition-all flex items-center gap-2 cursor-pointer">
                     <i class="fa-solid fa-paper-plane"></i>
                     <span data-i18n="nav_contact">Kontakt</span>
-                </a>
+                </button>
             </div>
         </div>
     </header>
@@ -182,7 +187,7 @@
 
             <!-- Interactive Easter Eggs Counter Badge -->
             <div class="flex flex-wrap justify-center items-center gap-4 mb-10">
-                <button onclick="toggleBinoculars()" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-semibold shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.02] transition-all flex items-center gap-3">
+                <button onclick="toggleBinoculars()" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-semibold shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.02] transition-all flex items-center gap-3 cursor-pointer">
                     <i class="fa-solid fa-binoculars text-lg"></i>
                     <span data-i18n="hero_btn_explore">Utforska med kikare</span>
                 </button>
@@ -295,55 +300,6 @@
         </div>
     </section>
 
-    <!-- Contact Form Section -->
-    <section id="contactSection" class="relative z-10 py-20 px-4 sm:px-6">
-        <div class="max-w-3xl mx-auto">
-            
-            <div class="text-center mb-12">
-                <span class="text-sky-400 font-mono text-xs tracking-wider uppercase" data-i18n="contact_tag">KONTAKT &bull; EPOST</span>
-                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2" data-i18n="contact_title">Hör Av Dig</h2>
-                <p class="text-slate-400 text-sm sm:text-base mt-2" data-i18n="contact_desc">
-                    Skicka ett meddelande direkt genom formuläret nedan.
-                </p>
-            </div>
-
-            <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-slate-700/60 shadow-2xl">
-                <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-xs font-mono text-slate-300 mb-2 uppercase" data-i18n="form_name">Ditt Namn</label>
-                            <input type="text" id="senderName" required placeholder="t.ex. Anna Andersson" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-mono text-slate-300 mb-2 uppercase" data-i18n="form_email">E-postadress</label>
-                            <input type="email" id="senderEmail" required placeholder="anna@foretag.se" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-mono text-slate-300 mb-2 uppercase" data-i18n="form_msg">Meddelande</label>
-                        <textarea id="senderMessage" rows="4" required placeholder="Berätta om ditt projekt eller ställ en fråga..." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all text-sm"></textarea>
-                    </div>
-
-                    <div class="flex items-center justify-end pt-2">
-                        <button type="submit" id="submitBtn" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 transition-all flex items-center justify-center gap-2 cursor-pointer">
-                            <i class="fa-solid fa-paper-plane"></i>
-                            <span data-i18n="form_send">Skicka Meddelande</span>
-                        </button>
-                    </div>
-                </form>
-
-                <!-- Feedback Toast inside container -->
-                <div id="formSuccessMessage" class="hidden mt-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-sm text-center">
-                    <i class="fa-solid fa-circle-check mr-2"></i> <span data-i18n="form_success">Tack! Ditt meddelande har skickats. Vi återkommer snart.</span>
-                </div>
-                <div id="formErrorMessage" class="hidden mt-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm text-center">
-                    <i class="fa-solid fa-circle-exclamation mr-2"></i> <span id="errorText">Kunde inte skicka meddelande. Försök igen.</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="relative z-10 py-8 px-6 border-t border-slate-800/80 text-center text-xs text-slate-500 font-mono">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -356,6 +312,56 @@
             </div>
         </div>
     </footer>
+
+    <!-- CONTACT POPUP MODAL (Fully Localized SV / EN) -->
+    <div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="glass-panel w-full max-w-xl rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-2xl relative transform scale-95 transition-all duration-300" id="contactModalCard">
+            <!-- Close Button -->
+            <button onclick="closeContactModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl w-8 h-8 rounded-full bg-slate-800/80 flex items-center justify-center border border-slate-700 transition-colors cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <span class="text-sky-400 font-mono text-xs tracking-wider uppercase" data-i18n="contact_tag">KONTAKT &bull; EPOST</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1" data-i18n="contact_title">Hör Av Dig</h2>
+                <p class="text-slate-400 text-xs sm:text-sm mt-1" data-i18n="contact_desc">
+                    Skicka ett meddelande direkt genom formuläret nedan.
+                </p>
+            </div>
+
+            <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-mono text-slate-300 mb-1 uppercase" data-i18n="form_name">Ditt Namn</label>
+                        <input type="text" id="senderName" required data-i18n-placeholder="form_placeholder_name" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono text-slate-300 mb-1 uppercase" data-i18n="form_email">E-postadress</label>
+                        <input type="email" id="senderEmail" required data-i18n-placeholder="form_placeholder_email" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono text-slate-300 mb-1 uppercase" data-i18n="form_msg">Meddelande</label>
+                    <textarea id="senderMessage" rows="3" required data-i18n-placeholder="form_placeholder_msg" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm"></textarea>
+                </div>
+
+                <div class="flex items-center justify-end pt-2">
+                    <button type="submit" id="submitBtn" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span data-i18n="form_send">Skicka Meddelande</span>
+                    </button>
+                </div>
+            </form>
+
+            <div id="formSuccessMessage" class="hidden mt-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs text-center">
+                <i class="fa-solid fa-circle-check mr-1.5"></i> <span data-i18n="form_success">Tack! Ditt meddelande har skickats. Vi återkommer snart.</span>
+            </div>
+            <div id="formErrorMessage" class="hidden mt-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs text-center">
+                <i class="fa-solid fa-circle-exclamation mr-1.5"></i> <span id="errorText">Kunde inte skicka meddelande. Försök igen.</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Toast Notification Container -->
     <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
@@ -396,6 +402,9 @@
                 form_msg: "Meddelande",
                 form_send: "Skicka Meddelande",
                 form_success: "Tack! Ditt meddelande har skickats. Vi återkommer snart.",
+                form_placeholder_name: "t.ex. Anna Andersson",
+                form_placeholder_email: "anna@foretag.se",
+                form_placeholder_msg: "Berätta om ditt projekt eller ställ en fråga...",
                 footer_rights: "Alla rättigheter förbehållna.",
                 footer_elev: "Höjd: 8 848m"
             },
@@ -427,6 +436,9 @@
                 form_msg: "Message",
                 form_send: "Send Message",
                 form_success: "Thank you! Your message has been sent. We'll get back to you soon.",
+                form_placeholder_name: "e.g. John Doe",
+                form_placeholder_email: "john@company.com",
+                form_placeholder_msg: "Tell us about your project or ask a question...",
                 footer_rights: "All rights reserved.",
                 footer_elev: "Elevation: 8,848m"
             }
@@ -440,10 +452,19 @@
             document.getElementById('langLabel').textContent = lang.toUpperCase();
             document.documentElement.lang = lang;
 
+            // Uppdatera all vanlig text
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[lang][key]) {
                     el.textContent = translations[lang][key];
+                }
+            });
+
+            // Uppdatera formulärets placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
                 }
             });
         }
@@ -476,7 +497,6 @@
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
                     radius: Math.random() * 2.5 + 0.5,
-                    density: Math.random() * 1,
                     opacity: Math.random() * 0.7 + 0.2,
                     speedY: Math.random() * 1.2 + 0.3,
                     speedX: Math.random() * 0.6 - 0.3
@@ -642,7 +662,7 @@
             } else if (currentAltitude >= 6600 && !passedCamps.c3) {
                 passedCamps.c3 = true;
                 banner.textContent = currentLang === 'sv' ? 'Camp 3 (6,600m) nådd! Dödszonen ⚠️' : 'Camp 3 (6,600m) reached! Death zone ⚠️';
-                showToast(currentLang === 'sv' ? 'Dödszonen (Camp 3)!' : 'Death Zone (Camp 3)!', currentLang === 'sv' ? 'Kämpa på, toppen är nära!' : 'Push through, the summit is near!', 'success');
+                showToast(currentLang === 'sv' ? 'Dödszonen (Camp 3)!' : 'Death Zone (Death Zone)!', currentLang === 'sv' ? 'Kämpa på, toppen är nära!' : 'Push through, the summit is near!', 'success');
             }
 
             if (currentAltitude >= 8848 && !passedCamps.summit) {
@@ -681,8 +701,24 @@
         });
 
         /* =========================================================
-           5. CONTACT FORM HANDLER WITH CLOUDFLARE WORKER
+           5. CONTACT MODAL CONTROL & FORM HANDLER
            ========================================================= */
+        function openContactModal() {
+            const modal = document.getElementById('contactModal');
+            const card = document.getElementById('contactModalCard');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            card.classList.remove('scale-95');
+            card.classList.add('scale-100');
+        }
+
+        function closeContactModal() {
+            const modal = document.getElementById('contactModal');
+            const card = document.getElementById('contactModalCard');
+            card.classList.remove('scale-100');
+            card.classList.add('scale-95');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
         async function handleContactSubmit(event) {
             event.preventDefault();
             const submitBtn = document.getElementById('submitBtn');
@@ -698,7 +734,7 @@
             const payload = {
                 name: document.getElementById('senderName').value,
                 email: document.getElementById('senderEmail').value,
-                subject: 'Message from 8848.nu',
+                subject: 'Message from 8848.nu (v2)',
                 message: document.getElementById('senderMessage').value
             };
 
@@ -715,6 +751,7 @@
                     formMsg.classList.remove('hidden');
                     showToast(currentLang === 'sv' ? 'Meddelande Skickat' : 'Message Sent', currentLang === 'sv' ? `Tack ${payload.name}, vi har tagit emot ditt meddelande.` : `Thank you ${payload.name}, your message was delivered.`, 'success');
                     document.getElementById('contactForm').reset();
+                    setTimeout(closeContactModal, 2500);
                 } else {
                     errorText.textContent = result.error || (currentLang === 'sv' ? 'Kunde inte skicka meddelande.' : 'Could not send message.');
                     errorMsg.classList.remove('hidden');
@@ -724,7 +761,7 @@
                 errorMsg.classList.remove('hidden');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>${currentLang === 'sv' ? 'Skicka Meddelande' : 'Send Message'}</span>`;
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>${translations[currentLang]['form_send'] || 'Skicka Meddelande'}</span>`;
             }
         }
 
