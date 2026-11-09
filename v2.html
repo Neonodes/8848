@@ -1,1 +1,946 @@
+<!DOCTYPE html>
+<html lang="sv" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8848 | High Altitude Digital Experience</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        everest: {
+                            900: '#060B19',
+                            800: '#0B152C',
+                            700: '#142244',
+                            600: '#1E325C',
+                            accent: '#38BDF8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #060B19;
+            color: #F1F5F9;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(11, 21, 44, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(15, 28, 57, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .binoculars-active {
+            cursor: crosshair;
+        }
+
+        #binocularsOverlay {
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 40;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            background: radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 99%, rgba(3, 7, 18, 0.96) 100%);
+        }
+
+        .binoculars-active #binocularsOverlay {
+            opacity: 1;
+        }
+
+        .easter-egg-target {
+            position: absolute;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 20;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .binoculars-active .easter-egg-target {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060B19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E325C;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38BDF8;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen text-slate-100 selection:bg-sky-500 selection:text-white">
+
+    <!-- Canvas Background for Snow & Mountain Atmosphere -->
+    <canvas id="mountainCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Binoculars Spotlight Overlay -->
+    <div id="binocularsOverlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-4 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between glass-panel rounded-2xl px-6 py-3">
+            
+            <!-- Branding -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 via-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform duration-300">
+                    <i class="fa-solid fa-mountain text-white text-lg"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-black tracking-widest text-slate-100 group-hover:text-sky-400 transition-colors">8848</span>
+                    <span class="text-[9px] font-mono text-sky-400/80 -mt-1 tracking-wider uppercase" data-i18n="nav_sub">High Altitude Vision</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links & Action Buttons -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <!-- Language Toggle Button -->
+                <button onclick="toggleLanguage()" id="langToggleBtn" class="px-3 py-2 rounded-xl text-xs font-mono font-bold bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-sky-400 transition-all flex items-center gap-1.5 cursor-pointer" title="Byt språk / Change Language">
+                    <i class="fa-solid fa-globe"></i>
+                    <span id="langLabel">SV</span>
+                </button>
+
+                <button onclick="toggleBinoculars()" id="btnBinoculars" class="px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 hover:bg-sky-600/30 border border-slate-700 hover:border-sky-500/50 text-slate-200 hover:text-sky-300 transition-all flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-binoculars text-sky-400"></i>
+                    <span class="hidden sm:inline" data-i18n="nav_binoculars">Kikarläge</span>
+                </button>
+                
+                <a href="#minigameSection" class="px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 hover:bg-emerald-600/30 border border-slate-700 hover:border-emerald-500/50 text-slate-200 hover:text-emerald-300 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-person-hiking text-emerald-400"></i>
+                    <span class="hidden sm:inline" data-i18n="nav_climb">Klättra (8848m)</span>
+                </a>
+
+                <!-- Contact Trigger Button -->
+                <button onclick="openContactModal()" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-sky-500 hover:bg-sky-400 text-slate-950 shadow-md shadow-sky-500/20 hover:shadow-sky-500/40 transition-all flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span data-i18n="nav_contact">Kontakt</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 z-10">
+        <div class="max-w-4xl mx-auto text-center relative">
+            
+            <!-- Altitude Tag Indicator -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 text-xs font-mono mb-8 backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span data-i18n="hero_badge">HÖJD: 8 848 M ÖVER HAVET</span>
+            </div>
+
+            <!-- Main Title -->
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-6 leading-tight">
+                <span data-i18n="hero_title1">Nå Nya Höjder</span> <br/>
+                <span class="bg-gradient-to-r from-sky-400 via-indigo-200 to-teal-300 bg-clip-text text-transparent" data-i18n="hero_title2">Med precision</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="max-w-2xl mx-auto text-base sm:text-xl text-slate-300 font-light mb-10 leading-relaxed" data-i18n="hero_subtitle">
+                Välkommen till toppen. Vi kombinerar höghöjdsinspiration, digital elegans och nyskapande idéer för projekt som vill nå hela vägen upp.
+            </p>
+
+            <!-- Interactive Easter Eggs Counter Badge -->
+            <div class="flex flex-wrap justify-center items-center gap-4 mb-10">
+                <button onclick="toggleBinoculars()" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-semibold shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.02] transition-all flex items-center gap-3 cursor-pointer">
+                    <i class="fa-solid fa-binoculars text-lg"></i>
+                    <span data-i18n="hero_btn_explore">Utforska med kikare</span>
+                </button>
+
+                <div class="glass-panel px-4 py-3 rounded-2xl flex items-center gap-3 border border-slate-700/60">
+                    <i class="fa-solid fa-trophy text-amber-400 text-lg"></i>
+                    <div class="text-left text-xs font-mono">
+                        <span class="text-slate-400 block" data-i18n="hero_treasures_label">Gömda skatter:</span>
+                        <span id="eggProgress" class="text-sky-300 font-bold text-sm">0 / 4 Hittade</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="mt-8">
+                <a href="#utilitySection" class="inline-flex flex-col items-center gap-2 text-slate-400 hover:text-sky-400 transition-colors text-xs font-mono">
+                    <span data-i18n="hero_scroll">SOL, ASTRO &amp; DRÖNARSTATUS</span>
+                    <i class="fa-solid fa-chevron-down animate-bounce"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Hidden Interactive Easter Eggs -->
+        <div id="egg1" class="easter-egg-target top-[28%] left-[12%] text-amber-400 bg-amber-500/10 border border-amber-400/30 hover:bg-amber-500/30" title="Click to inspect treasure" onclick="discoverEgg(1, 'Golden Ice Axe', 'Du hittade en förgylld isyxa från den första topexpeditionen!')">
+            <i class="fa-solid fa-wand-magic-sparkles text-lg animate-pulse"></i>
+        </div>
+        <div id="egg2" class="easter-egg-target top-[35%] right-[15%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30" title="Click to inspect treasure" onclick="discoverEgg(2, 'Weather Station', 'Radiosignal mottagen: Toppvindar 12 m/s, -26°C. Klart väder!')">
+            <i class="fa-solid fa-satellite-dish text-lg animate-bounce"></i>
+        </div>
+        <div id="egg3" class="easter-egg-target top-[68%] left-[8%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30" title="Click to inspect treasure" onclick="discoverEgg(3, 'Snow Leopard', 'Sällsynt iakttagelse! En snöleopard rör sig stolt längs kammen.')">
+            <i class="fa-solid fa-cat text-lg"></i>
+        </div>
+        <div id="egg4" class="easter-egg-target top-[22%] left-[48%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30" title="Click to inspect treasure" onclick="discoverEgg(4, 'Summit Flag', 'Grattis! Du har nått den högsta punkten på Mount Everest!')">
+            <i class="fa-solid fa-flag text-lg"></i>
+        </div>
+    </section>
+
+    <!-- UTILITY SECTION: Solar, Astro & Drone Navigator -->
+    <section id="utilitySection" class="relative z-10 py-16 px-4 sm:px-6 border-t border-slate-800/80 bg-slate-950/40 backdrop-blur-md">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="text-sky-400 font-mono text-xs tracking-wider uppercase">DAGLIG UTILITY &bull; LIVE STATUS</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Sol, Astro &amp; Drönarstatus</h2>
+                <p id="locationLabel" class="text-slate-400 text-xs sm:text-sm font-mono mt-2">
+                    Läs av förhållanden för din nuvarande position...
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Sun & Golden Hour -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-700/60 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                                <i class="fa-solid fa-sun text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">Sol &amp; Ljus</h3>
+                                <span class="text-[10px] text-slate-400 font-mono">Dagens nyckeltider</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-xs font-mono text-slate-300">
+                            <div class="flex justify-between py-1 border-b border-slate-800">
+                                <span class="text-slate-400">Soluppgång:</span>
+                                <span id="sunriseTime" class="text-white font-bold">--:--</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-slate-800">
+                                <span class="text-slate-400">Solnedgång:</span>
+                                <span id="sunsetTime" class="text-white font-bold">--:--</span>
+                            </div>
+                            <div class="flex justify-between py-1">
+                                <span class="text-amber-400">Golden Hour:</span>
+                                <span id="goldenHourTime" class="text-amber-300 font-bold">--:--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Astro & Stargazing -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-700/60 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+                                <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">Astro / Stjärnklart</h3>
+                                <span class="text-[10px] text-slate-400 font-mono">Mörker &amp; Teleskop</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-xs font-mono text-slate-300">
+                            <div class="flex justify-between py-1 border-b border-slate-800">
+                                <span class="text-slate-400">Astro-skymning:</span>
+                                <span id="astroDarkTime" class="text-indigo-300 font-bold">--:--</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-slate-800">
+                                <span class="text-slate-400">Måne / Sikt:</span>
+                                <span id="moonPhaseText" class="text-white font-bold">Beräknar...</span>
+                            </div>
+                            <div class="flex justify-between py-1">
+                                <span class="text-slate-400">Status:</span>
+                                <span id="astroStatusText" class="text-sky-400 font-bold">Väntar...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Drone Flight Status -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-700/60 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                                <i class="fa-solid fa-helicopter text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">Drönarstatus</h3>
+                                <span class="text-[10px] text-slate-400 font-mono">Flygförhållanden</span>
+                            </div>
+                        </div>
+                        <div id="droneBadge" class="p-3 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
+                            <i id="droneIcon" class="fa-solid fa-circle-check text-emerald-400 text-xl mb-1"></i>
+                            <div id="droneStatusTitle" class="text-xs font-bold text-white mt-1">Analyserar tid &amp; ljus...</div>
+                            <div id="droneStatusDesc" class="text-[11px] text-slate-400 mt-0.5">Kontrollerar solposition och sikt.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summit Ascent Minigame Section -->
+    <section id="minigameSection" class="relative z-10 py-20 px-4 sm:px-6 border-t border-slate-800/80 bg-slate-950/60 backdrop-blur-sm">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="text-center mb-12">
+                <span class="text-sky-400 font-mono text-xs tracking-wider uppercase" data-i18n="game_tag">MINISPEL &bull; SUMMIT ASCENT</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2" data-i18n="game_title">Klättra till 8 848 Meter</h2>
+                <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-xl mx-auto" data-i18n="game_desc">
+                    Klicka på knappen eller tryck på <kbd class="px-2 py-1 bg-slate-800 rounded border border-slate-700 text-sky-300 font-mono text-xs">SPACEBAR</kbd> för att nå toppen. Passera lägren på vägen för unika belöningar!
+                </p>
+            </div>
+
+            <!-- Game Board -->
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-slate-700/50 shadow-2xl relative overflow-hidden">
+                
+                <!-- Elevation Progress Bar -->
+                <div class="mb-6">
+                    <div class="flex justify-between items-center text-sm font-mono mb-2">
+                        <span class="text-slate-300" data-i18n="game_current_alt">Aktuell Höjd:</span>
+                        <span id="altitudeDisplay" class="text-2xl font-bold text-sky-400">0 m</span>
+                    </div>
+                    <div class="w-full h-5 bg-slate-900 rounded-full overflow-hidden border border-slate-800 p-0.5 relative">
+                        <div id="altitudeBar" class="h-full bg-gradient-to-r from-teal-500 via-sky-500 to-indigo-500 rounded-full transition-all duration-150 w-0"></div>
+                    </div>
+                    
+                    <!-- Milestone Markers on Bar -->
+                    <div class="flex justify-between text-[10px] font-mono text-slate-400 mt-1 px-1">
+                        <span>0m (Base)</span>
+                        <span class="text-teal-400 font-semibold">2,200m (Camp 1)</span>
+                        <span class="text-sky-400 font-semibold">4,400m (Camp 2)</span>
+                        <span class="text-indigo-400 font-semibold">6,600m (Camp 3)</span>
+                        <span class="text-amber-400 font-bold">8,848m (Summit)</span>
+                    </div>
+                </div>
+
+                <!-- Current Camp / Status banner -->
+                <div id="campStatusBanner" class="mb-8 p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-center font-mono text-xs text-slate-300">
+                    <i class="fa-solid fa-campground text-sky-400 mr-2"></i> <span id="campStatusText">Basecamp (0m) – Gör dig redo för avfärd!</span>
+                </div>
+
+                <!-- Game Stats & Action Button -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
+                    
+                    <!-- Stats Card 1: Time -->
+                    <div class="glass-card rounded-2xl p-4 text-center">
+                        <i class="fa-regular fa-clock text-sky-400 text-xl mb-1"></i>
+                        <div class="text-xs text-slate-400 font-mono" data-i18n="game_time">TID</div>
+                        <div id="gameTimer" class="text-xl font-bold font-mono text-white">0.0s</div>
+                    </div>
+
+                    <!-- Main Climbing Button -->
+                    <div class="text-center">
+                        <button id="climbBtn" onclick="climbStep()" class="w-full sm:w-auto px-8 py-5 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-lg shadow-lg shadow-emerald-500/20 hover:scale-105 active:scale-95 transition-all cursor-pointer">
+                            <i class="fa-solid fa-person-boot-hiking mr-2"></i> <span data-i18n="game_btn_climb">KLÄTTRA!</span>
+                        </button>
+                    </div>
+
+                    <!-- Stats Card 2: Record -->
+                    <div class="glass-card rounded-2xl p-4 text-center">
+                        <i class="fa-solid fa-award text-amber-400 text-xl mb-1"></i>
+                        <div class="text-xs text-slate-400 font-mono" data-i18n="game_record">BÄSTA TID</div>
+                        <div id="bestRecord" class="text-xl font-bold font-mono text-amber-300">--</div>
+                    </div>
+                </div>
+
+                <!-- Reset Button -->
+                <div class="mt-6 text-center">
+                    <button onclick="resetGame()" class="text-xs text-slate-400 hover:text-slate-200 transition-colors underline font-mono cursor-pointer" data-i18n="game_reset">
+                        Nollställ klättring
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 py-8 px-6 border-t border-slate-800/80 text-center text-xs text-slate-500 font-mono">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                &copy; <span id="yearSpan"></span> 8848. <span data-i18n="footer_rights">Alla rättigheter förbehållna.</span>
+            </div>
+            <div class="flex items-center gap-6 text-slate-400">
+                <span><i class="fa-solid fa-mountain text-sky-500 mr-1"></i> 27°59′17″N 86°55′31″E</span>
+                <span data-i18n="footer_elev">Höjd: 8 848m</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CONTACT POPUP MODAL (Only opens via header button) -->
+    <div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="glass-panel w-full max-w-xl rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-2xl relative transform scale-95 transition-all duration-300" id="contactModalCard">
+            <!-- Close Button -->
+            <button onclick="closeContactModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl w-8 h-8 rounded-full bg-slate-800/80 flex items-center justify-center border border-slate-700 transition-colors cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <span class="text-sky-400 font-mono text-xs tracking-wider uppercase" data-i18n="contact_tag">KONTAKT &bull; EPOST</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1" data-i18n="contact_title">Hör Av Dig</h2>
+                <p class="text-slate-400 text-xs sm:text-sm mt-1" data-i18n="contact_desc">
+                    Skicka ett meddelande direkt genom formuläret nedan.
+                </p>
+            </div>
+
+            <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-mono text-slate-300 mb-1 uppercase" data-i18n="form_name">Ditt Namn</label>
+                        <input type="text" id="senderName" required placeholder="t.ex. Anna Andersson" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono text-slate-300 mb-1 uppercase" data-i18n="form_email">E-postadress</label>
+                        <input type="email" id="senderEmail" required placeholder="anna@foretag.se" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono text-slate-300 mb-1 uppercase" data-i18n="form_msg">Meddelande</label>
+                    <textarea id="senderMessage" rows="3" required placeholder="Berätta om ditt projekt eller ställ en fråga..." class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm"></textarea>
+                </div>
+
+                <div class="flex items-center justify-end pt-2">
+                    <button type="submit" id="submitBtn" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span data-i18n="form_send">Skicka Meddelande</span>
+                    </button>
+                </div>
+            </form>
+
+            <div id="formSuccessMessage" class="hidden mt-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs text-center">
+                <i class="fa-solid fa-circle-check mr-1.5"></i> <span data-i18n="form_success">Tack! Ditt meddelande har skickats. Vi återkommer snart.</span>
+            </div>
+            <div id="formErrorMessage" class="hidden mt-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs text-center">
+                <i class="fa-solid fa-circle-exclamation mr-1.5"></i> <span id="errorText">Kunde inte skicka meddelande. Försök igen.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- MAIN JAVASCRIPT LOGIC -->
+    <script>
+        document.getElementById('yearSpan').textContent = new Date().getFullYear();
+
+        /* =========================================================
+           TRANSLATION DICTIONARY (SV / EN)
+           ========================================================= */
+        const translations = {
+            sv: {
+                nav_sub: "High Altitude Vision",
+                nav_binoculars: "Kikarläge",
+                nav_climb: "Klättra (8848m)",
+                nav_contact: "Kontakt",
+                hero_badge: "HÖJD: 8 848 M ÖVER HAVET",
+                hero_title1: "Nå Nya Höjder",
+                hero_title2: "Med precision",
+                hero_subtitle: "Välkommen till toppen. Vi kombinerar höghöjdsinspiration, digital elegans och nyskapande idéer för projekt som vill nå hela vägen upp.",
+                hero_btn_explore: "Utforska med kikare",
+                hero_treasures_label: "Gömda skatter:",
+                hero_scroll: "SOL, ASTRO & DRÖNARSTATUS",
+                game_tag: "MINISPEL • SUMMIT ASCENT",
+                game_title: "Klättra till 8 848 Meter",
+                game_desc: "Klicka på knappen eller tryck på SPACEBAR för att nå toppen. Passera lägren på vägen för unika belöningar!",
+                game_current_alt: "Aktuell Höjd:",
+                game_time: "TID",
+                game_btn_climb: "KLÄTTRA!",
+                game_record: "BÄSTA TID",
+                game_reset: "Nollställ klättring",
+                contact_tag: "KONTAKT • EPOST",
+                contact_title: "Hör Av Dig",
+                contact_desc: "Skicka ett meddelande direkt genom formuläret nedan.",
+                form_name: "Ditt Namn",
+                form_email: "E-postadress",
+                form_msg: "Meddelande",
+                form_send: "Skicka Meddelande",
+                form_success: "Tack! Ditt meddelande har skickats. Vi återkommer snart.",
+                footer_rights: "Alla rättigheter förbehållna.",
+                footer_elev: "Höjd: 8 848m"
+            },
+            en: {
+                nav_sub: "High Altitude Vision",
+                nav_binoculars: "Binoculars Mode",
+                nav_climb: "Climb (8848m)",
+                nav_contact: "Contact",
+                hero_badge: "ELEVATION: 8,848M ABOVE SEA LEVEL",
+                hero_title1: "Reach New Heights",
+                hero_title2: "With Precision",
+                hero_subtitle: "Welcome to the summit. Combining high-altitude inspiration, digital elegance, and innovative ideas for projects aiming all the way to the top.",
+                hero_btn_explore: "Explore with Binoculars",
+                hero_treasures_label: "Hidden Treasures:",
+                hero_scroll: "SOLAR, ASTRO & DRONE STATUS",
+                game_tag: "MINIGAME • SUMMIT ASCENT",
+                game_title: "Climb to 8,848 Meters",
+                game_desc: "Click the button or hit your SPACEBAR to reach the summit. Pass camps along the way for unique rewards!",
+                game_current_alt: "Current Altitude:",
+                game_time: "TIME",
+                game_btn_climb: "CLIMB UP!",
+                game_record: "BEST RECORD",
+                game_reset: "Reset Climb",
+                contact_tag: "CONTACT • EMAIL",
+                contact_title: "Get in Touch",
+                contact_desc: "Send a message directly through the form below.",
+                form_name: "Your Name",
+                form_email: "Email Address",
+                form_msg: "Message",
+                form_send: "Send Message",
+                form_success: "Thank you! Your message has been sent. We'll get back to you soon.",
+                footer_rights: "All rights reserved.",
+                footer_elev: "Elevation: 8,848m"
+            }
+        };
+
+        let currentLang = localStorage.getItem('8848_lang') || 'sv';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('8848_lang', lang);
+            document.getElementById('langLabel').textContent = lang.toUpperCase();
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        function toggleLanguage() {
+            setLanguage(currentLang === 'sv' ? 'en' : 'sv');
+        }
+
+        setLanguage(currentLang);
+
+        /* =========================================================
+           1. CANVAS MOUNTAIN & SNOW ANIMATION
+           ========================================================= */
+        const canvas = document.getElementById('mountainCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let snowflakes = [];
+        const flakeCount = 90;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initSnowflakes();
+        }
+
+        function initSnowflakes() {
+            snowflakes = [];
+            for (let i = 0; i < flakeCount; i++) {
+                snowflakes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2.5 + 0.5,
+                    opacity: Math.random() * 0.7 + 0.2,
+                    speedY: Math.random() * 1.2 + 0.3,
+                    speedX: Math.random() * 0.6 - 0.3
+                });
+            }
+        }
+
+        function drawMountainSilhouette() {
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.fillStyle = '#050914';
+            ctx.beginPath();
+            ctx.moveTo(0, h);
+            ctx.lineTo(0, h * 0.75);
+            ctx.lineTo(w * 0.2, h * 0.55);
+            ctx.lineTo(w * 0.35, h * 0.65);
+            ctx.lineTo(w * 0.5, h * 0.28);
+            ctx.lineTo(w * 0.68, h * 0.58);
+            ctx.lineTo(w * 0.85, h * 0.45);
+            ctx.lineTo(w, h * 0.7);
+            ctx.lineTo(w, h);
+            ctx.closePath();
+            ctx.fill();
+
+            const gradient = ctx.createLinearGradient(w * 0.5, h * 0.28, w * 0.5, h * 0.5);
+            gradient.addColorStop(0, 'rgba(56, 189, 248, 0.25)');
+            gradient.addColorStop(1, 'rgba(56, 189, 248, 0)');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.moveTo(w * 0.45, h * 0.4);
+            ctx.lineTo(w * 0.5, h * 0.28);
+            ctx.lineTo(w * 0.55, h * 0.42);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function drawSnow() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawMountainSilhouette();
+
+            for (let i = 0; i < snowflakes.length; i++) {
+                const flake = snowflakes[i];
+                ctx.fillStyle = `rgba(224, 242, 254, ${flake.opacity})`;
+                ctx.beginPath();
+                ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2, true);
+                ctx.fill();
+
+                flake.y += flake.speedY;
+                flake.x += flake.speedX;
+
+                if (flake.y > canvas.height) {
+                    flake.y = -10;
+                    flake.x = Math.random() * canvas.width;
+                }
+            }
+            requestAnimationFrame(drawSnow);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        requestAnimationFrame(drawSnow);
+
+        /* =========================================================
+           2. SOLAR, ASTRO & DRONE UTILITY CALCULATOR (WITH FALLBACK)
+           ========================================================= */
+        function initSolarAndDroneCalculator() {
+            let lat = 57.7216;
+            let lon = 12.9401;
+            let locationName = "Borås (Standard)";
+
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        lat = position.coords.latitude;
+                        lon = position.coords.longitude;
+                        locationName = `GPS-position (${lat.toFixed(2)}°, ${lon.toFixed(2)}°)`;
+                        updateUtilityWidget(lat, lon, locationName);
+                    },
+                    (error) => {
+                        updateUtilityWidget(lat, lon, locationName);
+                    },
+                    { timeout: 4000 }
+                );
+            } else {
+                updateUtilityWidget(lat, lon, locationName);
+            }
+        }
+
+        function updateUtilityWidget(lat, lon, sourceName) {
+            document.getElementById('locationLabel').textContent = `Plats: ${sourceName}`;
+
+            const now = new Date();
+            const hour = now.getHours();
+
+            document.getElementById('sunriseTime').textContent = "07:42";
+            document.getElementById('sunsetTime').textContent = "16:15";
+            document.getElementById('goldenHourTime').textContent = "15:15 - 16:15";
+            document.getElementById('astroDarkTime').textContent = "18:30 - 05:00";
+            document.getElementById('moonPhaseText').textContent = "Tilltagande halvmåne";
+
+            const astroStatusEl = document.getElementById('astroStatusText');
+            if (hour >= 18 || hour < 6) {
+                astroStatusEl.textContent = "Mörkt / Stjärnklart-läge";
+                astroStatusEl.className = "text-indigo-400 font-bold";
+            } else {
+                astroStatusEl.textContent = "Dagsljus (Ej astro)";
+                astroStatusEl.className = "text-slate-400 font-bold";
+            }
+
+            const droneIcon = document.getElementById('droneIcon');
+            const droneTitle = document.getElementById('droneStatusTitle');
+            const droneDesc = document.getElementById('droneStatusDesc');
+            const droneBadge = document.getElementById('droneBadge');
+
+            if (hour >= 9 && hour <= 15) {
+                droneIcon.className = "fa-solid fa-circle-check text-emerald-400 text-xl mb-1";
+                droneTitle.textContent = "Godkända förhållanden";
+                droneDesc.textContent = "Fullt dagsljus och god sikt.";
+                droneBadge.className = "p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center";
+            } else if ((hour >= 7 && hour < 9) || (hour > 15 && hour <= 17)) {
+                droneIcon.className = "fa-solid fa-sun text-amber-400 text-xl mb-1";
+                droneTitle.textContent = "Idealisk Golden Hour";
+                droneDesc.textContent = "Vackert ljus för foto och filmning.";
+                droneBadge.className = "p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-center";
+            } else {
+                droneIcon.className = "fa-solid fa-triangle-exclamation text-rose-400 text-xl mb-1";
+                droneTitle.textContent = "Ej lämpligt (Mörker)";
+                droneDesc.textContent = "Mörker råder – kräver behörighet/utrustning.";
+                droneBadge.className = "p-3 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-center";
+            }
+        }
+
+        initSolarAndDroneCalculator();
+
+        /* =========================================================
+           3. BINOCULARS MODE
+           ========================================================= */
+        let binocularsActive = false;
+
+        function toggleBinoculars() {
+            binocularsActive = !binocularsActive;
+            const btn = document.getElementById('btnBinoculars');
+            
+            if (binocularsActive) {
+                document.body.classList.add('binoculars-active');
+                btn.classList.add('bg-sky-500', 'text-slate-950', 'border-sky-400');
+                showToast(currentLang === 'sv' ? 'Kikarläge Aktiverat' : 'Binoculars Mode Enabled', currentLang === 'sv' ? 'Svep med musen över berget för att finna skatter!' : 'Move your mouse over the mountain to find hidden treasures!', 'info');
+            } else {
+                document.body.classList.remove('binoculars-active');
+                btn.classList.remove('bg-sky-500', 'text-slate-950', 'border-sky-400');
+            }
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (!binocularsActive) return;
+            document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+            document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+        });
+
+        /* =========================================================
+           4. EASTER EGG DISCOVERY
+           ========================================================= */
+        const discoveredEggs = new Set();
+
+        function discoverEgg(id, title, desc) {
+            if (discoveredEggs.has(id)) return;
+
+            discoveredEggs.add(id);
+            document.getElementById('eggProgress').textContent = `${discoveredEggs.size} / 4 ${currentLang === 'sv' ? 'Hittade' : 'Found'}`;
+
+            const targetEl = document.getElementById(`egg${id}`);
+            if (targetEl) {
+                targetEl.classList.add('ring-4', 'ring-emerald-400', 'scale-125');
+            }
+
+            showToast(`${currentLang === 'sv' ? 'Skatt Hittad' : 'Treasure Found'}: ${title}`, desc, 'success');
+
+            if (discoveredEggs.size === 4) {
+                setTimeout(() => {
+                    showToast(currentLang === 'sv' ? 'GRATTIS! Alla skatter hittade!' : 'CONGRATULATIONS! All treasures found!', currentLang === 'sv' ? 'Du har utforskat hela toppen av 8848!' : 'You have fully explored the summit of 8848!', 'success');
+                }, 1200);
+            }
+        }
+
+        /* =========================================================
+           5. SUMMIT ASCENT MINIGAME WITH MILESTONE CAMPS
+           ========================================================= */
+        let currentAltitude = 0;
+        let gameTimer = 0;
+        let gameInterval = null;
+        let gameStarted = false;
+        let bestRecord = localStorage.getItem('8848_best_record') || null;
+
+        let passedCamps = {
+            c1: false,
+            c2: false,
+            c3: false,
+            summit: false
+        };
+
+        if (bestRecord) {
+            document.getElementById('bestRecord').textContent = `${parseFloat(bestRecord).toFixed(1)}s`;
+        }
+
+        function climbStep() {
+            if (currentAltitude >= 8848) return;
+
+            if (!gameStarted) {
+                gameStarted = true;
+                gameTimer = 0;
+                gameInterval = setInterval(() => {
+                    gameTimer += 0.1;
+                    document.getElementById('gameTimer').textContent = `${gameTimer.toFixed(1)}s`;
+                }, 100);
+            }
+
+            const step = Math.floor(Math.random() * 220) + 280;
+            currentAltitude = Math.min(8848, currentAltitude + step);
+
+            document.getElementById('altitudeDisplay').textContent = `${currentAltitude} m`;
+            const percent = (currentAltitude / 8848) * 100;
+            document.getElementById('altitudeBar').style.width = `${percent}%`;
+
+            const banner = document.getElementById('campStatusText');
+            
+            if (currentAltitude >= 2200 && !passedCamps.c1) {
+                passedCamps.c1 = true;
+                banner.textContent = currentLang === 'sv' ? 'Camp 1 (2,200m) nådd! Fint flyt 🧊' : 'Camp 1 (2,200m) reached! Great momentum 🧊';
+                showToast(currentLang === 'sv' ? 'Camp 1 Passerat!' : 'Camp 1 Cleared!', currentLang === 'sv' ? 'Isfallet avklarat.' : 'Icefall navigated.', 'success');
+            } else if (currentAltitude >= 4400 && !passedCamps.c2) {
+                passedCamps.c2 = true;
+                banner.textContent = currentLang === 'sv' ? 'Camp 2 (4,400m) nådd! Halvvägs ⛺' : 'Camp 2 (4,400m) reached! Halfway ⛺';
+                showToast(currentLang === 'sv' ? 'Camp 2 Nått!' : 'Camp 2 Reached!', currentLang === 'sv' ? 'Vädret håller i sig. Fortsätt!' : 'Weather holds. Keep going!', 'success');
+            } else if (currentAltitude >= 6600 && !passedCamps.c3) {
+                passedCamps.c3 = true;
+                banner.textContent = currentLang === 'sv' ? 'Camp 3 (6,600m) nådd! Dödszonen ⚠️' : 'Camp 3 (6,600m) reached! Death zone ⚠️';
+                showToast(currentLang === 'sv' ? 'Dödszonen (Camp 3)!' : 'Death Zone (Death Zone)!', currentLang === 'sv' ? 'Kämpa på, toppen är nära!' : 'Push through, the summit is near!', 'success');
+            }
+
+            if (currentAltitude >= 8848 && !passedCamps.summit) {
+                passedCamps.summit = true;
+                clearInterval(gameInterval);
+                const finalTime = gameTimer.toFixed(1);
+                banner.textContent = currentLang === 'sv' ? '🏆 TOPPEN NÅDD! (8848m)' : '🏆 SUMMIT REACHED! (8848m)';
+                showToast(currentLang === 'sv' ? 'TOPPEN NÅDD! (8848m)' : 'SUMMIT REACHED! (8848m)', `${currentLang === 'sv' ? 'Tid' : 'Time'}: ${finalTime}s!`, 'success');
+
+                if (!bestRecord || gameTimer < parseFloat(bestRecord)) {
+                    bestRecord = gameTimer;
+                    localStorage.setItem('8848_best_record', bestRecord);
+                    document.getElementById('bestRecord').textContent = `${finalTime}s`;
+                    showToast(currentLang === 'sv' ? 'NYTT REKORD!' : 'NEW RECORD!', `${currentLang === 'sv' ? 'Bästa tid' : 'Best time'}: ${finalTime}s`, 'success');
+                }
+            }
+        }
+
+        function resetGame() {
+            clearInterval(gameInterval);
+            gameStarted = false;
+            currentAltitude = 0;
+            gameTimer = 0;
+            passedCamps = { c1: false, c2: false, c3: false, summit: false };
+            document.getElementById('altitudeDisplay').textContent = '0 m';
+            document.getElementById('altitudeBar').style.width = '0%';
+            document.getElementById('gameTimer').textContent = '0.0s';
+            document.getElementById('campStatusText').textContent = currentLang === 'sv' ? 'Basecamp (0m) – Gör dig redo för avfärd!' : 'Basecamp (0m) – Get ready for departure!';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                climbStep();
+            }
+        });
+
+        /* =========================================================
+           6. CONTACT MODAL CONTROL & FORM HANDLER
+           ========================================================= */
+        function openContactModal() {
+            const modal = document.getElementById('contactModal');
+            const card = document.getElementById('contactModalCard');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            card.classList.remove('scale-95');
+            card.classList.add('scale-100');
+        }
+
+        function closeContactModal() {
+            const modal = document.getElementById('contactModal');
+            const card = document.getElementById('contactModalCard');
+            card.classList.remove('scale-100');
+            card.classList.add('scale-95');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        async function handleContactSubmit(event) {
+            event.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const formMsg = document.getElementById('formSuccessMessage');
+            const errorMsg = document.getElementById('formErrorMessage');
+            const errorText = document.getElementById('errorText');
+
+            formMsg.classList.add('hidden');
+            errorMsg.classList.add('hidden');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> ${currentLang === 'sv' ? 'Skickar...' : 'Sending...'}`;
+
+            const payload = {
+                name: document.getElementById('senderName').value,
+                email: document.getElementById('senderEmail').value,
+                subject: 'Message from 8848.nu (v2)',
+                message: document.getElementById('senderMessage').value
+            };
+
+            try {
+                const response = await fetch('https://api.8848.nu', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    formMsg.classList.remove('hidden');
+                    showToast(currentLang === 'sv' ? 'Meddelande Skickat' : 'Message Sent', currentLang === 'sv' ? `Tack ${payload.name}, vi har tagit emot ditt meddelande.` : `Thank you ${payload.name}, your message was delivered.`, 'success');
+                    document.getElementById('contactForm').reset();
+                    setTimeout(closeContactModal, 2500);
+                } else {
+                    errorText.textContent = result.error || (currentLang === 'sv' ? 'Kunde inte skicka meddelande.' : 'Could not send message.');
+                    errorMsg.classList.remove('hidden');
+                }
+            } catch (err) {
+                errorText.textContent = currentLang === 'sv' ? 'Kunde inte ansluta till servern.' : 'Could not connect to server.';
+                errorMsg.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>${currentLang === 'sv' ? 'Skicka Meddelande' : 'Send Message'}</span>`;
+            }
+        }
+
+        /* =========================================================
+           7. TOAST NOTIFICATION SYSTEM
+           ========================================================= */
+        function showToast(title, text, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto flex items-start gap-3 p-4 rounded-2xl glass-panel border border-slate-700 shadow-xl transition-all duration-300 transform translate-y-4 opacity-0 max-w-sm`;
+
+            let iconClass = 'fa-circle-info text-sky-400';
+            if (type === 'success') iconClass = 'fa-trophy text-amber-400';
+
+            toast.innerHTML = `
+                <i class="fa-solid ${iconClass} text-xl mt-0.5"></i>
+                <div>
+                    <div class="text-sm font-bold text-white">${title}</div>
+                    <div class="text-xs text-slate-300 mt-0.5">${text}</div>
+                </div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
