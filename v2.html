@@ -61,7 +61,7 @@
             cursor: crosshair;
         }
 
-        /* Modern binocular view with smaller size and double-lens/reticle frame styling */
+        /* Kompakt, skarp kikare med mörk optikring */
         #binocularsOverlay {
             pointer-events: none;
             position: fixed;
@@ -69,8 +69,8 @@
             z-index: 40;
             opacity: 0;
             transition: opacity 0.3s ease;
-            background: radial-gradient(circle 90px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 94%, rgba(2, 6, 23, 0.98) 96%, rgba(1, 3, 12, 1) 100%);
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+            background: radial-gradient(circle 85px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 92%, rgba(2, 6, 23, 0.98) 95%, rgba(1, 3, 12, 1) 100%);
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.9);
         }
 
         .binoculars-active #binocularsOverlay {
@@ -223,6 +223,99 @@
         </div>
     </section>
 
+    <!-- UTILITY SECTION: Solar, Astro & Drone Navigator -->
+    <section id="utilitySection" class="relative z-10 py-16 px-4 sm:px-6 border-t border-slate-800/80 bg-slate-950/40 backdrop-blur-md">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="text-sky-400 font-mono text-xs tracking-wider uppercase">DAGLIG UTILITY &bull; LIVE STATUS</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Sol, Astro &amp; Drönarstatus</h2>
+                <p id="locationLabel" class="text-slate-400 text-xs sm:text-sm font-mono mt-2">
+                    Läs av förhållanden för din nuvarande position...
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Sun & Golden Hour -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-700/60 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                                <i class="fa-solid fa-sun text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">Sol &amp; Ljus</h3>
+                                <span class="text-[10px] text-slate-400 font-mono">Dagens nyckeltider</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-xs font-mono text-slate-300">
+                            <div class="flex justify-between py-1 border-b border-slate-800">
+                                <span class="text-slate-400">Soluppgång:</span>
+                                <span id="sunriseTime" class="text-white font-bold">--:--</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-slate-800">
+                                <span class="text-slate-400">Solnedgång:</span>
+                                <span id="sunsetTime" class="text-white font-bold">--:--</span>
+                            </div>
+                            <div class="flex justify-between py-1">
+                                <span class="text-amber-400">Golden Hour:</span>
+                                <span id="goldenHourTime" class="text-amber-300 font-bold">--:--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Astro & Stargazing -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-700/60 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+                                <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">Astro / Stjärnklart</h3>
+                                <span class="text-[10px] text-slate-400 font-mono">Mörker &amp; Teleskop</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-xs font-mono text-slate-300">
+                            <div class="flex justify-between py-1 border-b border-slate-800">
+                                <span class="text-slate-400">Astro-skymning:</span>
+                                <span id="astroDarkTime" class="text-indigo-300 font-bold">--:--</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-slate-800">
+                                <span class="text-slate-400">Måne / Sikt:</span>
+                                <span id="moonPhaseText" class="text-white font-bold">Beräknar...</span>
+                            </div>
+                            <div class="flex justify-between py-1">
+                                <span class="text-slate-400">Status:</span>
+                                <span id="astroStatusText" class="text-sky-400 font-bold">Väntar...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Drone Flight Status -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-700/60 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                                <i class="fa-solid fa-helicopter text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">Drönarstatus</h3>
+                                <span class="text-[10px] text-slate-400 font-mono">Flygförhållanden</span>
+                            </div>
+                        </div>
+                        <div id="droneBadge" class="p-3 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
+                            <i id="droneIcon" class="fa-solid fa-circle-check text-emerald-400 text-xl mb-1"></i>
+                            <div id="droneStatusTitle" class="text-xs font-bold text-white mt-1">Analyserar tid &amp; ljus...</div>
+                            <div id="droneStatusDesc" class="text-[11px] text-slate-400 mt-0.5">Kontrollerar solposition och sikt.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Summit Ascent Minigame Section -->
     <section id="minigameSection" class="relative z-10 py-20 px-4 sm:px-6 border-t border-slate-800/80 bg-slate-950/60 backdrop-blur-sm">
         <div class="max-w-4xl mx-auto">
@@ -311,7 +404,7 @@
         </div>
     </footer>
 
-    <!-- CONTACT POPUP MODAL (Only opens via header button) -->
+    <!-- CONTACT POPUP MODAL (Fully localized SV/EN) -->
     <div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
         <div class="glass-panel w-full max-w-xl rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-2xl relative transform scale-95 transition-all duration-300" id="contactModalCard">
             <!-- Close Button -->
@@ -331,17 +424,17 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-mono text-slate-300 mb-1 uppercase" data-i18n="form_name">Ditt Namn</label>
-                        <input type="text" id="senderName" required placeholder="t.ex. Anna Andersson" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm">
+                        <input type="text" id="senderName" required data-i18n-placeholder="form_placeholder_name" placeholder="t.ex. Anna Andersson" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-mono text-slate-300 mb-1 uppercase" data-i18n="form_email">E-postadress</label>
-                        <input type="email" id="senderEmail" required placeholder="anna@foretag.se" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm">
+                        <input type="email" id="senderEmail" required data-i18n-placeholder="form_placeholder_email" placeholder="anna@foretag.se" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm">
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-mono text-slate-300 mb-1 uppercase" data-i18n="form_msg">Meddelande</label>
-                    <textarea id="senderMessage" rows="3" required placeholder="Berätta om ditt projekt eller ställ en fråga..." class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm"></textarea>
+                    <textarea id="senderMessage" rows="3" required data-i18n-placeholder="form_placeholder_msg" placeholder="Berätta om ditt projekt eller ställ en fråga..." class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm"></textarea>
                 </div>
 
                 <div class="flex items-center justify-end pt-2">
@@ -400,6 +493,9 @@
                 form_msg: "Meddelande",
                 form_send: "Skicka Meddelande",
                 form_success: "Tack! Ditt meddelande har skickats. Vi återkommer snart.",
+                form_placeholder_name: "t.ex. Anna Andersson",
+                form_placeholder_email: "anna@foretag.se",
+                form_placeholder_msg: "Berätta om ditt projekt eller ställ en fråga...",
                 footer_rights: "Alla rättigheter förbehållna.",
                 footer_elev: "Höjd: 8 848m"
             },
@@ -431,6 +527,9 @@
                 form_msg: "Message",
                 form_send: "Send Message",
                 form_success: "Thank you! Your message has been sent. We'll get back to you soon.",
+                form_placeholder_name: "e.g. John Doe",
+                form_placeholder_email: "john@company.com",
+                form_placeholder_msg: "Tell us about your project or ask a question...",
                 footer_rights: "All rights reserved.",
                 footer_elev: "Elevation: 8,848m"
             }
@@ -444,10 +543,19 @@
             document.getElementById('langLabel').textContent = lang.toUpperCase();
             document.documentElement.lang = lang;
 
+            // Update text content
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[lang][key]) {
                     el.textContent = translations[lang][key];
+                }
+            });
+
+            // Update placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
                 }
             });
         }
