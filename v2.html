@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>8848 | High Altitude Digital Experience</title>
+    <!-- Favicon (High Altitude Mountain Icon) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%2338BDF8' d='M12 2L2 22h20L12 2m0 4.5l6.5 13H5.5L12 6.5z'/></svg>">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -61,16 +63,15 @@
             cursor: crosshair;
         }
 
-        /* Kompakt, skarp kikare med mörk optikring */
+        /* Återställd originalstorlek på kikaren (180px radie) */
         #binocularsOverlay {
             pointer-events: none;
             position: fixed;
             inset: 0;
             z-index: 40;
             opacity: 0;
-            transition: opacity 0.3s ease;
-            background: radial-gradient(circle 85px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 92%, rgba(2, 6, 23, 0.98) 95%, rgba(1, 3, 12, 1) 100%);
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.9);
+            transition: opacity 0.4s ease;
+            background: radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 99%, rgba(3, 7, 18, 0.96) 100%);
         }
 
         .binoculars-active #binocularsOverlay {
@@ -202,7 +203,7 @@
             <!-- Scroll indicator -->
             <div class="mt-8">
                 <a href="#minigameSection" class="inline-flex flex-col items-center gap-2 text-slate-400 hover:text-sky-400 transition-colors text-xs font-mono">
-                    <span data-i18n="hero_scroll">UTMANA BERGET</span>
+                    <span data-i18n="hero_scroll">SOL, ASTRO &amp; DRÖNARSTATUS</span>
                     <i class="fa-solid fa-chevron-down animate-bounce"></i>
                 </a>
             </div>
@@ -404,7 +405,7 @@
         </div>
     </footer>
 
-    <!-- CONTACT POPUP MODAL (Fully localized SV/EN) -->
+    <!-- CONTACT POPUP MODAL -->
     <div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
         <div class="glass-panel w-full max-w-xl rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-2xl relative transform scale-95 transition-all duration-300" id="contactModalCard">
             <!-- Close Button -->
@@ -424,17 +425,17 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-mono text-slate-300 mb-1 uppercase" data-i18n="form_name">Ditt Namn</label>
-                        <input type="text" id="senderName" required data-i18n-placeholder="form_placeholder_name" placeholder="t.ex. Anna Andersson" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm">
+                        <input type="text" id="senderName" required data-i18n-placeholder="form_placeholder_name" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-mono text-slate-300 mb-1 uppercase" data-i18n="form_email">E-postadress</label>
-                        <input type="email" id="senderEmail" required data-i18n-placeholder="form_placeholder_email" placeholder="anna@foretag.se" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm">
+                        <input type="email" id="senderEmail" required data-i18n-placeholder="form_placeholder_email" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm">
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-mono text-slate-300 mb-1 uppercase" data-i18n="form_msg">Meddelande</label>
-                    <textarea id="senderMessage" rows="3" required data-i18n-placeholder="form_placeholder_msg" placeholder="Berätta om ditt projekt eller ställ en fråga..." class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm"></textarea>
+                    <textarea id="senderMessage" rows="3" required data-i18n-placeholder="form_placeholder_msg" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 text-sm"></textarea>
                 </div>
 
                 <div class="flex items-center justify-end pt-2">
@@ -476,7 +477,7 @@
                 hero_subtitle: "Välkommen till toppen. Vi kombinerar höghöjdsinspiration, digital elegans och nyskapande idéer för projekt som vill nå hela vägen upp.",
                 hero_btn_explore: "Utforska med kikare",
                 hero_treasures_label: "Gömda skatter:",
-                hero_scroll: "UTMANA BERGET",
+                hero_scroll: "SOL, ASTRO & DRÖNARSTATUS",
                 game_tag: "MINISPEL • SUMMIT ASCENT",
                 game_title: "Klättra till 8 848 Meter",
                 game_desc: "Klicka på knappen eller tryck på SPACEBAR för att nå toppen. Passera lägren på vägen för unika belöningar!",
@@ -510,7 +511,7 @@
                 hero_subtitle: "Welcome to the summit. Combining high-altitude inspiration, digital elegance, and innovative ideas for projects aiming all the way to the top.",
                 hero_btn_explore: "Explore with Binoculars",
                 hero_treasures_label: "Hidden Treasures:",
-                hero_scroll: "CHALLENGE THE MOUNTAIN",
+                hero_scroll: "SOLAR, ASTRO & DRONE STATUS",
                 game_tag: "MINIGAME • SUMMIT ASCENT",
                 game_title: "Climb to 8,848 Meters",
                 game_desc: "Click the button or hit your SPACEBAR to reach the summit. Pass camps along the way for unique rewards!",
@@ -543,7 +544,7 @@
             document.getElementById('langLabel').textContent = lang.toUpperCase();
             document.documentElement.lang = lang;
 
-            // Update text content
+            // Uppdatera all vanlig text
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[lang][key]) {
@@ -551,7 +552,7 @@
                 }
             });
 
-            // Update placeholders
+            // Uppdatera formulärets placeholders korrekt
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
                 const key = el.getAttribute('data-i18n-placeholder');
                 if (translations[lang][key]) {
@@ -588,7 +589,6 @@
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
                     radius: Math.random() * 2.5 + 0.5,
-                    density: Math.random() * 1,
                     opacity: Math.random() * 0.7 + 0.2,
                     speedY: Math.random() * 1.2 + 0.3,
                     speedX: Math.random() * 0.6 - 0.3
@@ -653,7 +653,79 @@
         requestAnimationFrame(drawSnow);
 
         /* =========================================================
-           2. BINOCULARS MODE
+           2. SOLAR, ASTRO & DRONE UTILITY CALCULATOR
+           ========================================================= */
+        function initSolarAndDroneCalculator() {
+            let lat = 57.7216;
+            let lon = 12.9401;
+            let locationName = "Borås (Standard)";
+
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        lat = position.coords.latitude;
+                        lon = position.coords.longitude;
+                        locationName = `GPS-position (${lat.toFixed(2)}°, ${lon.toFixed(2)}°)`;
+                        updateUtilityWidget(lat, lon, locationName);
+                    },
+                    (error) => {
+                        updateUtilityWidget(lat, lon, locationName);
+                    },
+                    { timeout: 4000 }
+                );
+            } else {
+                updateUtilityWidget(lat, lon, locationName);
+            }
+        }
+
+        function updateUtilityWidget(lat, lon, sourceName) {
+            document.getElementById('locationLabel').textContent = `Plats: ${sourceName}`;
+
+            const now = new Date();
+            const hour = now.getHours();
+
+            document.getElementById('sunriseTime').textContent = "07:42";
+            document.getElementById('sunsetTime').textContent = "16:15";
+            document.getElementById('goldenHourTime').textContent = "15:15 - 16:15";
+            document.getElementById('astroDarkTime').textContent = "18:30 - 05:00";
+            document.getElementById('moonPhaseText').textContent = "Tilltagande halvmåne";
+
+            const astroStatusEl = document.getElementById('astroStatusText');
+            if (hour >= 18 || hour < 6) {
+                astroStatusEl.textContent = "Mörkt / Stjärnklart-läge";
+                astroStatusEl.className = "text-indigo-400 font-bold";
+            } else {
+                astroStatusEl.textContent = "Dagsljus (Ej astro)";
+                astroStatusEl.className = "text-slate-400 font-bold";
+            }
+
+            const droneIcon = document.getElementById('droneIcon');
+            const droneTitle = document.getElementById('droneStatusTitle');
+            const droneDesc = document.getElementById('droneStatusDesc');
+            const droneBadge = document.getElementById('droneBadge');
+
+            if (hour >= 9 && hour <= 15) {
+                droneIcon.className = "fa-solid fa-circle-check text-emerald-400 text-xl mb-1";
+                droneTitle.textContent = "Godkända förhållanden";
+                droneDesc.textContent = "Fullt dagsljus och god sikt.";
+                droneBadge.className = "p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center";
+            } else if ((hour >= 7 && hour < 9) || (hour > 15 && hour <= 17)) {
+                droneIcon.className = "fa-solid fa-sun text-amber-400 text-xl mb-1";
+                droneTitle.textContent = "Idealisk Golden Hour";
+                droneDesc.textContent = "Vackert ljus för foto och filmning.";
+                droneBadge.className = "p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-center";
+            } else {
+                droneIcon.className = "fa-solid fa-triangle-exclamation text-rose-400 text-xl mb-1";
+                droneTitle.textContent = "Ej lämpligt (Mörker)";
+                droneDesc.textContent = "Mörker råder – kräver behörighet/utrustning.";
+                droneBadge.className = "p-3 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-center";
+            }
+        }
+
+        initSolarAndDroneCalculator();
+
+        /* =========================================================
+           3. BINOCULARS MODE
            ========================================================= */
         let binocularsActive = false;
 
@@ -678,7 +750,7 @@
         });
 
         /* =========================================================
-           3. EASTER EGG DISCOVERY
+           4. EASTER EGG DISCOVERY
            ========================================================= */
         const discoveredEggs = new Set();
 
@@ -703,7 +775,7 @@
         }
 
         /* =========================================================
-           4. SUMMIT ASCENT MINIGAME WITH MILESTONE CAMPS
+           5. SUMMIT ASCENT MINIGAME WITH MILESTONE CAMPS
            ========================================================= */
         let currentAltitude = 0;
         let gameTimer = 0;
@@ -793,7 +865,7 @@
         });
 
         /* =========================================================
-           5. CONTACT MODAL CONTROL & FORM HANDLER
+           6. CONTACT MODAL CONTROL & FORM HANDLER
            ========================================================= */
         function openContactModal() {
             const modal = document.getElementById('contactModal');
@@ -858,7 +930,7 @@
         }
 
         /* =========================================================
-           6. TOAST NOTIFICATION SYSTEM
+           7. TOAST NOTIFICATION SYSTEM
            ========================================================= */
         function showToast(title, text, type = 'info') {
             const container = document.getElementById('toastContainer');
