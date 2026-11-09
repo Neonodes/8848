@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>8848 | High Altitude Digital Experience</title>
+    
     <!-- Favicon (High Altitude Mountain Icon) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%2338BDF8' d='M12 2L2 22h20L12 2m0 4.5l6.5 13H5.5L12 6.5z'/></svg>">
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -63,7 +65,6 @@
             cursor: crosshair;
         }
 
-        /* Återställd originalstorlek på kikaren (180px radie) */
         #binocularsOverlay {
             pointer-events: none;
             position: fixed;
@@ -154,7 +155,7 @@
                     <span class="hidden sm:inline" data-i18n="nav_climb">Klättra (8848m)</span>
                 </a>
 
-                <!-- Contact Trigger Button -->
+                <!-- Contact Trigger Button (Opens Modal) -->
                 <button onclick="openContactModal()" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-sky-500 hover:bg-sky-400 text-slate-950 shadow-md shadow-sky-500/20 hover:shadow-sky-500/40 transition-all flex items-center gap-2 cursor-pointer">
                     <i class="fa-solid fa-paper-plane"></i>
                     <span data-i18n="nav_contact">Kontakt</span>
@@ -203,7 +204,7 @@
             <!-- Scroll indicator -->
             <div class="mt-8">
                 <a href="#minigameSection" class="inline-flex flex-col items-center gap-2 text-slate-400 hover:text-sky-400 transition-colors text-xs font-mono">
-                    <span data-i18n="hero_scroll">SOL, ASTRO &amp; DRÖNARSTATUS</span>
+                    <span data-i18n="hero_scroll">UTMANA BERGET</span>
                     <i class="fa-solid fa-chevron-down animate-bounce"></i>
                 </a>
             </div>
@@ -221,99 +222,6 @@
         </div>
         <div id="egg4" class="easter-egg-target top-[22%] left-[48%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30" title="Click to inspect treasure" onclick="discoverEgg(4, 'Summit Flag', 'Grattis! Du har nått den högsta punkten på Mount Everest!')">
             <i class="fa-solid fa-flag text-lg"></i>
-        </div>
-    </section>
-
-    <!-- UTILITY SECTION: Solar, Astro & Drone Navigator -->
-    <section id="utilitySection" class="relative z-10 py-16 px-4 sm:px-6 border-t border-slate-800/80 bg-slate-950/40 backdrop-blur-md">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-10">
-                <span class="text-sky-400 font-mono text-xs tracking-wider uppercase">DAGLIG UTILITY &bull; LIVE STATUS</span>
-                <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Sol, Astro &amp; Drönarstatus</h2>
-                <p id="locationLabel" class="text-slate-400 text-xs sm:text-sm font-mono mt-2">
-                    Läs av förhållanden för din nuvarande position...
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Card 1: Sun & Golden Hour -->
-                <div class="glass-panel rounded-3xl p-6 border border-slate-700/60 shadow-xl flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
-                                <i class="fa-solid fa-sun text-lg"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">Sol &amp; Ljus</h3>
-                                <span class="text-[10px] text-slate-400 font-mono">Dagens nyckeltider</span>
-                            </div>
-                        </div>
-                        <div class="space-y-2 text-xs font-mono text-slate-300">
-                            <div class="flex justify-between py-1 border-b border-slate-800">
-                                <span class="text-slate-400">Soluppgång:</span>
-                                <span id="sunriseTime" class="text-white font-bold">--:--</span>
-                            </div>
-                            <div class="flex justify-between py-1 border-b border-slate-800">
-                                <span class="text-slate-400">Solnedgång:</span>
-                                <span id="sunsetTime" class="text-white font-bold">--:--</span>
-                            </div>
-                            <div class="flex justify-between py-1">
-                                <span class="text-amber-400">Golden Hour:</span>
-                                <span id="goldenHourTime" class="text-amber-300 font-bold">--:--</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2: Astro & Stargazing -->
-                <div class="glass-panel rounded-3xl p-6 border border-slate-700/60 shadow-xl flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
-                                <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">Astro / Stjärnklart</h3>
-                                <span class="text-[10px] text-slate-400 font-mono">Mörker &amp; Teleskop</span>
-                            </div>
-                        </div>
-                        <div class="space-y-2 text-xs font-mono text-slate-300">
-                            <div class="flex justify-between py-1 border-b border-slate-800">
-                                <span class="text-slate-400">Astro-skymning:</span>
-                                <span id="astroDarkTime" class="text-indigo-300 font-bold">--:--</span>
-                            </div>
-                            <div class="flex justify-between py-1 border-b border-slate-800">
-                                <span class="text-slate-400">Måne / Sikt:</span>
-                                <span id="moonPhaseText" class="text-white font-bold">Beräknar...</span>
-                            </div>
-                            <div class="flex justify-between py-1">
-                                <span class="text-slate-400">Status:</span>
-                                <span id="astroStatusText" class="text-sky-400 font-bold">Väntar...</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3: Drone Flight Status -->
-                <div class="glass-panel rounded-3xl p-6 border border-slate-700/60 shadow-xl flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                                <i class="fa-solid fa-helicopter text-lg"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-sm font-bold text-white uppercase tracking-wider font-mono">Drönarstatus</h3>
-                                <span class="text-[10px] text-slate-400 font-mono">Flygförhållanden</span>
-                            </div>
-                        </div>
-                        <div id="droneBadge" class="p-3 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
-                            <i id="droneIcon" class="fa-solid fa-circle-check text-emerald-400 text-xl mb-1"></i>
-                            <div id="droneStatusTitle" class="text-xs font-bold text-white mt-1">Analyserar tid &amp; ljus...</div>
-                            <div id="droneStatusDesc" class="text-[11px] text-slate-400 mt-0.5">Kontrollerar solposition och sikt.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -405,7 +313,7 @@
         </div>
     </footer>
 
-    <!-- CONTACT POPUP MODAL -->
+    <!-- CONTACT POPUP MODAL (Fully Localized SV / EN) -->
     <div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
         <div class="glass-panel w-full max-w-xl rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-2xl relative transform scale-95 transition-all duration-300" id="contactModalCard">
             <!-- Close Button -->
@@ -477,7 +385,7 @@
                 hero_subtitle: "Välkommen till toppen. Vi kombinerar höghöjdsinspiration, digital elegans och nyskapande idéer för projekt som vill nå hela vägen upp.",
                 hero_btn_explore: "Utforska med kikare",
                 hero_treasures_label: "Gömda skatter:",
-                hero_scroll: "SOL, ASTRO & DRÖNARSTATUS",
+                hero_scroll: "UTMANA BERGET",
                 game_tag: "MINISPEL • SUMMIT ASCENT",
                 game_title: "Klättra till 8 848 Meter",
                 game_desc: "Klicka på knappen eller tryck på SPACEBAR för att nå toppen. Passera lägren på vägen för unika belöningar!",
@@ -511,7 +419,7 @@
                 hero_subtitle: "Welcome to the summit. Combining high-altitude inspiration, digital elegance, and innovative ideas for projects aiming all the way to the top.",
                 hero_btn_explore: "Explore with Binoculars",
                 hero_treasures_label: "Hidden Treasures:",
-                hero_scroll: "SOLAR, ASTRO & DRONE STATUS",
+                hero_scroll: "CHALLENGE THE MOUNTAIN",
                 game_tag: "MINIGAME • SUMMIT ASCENT",
                 game_title: "Climb to 8,848 Meters",
                 game_desc: "Click the button or hit your SPACEBAR to reach the summit. Pass camps along the way for unique rewards!",
@@ -552,7 +460,7 @@
                 }
             });
 
-            // Uppdatera formulärets placeholders korrekt
+            // Uppdatera formulärets placeholders
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
                 const key = el.getAttribute('data-i18n-placeholder');
                 if (translations[lang][key]) {
@@ -653,79 +561,7 @@
         requestAnimationFrame(drawSnow);
 
         /* =========================================================
-           2. SOLAR, ASTRO & DRONE UTILITY CALCULATOR
-           ========================================================= */
-        function initSolarAndDroneCalculator() {
-            let lat = 57.7216;
-            let lon = 12.9401;
-            let locationName = "Borås (Standard)";
-
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        lat = position.coords.latitude;
-                        lon = position.coords.longitude;
-                        locationName = `GPS-position (${lat.toFixed(2)}°, ${lon.toFixed(2)}°)`;
-                        updateUtilityWidget(lat, lon, locationName);
-                    },
-                    (error) => {
-                        updateUtilityWidget(lat, lon, locationName);
-                    },
-                    { timeout: 4000 }
-                );
-            } else {
-                updateUtilityWidget(lat, lon, locationName);
-            }
-        }
-
-        function updateUtilityWidget(lat, lon, sourceName) {
-            document.getElementById('locationLabel').textContent = `Plats: ${sourceName}`;
-
-            const now = new Date();
-            const hour = now.getHours();
-
-            document.getElementById('sunriseTime').textContent = "07:42";
-            document.getElementById('sunsetTime').textContent = "16:15";
-            document.getElementById('goldenHourTime').textContent = "15:15 - 16:15";
-            document.getElementById('astroDarkTime').textContent = "18:30 - 05:00";
-            document.getElementById('moonPhaseText').textContent = "Tilltagande halvmåne";
-
-            const astroStatusEl = document.getElementById('astroStatusText');
-            if (hour >= 18 || hour < 6) {
-                astroStatusEl.textContent = "Mörkt / Stjärnklart-läge";
-                astroStatusEl.className = "text-indigo-400 font-bold";
-            } else {
-                astroStatusEl.textContent = "Dagsljus (Ej astro)";
-                astroStatusEl.className = "text-slate-400 font-bold";
-            }
-
-            const droneIcon = document.getElementById('droneIcon');
-            const droneTitle = document.getElementById('droneStatusTitle');
-            const droneDesc = document.getElementById('droneStatusDesc');
-            const droneBadge = document.getElementById('droneBadge');
-
-            if (hour >= 9 && hour <= 15) {
-                droneIcon.className = "fa-solid fa-circle-check text-emerald-400 text-xl mb-1";
-                droneTitle.textContent = "Godkända förhållanden";
-                droneDesc.textContent = "Fullt dagsljus och god sikt.";
-                droneBadge.className = "p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center";
-            } else if ((hour >= 7 && hour < 9) || (hour > 15 && hour <= 17)) {
-                droneIcon.className = "fa-solid fa-sun text-amber-400 text-xl mb-1";
-                droneTitle.textContent = "Idealisk Golden Hour";
-                droneDesc.textContent = "Vackert ljus för foto och filmning.";
-                droneBadge.className = "p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-center";
-            } else {
-                droneIcon.className = "fa-solid fa-triangle-exclamation text-rose-400 text-xl mb-1";
-                droneTitle.textContent = "Ej lämpligt (Mörker)";
-                droneDesc.textContent = "Mörker råder – kräver behörighet/utrustning.";
-                droneBadge.className = "p-3 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-center";
-            }
-        }
-
-        initSolarAndDroneCalculator();
-
-        /* =========================================================
-           3. BINOCULARS MODE
+           2. BINOCULARS MODE
            ========================================================= */
         let binocularsActive = false;
 
@@ -750,7 +586,7 @@
         });
 
         /* =========================================================
-           4. EASTER EGG DISCOVERY
+           3. EASTER EGG DISCOVERY
            ========================================================= */
         const discoveredEggs = new Set();
 
@@ -775,7 +611,7 @@
         }
 
         /* =========================================================
-           5. SUMMIT ASCENT MINIGAME WITH MILESTONE CAMPS
+           4. SUMMIT ASCENT MINIGAME WITH MILESTONE CAMPS
            ========================================================= */
         let currentAltitude = 0;
         let gameTimer = 0;
@@ -865,7 +701,7 @@
         });
 
         /* =========================================================
-           6. CONTACT MODAL CONTROL & FORM HANDLER
+           5. CONTACT MODAL CONTROL & FORM HANDLER
            ========================================================= */
         function openContactModal() {
             const modal = document.getElementById('contactModal');
@@ -922,7 +758,7 @@
                 }
             } catch (err) {
                 errorText.textContent = currentLang === 'sv' ? 'Kunde inte ansluta till servern.' : 'Could not connect to server.';
-                errorMsg.classList.add('hidden');
+                errorMsg.classList.remove('hidden');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>${translations[currentLang]['form_send'] || 'Skicka Meddelande'}</span>`;
@@ -930,7 +766,7 @@
         }
 
         /* =========================================================
-           7. TOAST NOTIFICATION SYSTEM
+           6. TOAST NOTIFICATION SYSTEM
            ========================================================= */
         function showToast(title, text, type = 'info') {
             const container = document.getElementById('toastContainer');
