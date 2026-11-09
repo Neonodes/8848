@@ -212,7 +212,7 @@
         <div id="egg2" class="easter-egg-target top-[35%] right-[15%] text-sky-400 bg-sky-500/10 border border-sky-400/30 hover:bg-sky-500/30" title="Click to inspect treasure" onclick="discoverEgg(2, 'Weather Station', 'Radiosignal mottagen: Toppvindar 12 m/s, -26°C. Klart väder!')">
             <i class="fa-solid fa-satellite-dish text-lg animate-bounce"></i>
         </div>
-        <div id="egg3" class="easter-egg-target top-[68%] left-[8%] text-emerald-400 bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/30" title="Click to inspect treasure" onclick="discoverEgg(3, 'Snow Leopard', 'Sällsynt iakttagelse! En snöleopard rör sig stolt längs kammen.')">
+        <div id="egg3" class="easter-egg-target top-[68%] left-[8%] text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/30" title="Click to inspect treasure" onclick="discoverEgg(3, 'Snow Leopard', 'Sällsynt iakttagelse! En snöleopard rör sig stolt längs kammen.')">
             <i class="fa-solid fa-cat text-lg"></i>
         </div>
         <div id="egg4" class="easter-egg-target top-[22%] left-[48%] text-rose-400 bg-rose-500/10 border border-rose-400/30 hover:bg-rose-500/30" title="Click to inspect treasure" onclick="discoverEgg(4, 'Summit Flag', 'Grattis! Du har nått den högsta punkten på Mount Everest!')">
@@ -220,7 +220,7 @@
         </div>
     </section>
 
-    <!-- NEW UTILITY SECTION: Solar, Astro & Drone Navigator -->
+    <!-- NEW UTILITY SECTION: Solar, Astro & Drone Navigator ("Tandpetare på bordet") -->
     <section id="utilitySection" class="relative z-10 py-16 px-4 sm:px-6 border-t border-slate-800/80 bg-slate-950/40 backdrop-blur-md">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-10">
@@ -664,18 +664,15 @@
         function updateUtilityWidget(lat, lon, sourceName) {
             document.getElementById('locationLabel').textContent = `Plats: ${sourceName}`;
 
-            // Enkel uppskattning / beräkning av tider baserat på svensk standardtid / tid på dygnet
             const now = new Date();
             const hour = now.getHours();
 
-            // Exempel på dynamiska tider för widgeten
             document.getElementById('sunriseTime').textContent = "07:42";
             document.getElementById('sunsetTime').textContent = "16:15";
             document.getElementById('goldenHourTime').textContent = "15:15 - 16:15";
             document.getElementById('astroDarkTime').textContent = "18:30 - 05:00";
             document.getElementById('moonPhaseText').textContent = "Tilltagande halvmåne";
 
-            // Astro status
             const astroStatusEl = document.getElementById('astroStatusText');
             if (hour >= 18 || hour < 6) {
                 astroStatusEl.textContent = "Mörkt / Stjärnklart-läge";
@@ -685,7 +682,6 @@
                 astroStatusEl.className = "text-slate-400 font-bold";
             }
 
-            // Drönarstatus logik
             const droneIcon = document.getElementById('droneIcon');
             const droneTitle = document.getElementById('droneStatusTitle');
             const droneDesc = document.getElementById('droneStatusDesc');
@@ -709,7 +705,6 @@
             }
         }
 
-        // Kör vid start
         initSolarAndDroneCalculator();
 
         /* =========================================================
