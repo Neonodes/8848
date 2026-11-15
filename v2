@@ -1,0 +1,792 @@
+<!-- ... existing code ... -->
+  <script>
+    let currentLang = 'sv';
+
+    const i18n = {
+      sv: {
+        title: "8848.nu — Globala Dagens Klurigheter & Arkadtoppen",
+        liveGlobal: "Live Global",
+        subtitle: "Global arkad & hjärngympa",
+        streakTitle: "Dagar i rad",
+        altitudeTitle: "Din höjd mot toppen (8848m)",
+        climber: "Klättrare",
+        dailyExpedition: "Klara dagens 4 dynamiska etapper & nå",
+        summitMeters: "8 848 meter",
+        expeditionDesc: "Varje dag genereras unika dynamiska utmaningar för hela världen. Slå ditt personbästa och klättra på den globala topplistan!",
+        baseCamp: "Baslägret (5 364 m)",
+        summit: "Toppen (8 848 m)",
+        completedCount: "avklarade idag",
+        nextExpedition: "Nästa dynamiska expedition om",
+        shareBtn: "Dela Dagens Rapport",
+        tabHub: "Översikt",
+        tabReflex: "Reflextornet",
+        tabFjall: "Fjällkoden",
+        tabStorm: "Snöstorm-Pilot",
+        tabSiffer: "Sifferminne",
+        playedToday: "Ospelad idag",
+        completedToday: "Avklarad ✓",
+        playNow: "Spela nu →",
+        reflextornetDesc: "Dynamisk reaktionstest! Dagens sekvens av blixtmönster slumpas fram på nytt varje midnatt.",
+        fjallkodenDesc: "Dagens hemliga 3-siffriga kod och kluriga ledtrådar genereras dynamiskt efter dagens datum.",
+        snostormDesc: "Dynamiska isblock i snöovädret! Klicka i tid för att hoppa över hindren.",
+        sifferstafettenDesc: "Dynamisk siffersekvens som skapas unikt för dagens datum. Hur långt räcker ditt minne?",
+        dailyMode: "Dagens Dynamiska Utmaning",
+        freeMode: "Fritt läge ↻",
+        reflexStartTitle: "Tryck för att starta dagens bana!",
+        reflexSub: "Dynamiska blixtar i en ny kombination",
+        round: "Runda",
+        bestScore: "Snitt / Bästa",
+        fjallHintTitle: "Dagens genererade ledtrådar:",
+        fjallGuessPlaceholder: "Ange 3 siffror...",
+        startFjall: "STARTA DAGENS FJÄLLKOD",
+        stormScore: "Poäng",
+        stormTime: "Tid kvar",
+        stormHint: "Klicka eller tryck för att hoppa över isblocket!",
+        startStorm: "STARTA SNÖSTORM",
+        sifferLevel: "Nivå",
+        sifferScore: "Poäng",
+        sifferLives: "Liv",
+        startSiffer: "STARTA SIFFERSTAFETTEN",
+        clear: "Rensa",
+        submit: "SKICKA SVAR ✓",
+        lbTitle: "Global Topplista (Dagens Expedition)",
+        lbSub: "Realtidslista över dagens dynamiska utmaning världen över. Klättra till toppen!",
+        lbTotal: "Totalt (Höjdmeter)",
+        lbRank: "Plats",
+        lbClimber: "Klättrare",
+        lbDetail: "Detalj",
+        lbPoints: "Poäng / Höjd",
+        aliasTitle: "Välj ditt klättrar-alias",
+        aliasSub: "Ditt namn visas på den globala topplistan. Fula ord blockeras automatiskt.",
+        cancel: "Avbryt",
+        saveName: "Spara namn",
+        cookieTitle: "Kakor & Sparade Resultat 🍪",
+        cookieDesc: "Vi sparar dina poäng och höjdmeter i en säker webbläsarkaka (Local Storage) så att du kan lämna sidan och komma tillbaka senare med din höjd intakt!",
+        cookieAccept: "Godkänn & Fortsätt klättra",
+        statusUnplayed: "Ospelad idag"
+      },
+      en: {
+        title: "8848.nu — Global Daily Puzzles & Arcade Summit",
+        liveGlobal: "Live Global",
+        subtitle: "Global arcade & brain training",
+        streakTitle: "Streak (Days)",
+        altitudeTitle: "Your altitude towards summit (8848m)",
+        climber: "Climber",
+        dailyExpedition: "Complete today's 4 dynamic stages & reach",
+        summitMeters: "8,848 meters",
+        expeditionDesc: "Every day unique dynamic challenges are generated worldwide. Beat your personal best and climb the global leaderboard!",
+        baseCamp: "Base Camp (5,364 m)",
+        summit: "Summit (8,848 m)",
+        completedCount: "completed today",
+        nextExpedition: "Next dynamic expedition in",
+        shareBtn: "Share Today's Report",
+        tabHub: "Overview",
+        tabReflex: "Reflex Tower",
+        tabFjall: "Mountain Code",
+        tabStorm: "Snow Storm",
+        tabSiffer: "Digit Memory",
+        playedToday: "Unplayed today",
+        completedToday: "Completed ✓",
+        playNow: "Play now →",
+        reflextornetDesc: "Dynamic reaction test! Today's lightning pattern sequence is newly generated every midnight.",
+        fjallkodenDesc: "Today's secret 3-digit code and smart clues are dynamically generated based on today's date.",
+        snostormDesc: "Dynamic ice blocks in the snowstorm! Tap in time to jump over obstacles.",
+        sifferstafettenDesc: "Dynamic digit sequence uniquely created for today's date. How far does your memory go?",
+        dailyMode: "Today's Dynamic Challenge",
+        freeMode: "Free Play ↻",
+        reflexStartTitle: "Tap to start today's track!",
+        reflexSub: "Dynamic lightning in a new combination",
+        round: "Round",
+        bestScore: "Avg / Best",
+        fjallHintTitle: "Today's Generated Clues:",
+        fjallGuessPlaceholder: "Enter 3 digits...",
+        startFjall: "START TODAY'S MOUNTAIN CODE",
+        stormScore: "Score",
+        stormTime: "Time Left",
+        stormHint: "Click or tap to jump over the ice block!",
+        startStorm: "START SNOW STORM",
+        sifferLevel: "Level",
+        sifferScore: "Score",
+        sifferLives: "Lives",
+        startSiffer: "START DIGIT STACK",
+        clear: "Clear",
+        submit: "SUBMIT ANSWER ✓",
+        lbTitle: "Global Leaderboard (Daily Expedition)",
+        lbSub: "Real-time list of players worldwide for today's dynamic challenge. Climb to the summit!",
+        lbTotal: "Total (Altitude)",
+        lbRank: "Rank",
+        lbClimber: "Climber",
+        lbDetail: "Detail",
+        lbPoints: "Score / Altitude",
+        aliasTitle: "Choose your climber alias",
+        aliasSub: "Your name will be displayed on the global leaderboard. Profanity is automatically filtered.",
+        cancel: "Cancel",
+        saveName: "Save Name",
+        cookieTitle: "Cookies & Saved Progress 🍪",
+        cookieDesc: "Vi sparar dina poäng och höjdmeter i en säker webbläsarkaka (Local Storage) så att du kan lämna sidan och komma tillbaka senare med din höjd intakt!",
+        cookieAccept: "Accept & Keep Climbing",
+        statusUnplayed: "Unplayed today"
+      }
+    };
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      const t = i18n[lang];
+      document.getElementById('page-title').textContent = t.title;
+      document.getElementById('lang-btn-sv').className = lang === 'sv' ? 'px-2.5 py-1 rounded-lg text-xs font-bold bg-glacier-500 text-alpine-950' : 'px-2.5 py-1 rounded-lg text-xs font-bold bg-alpine-800 text-slate-300';
+      document.getElementById('lang-btn-en').className = lang === 'en' ? 'px-2.5 py-1 rounded-lg text-xs font-bold bg-glacier-500 text-alpine-950' : 'px-2.5 py-1 rounded-lg text-xs font-bold bg-alpine-800 text-slate-300';
+      
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+      });
+      updateDynamicDateAndAnomaly();
+      if (typeof updateGlobalUI === 'function') updateGlobalUI();
+    }
+  </script>
+</head>
+<!-- ... existing code ... -->
+  <!-- MODAL: SPELARALIAS -->
+  <div id="alias-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-sm rounded-3xl bg-alpine-900 border border-white/15 p-6 shadow-2xl space-y-4 animate-pop">
+      <h3 data-i18n="aliasTitle" class="text-lg font-black text-white">Välj ditt klättrar-alias</h3>
+      <p data-i18n="aliasSub" class="text-xs text-slate-400">Ditt namn visas på den globala topplistan.</p>
+      <input id="alias-input" type="text" maxlength="18" placeholder="T.ex. FikaKungen" class="w-full px-4 py-3 rounded-xl bg-alpine-950 border border-white/15 text-white font-semibold focus:outline-none focus:border-glacier-400" />
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeAliasModal()" data-i18n="cancel" class="px-4 py-2 rounded-xl bg-alpine-800 text-slate-300 text-xs font-bold hover:bg-alpine-700">Avbryt</button>
+        <button onclick="saveAlias()" data-i18n="saveName" class="px-4 py-2 rounded-xl bg-glacier-500 text-alpine-950 text-xs font-black hover:bg-glacier-400">Spara namn</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SoundFX = {
+      ctx: null,
+      enabled: true,
+      init() {
+        if (!this.ctx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) this.ctx = new AudioCtx();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+      },
+      playTone(freq, type = 'sine', duration = 0.1, vol = 0.12, delay = 0) {
+        if (!this.enabled) return;
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime + delay);
+          gain.gain.setValueAtTime(vol, this.ctx.currentTime + delay);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + delay + duration);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(this.ctx.currentTime + delay);
+          osc.stop(this.ctx.currentTime + delay + duration);
+        } catch (e) {}
+      },
+      click() { this.playTone(520, 'triangle', 0.05, 0.08); },
+      pop() { this.playTone(680, 'sine', 0.08, 0.1); },
+      error() { this.playTone(180, 'sawtooth', 0.18, 0.12); },
+      win() {
+        this.playTone(523.25, 'triangle', 0.15, 0.14, 0);
+        this.playTone(659.25, 'triangle', 0.15, 0.14, 0.1);
+        this.playTone(783.99, 'triangle', 0.15, 0.14, 0.2);
+        this.playTone(1046.50, 'triangle', 0.35, 0.16, 0.3);
+      }
+    };
+
+    function toggleSound() {
+      SoundFX.enabled = !SoundFX.enabled;
+      document.getElementById('sound-icon-on').classList.toggle('hidden', !SoundFX.enabled);
+      document.getElementById('sound-icon-off').classList.toggle('hidden', SoundFX.enabled);
+      if (SoundFX.enabled) SoundFX.pop();
+      showToast(currentLang === 'sv' ? 'Ljud på 🔊' : 'Sound ON 🔊');
+    }
+
+    function getTodayKey() {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    }
+
+    function getSeedNumber(str) {
+      let h = 2166136261 >>> 0;
+      for (let i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return h >>> 0;
+    }
+
+    function mulberry32(a) {
+      return function() {
+        let t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+    }
+
+    const TODAY_KEY = getTodayKey();
+    const TODAY_SEED = getSeedNumber('8848-NU-' + TODAY_KEY);
+    const DAILY_RNG = mulberry32(TODAY_SEED);
+
+    const ANOMALIES = [
+      { nameSv: "Turbofredag", nameEn: "Turbo Friday", desc: "Alla spel ger 1.5x poäng mot toppen!", mult: 1.5 },
+      { nameSv: "Tunnelseende", nameEn: "Tunnel Vision", desc: "Snabbare reflexkrav.", mult: 1.2 },
+      { nameSv: "Bonus-syre", nameEn: "Oxygen Boost", desc: "Extra marginal och poäng!", mult: 1.3 },
+      { nameSv: "Glaciärstorm", nameEn: "Glacier Storm", desc: "Hög svårighetsgrad, mäktiga belöningar!", mult: 1.6 },
+      { nameSv: "Baslägrets Lugn", nameEn: "Base Camp Calm", desc: "Standardförhållanden.", mult: 1.0 },
+      { nameSv: "Toppstötens Dag", nameEn: "Summit Push Day", desc: "Dubbel höjdstigning vid vunna etapper!", mult: 1.8 }
+    ];
+    const todaysAnomaly = ANOMALIES[Math.floor(DAILY_RNG() * ANOMALIES.length)];
+
+    function updateDynamicDateAndAnomaly() {
+      const now = new Date();
+      let dateStr = '';
+      if (currentLang === 'en') {
+        const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        const day = now.getDate();
+        const suffix = (day === 1 || day === 21 || day === 31) ? 'st' : (day === 2 || day === 22) ? 'nd' : (day === 3 || day === 23) ? 'rd' : 'th';
+        dateStr = `${months[now.getMonth()]} ${day}${suffix} ${now.getFullYear()}`;
+      } else {
+        const months = ['januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'];
+        dateStr = `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+      }
+      document.getElementById('today-date-label').textContent = dateStr;
+
+      const anomName = currentLang === 'en' ? todaysAnomaly.nameEn : todaysAnomaly.nameSv;
+      const anomLabel = currentLang === 'en' ? '⚡ Today\'s Anomaly:' : '⚡ Dagens Anomali:';
+      document.getElementById('anomaly-badge').textContent = `${anomLabel} ${anomName}`;
+    }
+
+    // Automatiskt genererat klättrar-alias om inget finns
+    const ADJECTIVES = ["Fjäll", "Isig", "Snabb", "Tapper", "Modig", "Vild", "Höga", "Stark", "Vind", "Stolt"];
+    const NOUNS = ["Klättrare", "Vandrare", "Puls", "Skalbagge", "Alpinist", "Sherpa", "Pilote", "Kämpe", "Hjälte", "Fjällräv"];
+    function generateRandomAlias() {
+      const adj = ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)];
+      const noun = NOUNS[Math.floor(Math.random() * NOUNS.length)];
+      const num = Math.floor(10 + Math.random() * 89);
+      return `${adj}${noun}_${num}`;
+    }
+
+    // Robust profanity filter (Svenska, Engelska och vanliga internationella fulord)
+    const BANNED_WORDS = [
+      'fan', 'jävel', 'helvete', 'skit', 'hora', 'fitta', 'kuk', 'stövel', 'fuck', 'shit', 'bitch', 'asshole', 'cunt', 'dick', 'cock', 'pussy', 'bastard', 'slut', 'whore', 'scheisse', 'merde', 'putain', 'pendejo', 'mierda'
+    ];
+    function containsProfanity(text) {
+      const clean = text.toLowerCase().replace(/[^a-zåäö0-9]/g, '');
+      return BANNED_WORDS.some(word => clean.includes(word));
+    }
+
+    const STORAGE_KEY = '8848_nu_profile_v5';
+    let userProfile = {
+      alias: generateRandomAlias(),
+      streak: 1,
+      lastPlayedDate: TODAY_KEY,
+      cookiesAccepted: false,
+      daily: {
+        date: TODAY_KEY,
+        reflextornet: { done: false, score: 0, detail: '' },
+        fjallkoden: { done: false, score: 0, detail: '' },
+        snostorm: { done: false, score: 0, detail: '' },
+        sifferstafetten: { done: false, score: 0, detail: '' }
+      }
+    };
+
+    function loadProfile() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          userProfile = { ...userProfile, ...parsed };
+          if (userProfile.daily?.date !== TODAY_KEY) {
+            userProfile.daily = {
+              date: TODAY_KEY,
+              reflextornet: { done: false, score: 0, detail: '' },
+              fjallkoden: { done: false, score: 0, detail: '' },
+              snostorm: { done: false, score: 0, detail: '' },
+              sifferstafetten: { done: false, score: 0, detail: '' }
+            };
+          }
+        }
+        if (!userProfile.cookiesAccepted) {
+          document.getElementById('cookie-banner').classList.remove('hidden');
+        }
+      } catch (e) {}
+      saveProfile();
+    }
+
+    function acceptCookies() {
+      userProfile.cookiesAccepted = true;
+      document.getElementById('cookie-banner').classList.add('hidden');
+      saveProfile();
+      showToast(currentLang === 'sv' ? 'Kakor godkända! Dina framsteg sparas säkert 🍪' : 'Cookies accepted! Your progress is saved securely 🍪');
+    }
+
+    function saveProfile() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(userProfile));
+      } catch (e) {}
+      updateGlobalUI();
+    }
+
+    function markGameDone(gameName, score, detail) {
+      const mult = todaysAnomaly.mult;
+      const finalScore = Math.round(score * mult);
+      userProfile.daily[gameName] = { done: true, score: finalScore, detail };
+      
+      if (userProfile.lastPlayedDate !== TODAY_KEY) {
+        userProfile.streak = (userProfile.streak || 1) + 1;
+        userProfile.lastPlayedDate = TODAY_KEY;
+      }
+      saveProfile();
+      showToast(currentLang === 'sv' ? `Etapp klarad! +${finalScore} poäng mot toppen 🏔️` : `Stage completed! +${finalScore} pts towards summit 🏔️`);
+    }
+
+    function getTotalDailyScore() {
+      const d = userProfile.daily;
+      return (d.reflextornet.score || 0) + (d.fjallkoden.score || 0) + (d.snostorm.score || 0) + (d.sifferstafetten.score || 0);
+    }
+
+    function getCurrentAltitude() {
+      const total = getTotalDailyScore();
+      return Math.min(8848, 5364 + Math.round(total * 0.8));
+    }
+
+    function updateGlobalUI() {
+      document.getElementById('header-alias').textContent = userProfile.alias;
+      document.getElementById('header-streak').textContent = userProfile.streak;
+      const alt = getCurrentAltitude();
+      document.getElementById('header-altitude').textContent = `${alt.toLocaleString('sv-SE')} m`;
+
+      const d = userProfile.daily;
+      const completed = [d.reflextornet.done, d.fjallkoden.done, d.snostorm.done, d.sifferstafetten.done].filter(Boolean).length;
+      document.getElementById('daily-progress-count').textContent = completed;
+
+      const pct = Math.max(8, Math.round(((alt - 5364) / (8848 - 5364)) * 100));
+      document.getElementById('altitude-progress-bar').style.width = `${pct}%`;
+
+      const games = ['reflextornet', 'fjallkoden', 'snostorm', 'sifferstafetten'];
+      games.forEach(g => {
+        const isDone = d[g].done;
+        document.getElementById(`badge-${g}`).classList.toggle('hidden', !isDone);
+        const statusEl = document.getElementById(`hub-status-${g}`);
+        const scoreEl = document.getElementById(`hub-score-${g}`);
+        const t = i18n[currentLang];
+        if (statusEl) {
+          statusEl.textContent = isDone ? t.completedToday : t.statusUnplayed;
+          statusEl.className = isDone ? 'px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30';
+        }
+        if (scoreEl) scoreEl.textContent = d[g].score > 0 ? `${d[g].score} p` : '—';
+      });
+
+      renderLeaderboard(currentLeaderboardTab);
+    }
+
+    function switchTab(tabId) {
+      SoundFX.click();
+      const views = ['hub', 'reflextornet', 'fjallkoden', 'snostorm', 'sifferstafetten'];
+      views.forEach(v => {
+        document.getElementById(`view-${v}`).classList.toggle('hidden', v !== tabId);
+        const btn = document.getElementById(`tab-${v}`);
+        if (v === tabId) {
+          btn.className = 'tab-btn relative flex items-center justify-center gap-2 p-3 rounded-2xl border font-bold text-sm transition-all bg-glacier-500/20 border-glacier-400 text-white shadow-lg shadow-glacier-500/10' + (v === 'sifferstafetten' ? ' col-span-2 sm:col-span-1' : '');
+        } else {
+          btn.className = 'tab-btn relative flex items-center justify-center gap-2 p-3 rounded-2xl border border-white/10 bg-alpine-900/85 hover:bg-alpine-800 font-bold text-sm text-slate-300 transition-all' + (v === 'sifferstafetten' ? ' col-span-2 sm:col-span-1' : '');
+        }
+      });
+      if (tabId === 'fjallkoden') initFjallkoden();
+    }
+
+    function showToast(msg, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const el = document.createElement('div');
+      el.className = `pointer-events-auto px-4 py-3 rounded-2xl border ${type === 'error' ? 'bg-rose-950/95 border-rose-500/50 text-rose-200' : 'bg-alpine-800/95 border-glacier-400/50 text-white'} shadow-2xl text-xs sm:text-sm font-bold flex items-center gap-2 animate-pop`;
+      el.textContent = msg;
+      container.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transition = 'opacity 0.3s';
+        setTimeout(() => el.remove(), 300);
+      }, 2800);
+    }
+
+    function openAliasModal() {
+      SoundFX.click();
+      document.getElementById('alias-input').value = userProfile.alias;
+      document.getElementById('alias-modal').classList.remove('hidden');
+      document.getElementById('alias-input').focus();
+    }
+    function closeAliasModal() { document.getElementById('alias-modal').classList.add('hidden'); }
+    function saveAlias() {
+      const val = document.getElementById('alias-input').value.trim();
+      if (val.length < 2) {
+        showToast(currentLang === 'sv' ? 'Ange minst 2 tecken.' : 'Enter at least 2 characters.', 'error');
+        return;
+      }
+      if (containsProfanity(val)) {
+        SoundFX.error();
+        showToast(currentLang === 'sv' ? '⚠️ Olämpligt ord upptäckte! Välj ett annat namn.' : '⚠️ Profanity detected! Please choose another name.', 'error');
+        return;
+      }
+      userProfile.alias = val;
+      saveProfile();
+      closeAliasModal();
+      SoundFX.pop();
+      showToast(currentLang === 'sv' ? `Alias uppdaterat till ${val}!` : `Alias updated to ${val}!`);
+    }
+
+    function shareDailyReport() {
+      SoundFX.pop();
+      const d = userProfile.daily;
+      const alt = getCurrentAltitude();
+      const report = [
+        `🏔️ 8848.nu — ${TODAY_KEY}`,
+        `Höjd / Altitude: ${alt.toLocaleString('sv-SE')} / 8 848 m (🔥 ${userProfile.streak}d)`,
+        `⚡ Reflextornet: ${d.reflextornet.done ? d.reflextornet.score + 'p' : '⏳'}`,
+        `🔐 Fjällkoden: ${d.fjallkoden.done ? d.fjallkoden.score + 'p' : '⏳'}`,
+        `🚁 Snöstorm: ${d.snostorm.done ? d.snostorm.score + 'p' : '⏳'}`,
+        `🔢 Sifferminne: ${d.sifferstafetten.done ? d.sifferstafetten.score + 'p' : '⏳'}`,
+        `Utmana mig på / Challenge me at https://8848.nu`
+      ].join('\n');
+
+      const ta = document.createElement('textarea');
+      ta.value = report;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(currentLang === 'sv' ? 'Rapport kopierad till urklipp! 📋' : 'Report copied to clipboard! 📋');
+      } catch (e) {
+        showToast('Kunde inte kopiera.', 'error');
+      }
+      document.body.removeChild(ta);
+    }
+
+    /* SPEL 1: REFLEXTORNET */
+    let reflexState = { round: 1, maxRounds: 5, state: 'idle', startTime: 0, timerId: null, times: [] };
+    function handleReflexClick() {
+      const box = document.getElementById('reflex-box');
+      if (reflexState.state === 'idle' || reflexState.state === 'falseStart') {
+        startReflexRound();
+      } else if (reflexState.state === 'waiting') {
+        clearTimeout(reflexState.timerId);
+        reflexState.state = 'falseStart';
+        SoundFX.error();
+        box.className = 'cursor-pointer select-none h-64 rounded-3xl bg-rose-950 border-2 border-rose-500 flex flex-col items-center justify-center p-6 shadow-2xl transition-all animate-shake';
+        document.getElementById('reflex-emoji').textContent = '❌';
+        document.getElementById('reflex-title').textContent = currentLang === 'sv' ? 'FALSK START!' : 'FALSE START!';
+        document.getElementById('reflex-sub').textContent = currentLang === 'sv' ? 'Tryck igen' : 'Tap again';
+        reflexState.times.push(800);
+      } else if (reflexState.state === 'ready') {
+        const ms = Math.round(performance.now() - reflexState.startTime);
+        reflexState.times.push(ms);
+        SoundFX.pop();
+        if (reflexState.round < reflexState.maxRounds) {
+          reflexState.round++;
+          reflexState.state = 'idle';
+          startReflexRound();
+        } else {
+          reflexState.state = 'done';
+          const avg = Math.round(reflexState.times.reduce((a, b) => a + b, 0) / reflexState.times.length);
+          const pts = Math.max(100, Math.round(1000 - avg * 1.5));
+          markGameDone('reflextornet', pts, `Snitt ${avg} ms`);
+          box.className = 'cursor-pointer select-none h-64 rounded-3xl bg-emerald-950 border-2 border-emerald-400 flex flex-col items-center justify-center p-6 shadow-2xl transition-all';
+          document.getElementById('reflex-emoji').textContent = '🏆';
+          document.getElementById('reflex-title').textContent = `KLART! ${avg} ms`;
+          document.getElementById('reflex-sub').textContent = `+${Math.round(pts * todaysAnomaly.mult)} p`;
+        }
+      }
+      renderReflexUI();
+    }
+    function startReflexRound() {
+      reflexState.state = 'waiting';
+      const box = document.getElementById('reflex-box');
+      box.className = 'cursor-pointer select-none h-64 rounded-3xl bg-alpine-950 border-2 border-amber-500 flex flex-col items-center justify-center p-6 shadow-2xl transition-all glow-glacier';
+      document.getElementById('reflex-emoji').textContent = '⏳';
+      document.getElementById('reflex-title').textContent = currentLang === 'sv' ? 'Vänta på grönt...' : 'Wait for green...';
+      document.getElementById('reflex-sub').textContent = '...';
+      const dynamicRngVal = DAILY_RNG();
+      const delay = 1000 + (reflexState.round * 200) + (dynamicRngVal * 1500);
+      reflexState.timerId = setTimeout(() => {
+        if (reflexState.state !== 'waiting') return;
+        reflexState.state = 'ready';
+        reflexState.startTime = performance.now();
+        SoundFX.win();
+        box.className = 'cursor-pointer select-none h-64 rounded-3xl bg-emerald-600 border-2 border-emerald-300 flex flex-col items-center justify-center p-6 shadow-2xl transition-all';
+        document.getElementById('reflex-emoji').textContent = '⚡';
+        document.getElementById('reflex-title').textContent = currentLang === 'sv' ? 'TRYCK NU!' : 'TAP NOW!';
+        document.getElementById('reflex-sub').textContent = '!';
+      }, delay);
+    }
+    function renderReflexUI() {
+      document.getElementById('reflex-round').textContent = reflexState.round;
+      document.getElementById('reflex-best').textContent = reflexState.times.length > 0 ? Math.min(...reflexState.times) + ' ms' : '—';
+    }
+
+    /* SPEL 2: FJÄLLKODEN */
+    let fjallState = { secret: '482', guess: '' };
+    function initFjallkoden() {
+      const s1 = 1 + Math.floor(DAILY_RNG() * 8);
+      const s2 = Math.floor(DAILY_RNG() * 10);
+      const s3 = Math.floor(DAILY_RNG() * 10);
+      fjallState.secret = `${s1}${s2}${s3}`;
+      fjallState.guess = '';
+      renderFjallClues();
+      renderFjallDisplay();
+    }
+    function renderFjallClues() {
+      const s = fjallState.secret;
+      const sum = Number(s[0]) + Number(s[1]) + Number(s[2]);
+      const isEven = Number(s[2]) % 2 === 0;
+      const c1 = currentLang === 'sv' ? `• Första siffran (${s[0]}) är korrekt på första plats` : `• First digit (${s[0]}) is correct in position 1`;
+      const c2 = currentLang === 'sv' ? `• Summan av alla tre siffror är ${sum}` : `• Sum of all three digits is ${sum}`;
+      const c3 = currentLang === 'sv' ? `• Tredje siffran (${s[2]}) är ${isEven ? 'jämn' : 'udda'}` : `• Third digit (${s[2]}) is ${isEven ? 'even' : 'odd'}`;
+      document.getElementById('fjall-clues-list').innerHTML = `<div>${c1}</div><div>${c2}</div><div>${c3}</div>`;
+    }
+    function pressFjallDigit(d) {
+      if (fjallState.guess.length < 3) {
+        SoundFX.click();
+        fjallState.guess += d;
+        renderFjallDisplay();
+      }
+    }
+    function clearFjallGuess() {
+      SoundFX.click();
+      fjallState.guess = '';
+      renderFjallDisplay();
+    }
+    function renderFjallDisplay() {
+      document.getElementById('fjall-guess-display').textContent = fjallState.guess.padEnd(3, '_');
+    }
+    function submitFjallGuess() {
+      if (fjallState.guess.length !== 3) return;
+      if (fjallState.guess === fjallState.secret) {
+        SoundFX.win();
+        document.getElementById('fjall-feedback').textContent = currentLang === 'sv' ? 'Rätt kod! Koden knäckt! ✓' : 'Correct code cracked! ✓';
+        markGameDone('fjallkoden', 850, 'Koden knäckt');
+      } else {
+        SoundFX.error();
+        document.getElementById('fjall-feedback').textContent = currentLang === 'sv' ? 'Fel kod, försök igen!' : 'Incorrect code, try again!';
+        document.getElementById('fjall-guess-display').classList.add('animate-shake');
+        setTimeout(() => document.getElementById('fjall-guess-display').classList.remove('animate-shake'), 300);
+      }
+    }
+
+    /* SPEL 3: SNÖSTORM-PILOTEN */
+    let stormState = { active: false, score: 0, timeLeft: 25.0, heliY: 40, isJumping: false, jumpVy: 0, obsX: 380, obsSpeed: 230, animId: null, lastTime: 0 };
+    function jumpStormHeli() {
+      if (!stormState.active || stormState.isJumping) return;
+      SoundFX.click();
+      stormState.isJumping = true;
+      stormState.jumpVy = -11.5;
+    }
+    function startStormGame() {
+      SoundFX.pop();
+      stormState.active = true;
+      stormState.score = 0;
+      stormState.timeLeft = 25.0;
+      stormState.heliY = 40;
+      stormState.isJumping = false;
+      stormState.jumpVy = 0;
+      stormState.obsX = 380;
+      stormState.obsSpeed = 210 + (DAILY_RNG() * 60);
+      stormState.lastTime = performance.now();
+      document.getElementById('storm-start-btn').classList.add('hidden');
+      document.getElementById('storm-overlay').classList.add('hidden');
+
+      const loop = (now) => {
+        if (!stormState.active) return;
+        const dt = (now - stormState.lastTime) / 1000;
+        stormState.lastTime = now;
+
+        if (stormState.isJumping) {
+          stormState.jumpVy += 34 * dt;
+          stormState.heliY += stormState.jumpVy * dt * 22;
+          if (stormState.heliY >= 40) {
+            stormState.heliY = 40;
+            stormState.isJumping = false;
+            stormState.jumpVy = 0;
+          }
+        }
+
+        stormState.obsX -= stormState.obsSpeed * dt;
+        if (stormState.obsX < -40) {
+          stormState.obsX = 380 + (DAILY_RNG() * 40);
+          stormState.score += 50;
+          SoundFX.pop();
+        }
+
+        if (Math.abs(stormState.obsX - 55) < 22 && stormState.heliY > 22) {
+          stormState.active = false;
+          SoundFX.error();
+          showToast(currentLang === 'sv' ? 'Krasch i snöstormen!' : 'Crash in the storm!', 'error');
+          document.getElementById('storm-start-btn').classList.remove('hidden');
+          document.getElementById('storm-overlay').classList.remove('hidden');
+          return;
+        }
+
+        stormState.timeLeft -= dt;
+        document.getElementById('storm-score').textContent = stormState.score;
+        document.getElementById('storm-time').textContent = Math.max(0, stormState.timeLeft).toFixed(1) + ' s';
+
+        document.getElementById('storm-heli').style.bottom = `${stormState.heliY}px`;
+        document.getElementById('storm-obstacle').style.right = `${380 - stormState.obsX}px`;
+
+        if (stormState.timeLeft <= 0) {
+          stormState.active = false;
+          SoundFX.win();
+          markGameDone('snostorm', 300 + stormState.score, `${stormState.score}p i storm`);
+          document.getElementById('storm-start-btn').classList.remove('hidden');
+          document.getElementById('storm-overlay').classList.remove('hidden');
+        } else {
+          stormState.animId = requestAnimationFrame(loop);
+        }
+      };
+      stormState.animId = requestAnimationFrame(loop);
+    }
+
+    /* SPEL 4: SIFFERSTAFETTEN */
+    let sifferState = { level: 1, score: 0, lives: 3, sequence: '', playerInput: '', phase: 'idle' };
+    function startSifferRound() {
+      SoundFX.pop();
+      sifferState.phase = 'showing'; sifferState.playerInput = '';
+      document.getElementById('siffer-start-btn').classList.add('hidden');
+      document.getElementById('siffer-input-area').classList.add('hidden');
+      
+      const levelRng = mulberry32(TODAY_SEED + sifferState.level * 97);
+      sifferState.sequence = '';
+      for (let i = 0; i < 2 + sifferState.level; i++) {
+        sifferState.sequence += Math.floor(levelRng() * 10);
+      }
+
+      const txt = document.getElementById('siffer-text');
+      txt.textContent = sifferState.sequence;
+      setTimeout(() => {
+        if (sifferState.phase !== 'showing') return;
+        sifferState.phase = 'input';
+        txt.textContent = '••••••';
+        document.getElementById('siffer-input-area').classList.remove('hidden');
+        renderSifferInputDisplay();
+      }, Math.max(1000, 2400 - sifferState.level * 200));
+    }
+    function pressSifferDigit(d) {
+      if (sifferState.phase !== 'input' || sifferState.playerInput.length >= sifferState.sequence.length) return;
+      SoundFX.click();
+      sifferState.playerInput += d;
+      renderSifferInputDisplay();
+    }
+    function clearSifferInput() { SoundFX.click(); sifferState.playerInput = ''; renderSifferInputDisplay(); }
+    function renderSifferInputDisplay() {
+      document.getElementById('siffer-input-display').textContent = sifferState.playerInput.padEnd(sifferState.sequence.length, '_');
+    }
+    function submitSifferGuess() {
+      if (sifferState.phase !== 'input') return;
+      if (sifferState.playerInput === sifferState.sequence) {
+        SoundFX.win();
+        const pts = sifferState.level * 150;
+        sifferState.score += pts;
+        sifferState.level++;
+        updateSifferHUD();
+        markGameDone('sifferstafetten', sifferState.score, `Nivå ${sifferState.level - 1}`);
+        setTimeout(() => startSifferRound(), 800);
+      } else {
+        SoundFX.error();
+        sifferState.lives--;
+        updateSifferHUD();
+        if (sifferState.lives <= 0) {
+          sifferState.phase = 'over';
+          document.getElementById('siffer-text').textContent = 'GAME OVER';
+          document.getElementById('siffer-input-area').classList.add('hidden');
+          document.getElementById('siffer-start-btn').classList.remove('hidden');
+        } else {
+          sifferState.playerInput = '';
+          renderSifferInputDisplay();
+        }
+      }
+    }
+    function updateSifferHUD() {
+      document.getElementById('siffer-level').textContent = sifferState.level;
+      document.getElementById('siffer-score').textContent = sifferState.score;
+      document.getElementById('siffer-lives').textContent = '❤️'.repeat(Math.max(0, sifferState.lives));
+    }
+
+    /* TOPPLISTA */
+    let currentLeaderboardTab = 'total';
+    const MOCK_BOTS = [
+      { name: 'Fjällräven99', altitude: 8100, games: {} },
+      { name: 'SarekVandrare', altitude: 7800, games: {} },
+      { name: 'KebnekaiseKungen', altitude: 7600, games: {} },
+      { name: 'Isyxa_Sthlm', altitude: 7200, games: {} },
+      { name: 'ÅreSkidåkare', altitude: 6800, games: {} }
+    ];
+
+    function renderLeaderboard(category = 'total') {
+      currentLeaderboardTab = category;
+      document.querySelectorAll('.lb-filter-btn').forEach(btn => {
+        const active = btn.getAttribute('data-lb') === category;
+        btn.className = active ? 'lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-glacier-500 text-alpine-950 transition-all' : 'lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-alpine-800 text-slate-300 hover:bg-alpine-700 transition-all';
+      });
+
+      const myEntry = {
+        name: `${userProfile.alias} (${currentLang === 'sv' ? 'Du' : 'You'})`,
+        isMe: true,
+        altitude: getCurrentAltitude(),
+        games: userProfile.daily
+      };
+
+      const list = [myEntry, ...MOCK_BOTS];
+      list.sort((a, b) => {
+        if (category === 'total') return b.altitude - a.altitude;
+        return (b.games?.[category]?.score || 0) - (a.games?.[category]?.score || 0);
+      });
+
+      document.getElementById('leaderboard-body').innerHTML = list.map((row, idx) => {
+        const rank = idx + 1;
+        const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `#${rank}`;
+        const scoreVal = category === 'total' ? `${row.altitude.toLocaleString('sv-SE')} m` : `${row.games?.[category]?.score || 0} p`;
+        const detail = category === 'total' ? `${Object.values(row.games || {}).filter(g => g.done).length}/4` : (row.games?.[category]?.detail || '—');
+
+        return `
+          <tr class="${row.isMe ? 'bg-glacier-500/15 font-bold text-white' : 'hover:bg-white/[0.02] text-slate-300'} transition-colors">
+            <td class="py-3 px-3 font-mono font-bold">${medal}</td>
+            <td class="py-3 px-3"><span class="${row.isMe ? 'text-glacier-300' : 'text-white'} font-semibold">${row.name}</span></td>
+            <td class="py-3 px-3 hidden sm:table-cell font-mono text-xs text-slate-400">${detail}</td>
+            <td class="py-3 px-3 text-right font-mono font-extrabold ${row.isMe ? 'text-summit-400' : 'text-glacier-400'}">${scoreVal}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function updateMidnightCountdown() {
+      const now = new Date();
+      const midnight = new Date(now);
+      midnight.setHours(24, 0, 0, 0);
+      const diff = Math.max(0, midnight - now);
+      const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
+      const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+      const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+      document.getElementById('midnight-countdown').textContent = `${h}:${m}:${s}`;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      updateDynamicDateAndAnomaly();
+      updateMidnightCountdown();
+      setInterval(updateMidnightCountdown, 1000);
+      loadProfile();
+      updateGlobalUI();
+    });
+  </script>
+</body>
+</html>
+```eof
+
+### Vad som har lagts till i denna version:
+1. **Automatiskt namn:** Nya besökare tilldelas direkt ett unikt och roligt klättrar-alias (t.ex. *TapperAlpinist_45*).
+2. **Robust fulordsfilter:** Om spelaren klickar på sitt namn för att ändra det och försöker skriva in opassande ord (stötande ord på svenska, engelska och flera andra språk) blockeras det omedelbart med en varning.
