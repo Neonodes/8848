@@ -1,4 +1,84 @@
-<!-- ... existing code ... -->
+<!DOCTYPE html>
+<html lang="sv" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">8848.nu — Globala Dagens Klurigheter & Arkadtoppen</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            alpine: {
+              950: '#050811',
+              900: '#0A0F1D',
+              800: '#131C31',
+              700: '#1E293B',
+              600: '#334155',
+            },
+            glacier: {
+              400: '#38BDF8',
+              500: '#0EA5E9',
+              600: '#0284C7',
+            },
+            summit: {
+              400: '#FBBF24',
+              500: '#F59E0B',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #050811;
+      color: #F8FAFC;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.14) 0%, transparent 60%),
+        radial-gradient(circle at 90% 25%, rgba(245, 158, 11, 0.08) 0%, transparent 50%);
+      min-height: 100vh;
+    }
+    .bg-grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.88); opacity: 0.4; }
+      60% { transform: scale(1.04); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.22); }
+      50% { box-shadow: 0 0 30px rgba(56, 189, 248, 0.5); }
+    }
+    .animate-pop { animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .animate-shake { animation: shake 0.3s ease-in-out; }
+    .glow-glacier { animation: pulseGlow 3s infinite; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #0A0F1D; }
+    ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    button { touch-action: manipulation; }
+  </style>
+
+  <!-- Globala översättningar och funktioner -->
   <script>
     let currentLang = 'sv';
 
@@ -123,7 +203,7 @@
         cancel: "Cancel",
         saveName: "Save Name",
         cookieTitle: "Cookies & Saved Progress 🍪",
-        cookieDesc: "Vi sparar dina poäng och höjdmeter i en säker webbläsarkaka (Local Storage) så att du kan lämna sidan och komma tillbaka senare med din höjd intakt!",
+        cookieDesc: "We save your score and altitude in a secure browser cookie (Local Storage) so you can leave and return anytime with your progress intact!",
         cookieAccept: "Accept & Keep Climbing",
         statusUnplayed: "Unplayed today"
       }
@@ -141,12 +221,426 @@
         const key = el.getAttribute('data-i18n');
         if (t[key]) el.textContent = t[key];
       });
-      updateDynamicDateAndAnomaly();
+      if (typeof updateDynamicDateAndAnomaly === 'function') updateDynamicDateAndAnomaly();
       if (typeof updateGlobalUI === 'function') updateGlobalUI();
     }
   </script>
 </head>
-<!-- ... existing code ... -->
+<body class="bg-grid-pattern antialiased selection:bg-glacier-500 selection:text-white pb-20">
+
+  <!-- Toast-meddelanden -->
+  <div id="toast-container" class="fixed bottom-5 right-5 left-5 sm:left-auto z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- COOKIE & SPARBANNER -->
+  <div id="cookie-banner" class="hidden fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:max-w-md z-50 rounded-3xl bg-alpine-900 border border-glacier-400/40 p-5 shadow-2xl animate-pop">
+    <div class="flex items-start gap-3">
+      <span class="text-3xl">🍪</span>
+      <div class="space-y-2">
+        <h4 data-i18n="cookieTitle" class="text-sm font-black text-white">Kakor & Sparade Resultat 🍪</h4>
+        <p data-i18n="cookieDesc" class="text-xs text-slate-300 leading-relaxed">Vi sparar dina poäng och höjdmeter i en säker webbläsarkaka (Local Storage) så att du kan lämna sidan och komma tillbaka senare med din höjd intakt!</p>
+        <button onclick="acceptCookies()" data-i18n="cookieAccept" class="w-full py-2.5 rounded-xl bg-glacier-500 hover:bg-glacier-400 text-alpine-950 font-black text-xs shadow-lg shadow-glacier-500/20 transition-all">
+          Godkänn &amp; Fortsätt klättra
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toppnavigering -->
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-alpine-950/90 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 cursor-pointer group" onclick="switchTab('hub')">
+        <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-glacier-400 to-indigo-600 p-0.5 shadow-lg shadow-glacier-500/20 group-hover:scale-105 transition-transform">
+          <div class="w-full h-full bg-alpine-950 rounded-[10px] flex items-center justify-center">
+            <svg class="w-6 h-6 text-glacier-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
+              <path d="M4.14 15.08c2.62-1.57 5.24-1.43 7.86.42 2.74 1.94 5.49 2 8.23.19" class="text-summit-400" stroke="currentColor"/>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="font-black text-xl tracking-tight text-white">8848<span class="text-glacier-400">.nu</span></span>
+            <span data-i18n="liveGlobal" class="text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-glacier-500/15 text-glacier-400 border border-glacier-500/30">Live Global</span>
+          </div>
+          <p data-i18n="subtitle" class="text-[11px] text-slate-400 hidden sm:block">Global arkad &amp; hjärngympa</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="flex items-center bg-alpine-900 border border-white/10 rounded-xl p-0.5">
+          <button id="lang-btn-sv" onclick="setLanguage('sv')" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-glacier-500 text-alpine-950">SV</button>
+          <button id="lang-btn-en" onclick="setLanguage('en')" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-alpine-800 text-slate-300">EN</button>
+        </div>
+
+        <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-alpine-800/90 border border-white/10">
+          <span class="text-base leading-none">🔥</span>
+          <span id="header-streak" class="font-mono font-bold text-sm text-summit-400">1</span>
+        </div>
+
+        <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-alpine-800/90 border border-white/10">
+          <span class="text-base leading-none">⛰️</span>
+          <span id="header-altitude" class="font-mono font-bold text-sm text-glacier-400">5 364 m</span>
+        </div>
+
+        <button onclick="openAliasModal()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-alpine-800 hover:bg-alpine-700 border border-white/10 text-xs font-semibold text-slate-200 transition-colors">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="header-alias" class="max-w-[70px] sm:max-w-[100px] truncate">Klättraren</span>
+          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+        </button>
+
+        <button id="sound-toggle-btn" onclick="toggleSound()" class="p-2 rounded-xl bg-alpine-800 hover:bg-alpine-700 border border-white/10 text-slate-300 transition-colors">
+          <svg id="sound-icon-on" class="w-5 h-5 text-glacier-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+          <svg id="sound-icon-off" class="w-5 h-5 text-slate-500 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 pt-6 space-y-8">
+
+    <!-- DAGENS EXPEDITION & ANOMALI -->
+    <section class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-alpine-900 via-alpine-800 to-alpine-900 border border-glacier-500/35 p-5 sm:p-7 shadow-2xl">
+      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div class="space-y-3 max-w-2xl">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-glacier-500/15 border border-glacier-500/30 text-glacier-400 text-xs font-bold uppercase tracking-wider">
+              <span class="w-2 h-2 rounded-full bg-glacier-400 animate-ping"></span>
+              <span id="today-date-label">Laddar...</span>
+            </span>
+            <span id="anomaly-badge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-summit-500/25 border border-summit-500/40 text-summit-300 text-xs font-bold uppercase tracking-wider">
+              ⚡ Dagens Anomali: Laddar...
+            </span>
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white">
+            <span data-i18n="dailyExpedition">Klara dagens 4 dynamiska etapper &amp; nå</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-glacier-400 to-summit-400">8 848 meter</span>
+          </h1>
+          <p data-i18n="expeditionDesc" class="text-sm sm:text-base text-slate-300 leading-relaxed">
+            Varje dag genereras unika dynamiska utmaningar för hela världen. Slå ditt personbästa och klättra på den globala topplistan!
+          </p>
+
+          <div class="pt-2">
+            <div class="flex justify-between text-xs font-mono text-slate-400 mb-1.5">
+              <span data-i18n="baseCamp">Baslägret (5 364 m)</span>
+              <span><strong id="daily-progress-count" class="text-glacier-400">0</strong> / 4 <span data-i18n="completedCount">avklarade idag</span></span>
+              <span data-i18n="summit">Toppen (8 848 m)</span>
+            </div>
+            <div class="w-full h-3 rounded-full bg-alpine-950/90 border border-white/10 overflow-hidden p-0.5">
+              <div id="altitude-progress-bar" class="h-full rounded-full bg-gradient-to-r from-glacier-500 via-sky-400 to-summit-400 transition-all duration-700" style="width: 15%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row lg:flex-col items-stretch sm:items-center lg:items-end justify-between gap-3 shrink-0 bg-alpine-950/70 p-4 rounded-2xl border border-white/10">
+          <div class="text-left lg:text-right">
+            <span data-i18n="nextExpedition" class="text-[11px] uppercase tracking-wider font-semibold text-slate-400 block">Nästa expedition om</span>
+            <span id="midnight-countdown" class="font-mono text-2xl sm:text-3xl font-extrabold text-white tracking-wider">00:00:00</span>
+          </div>
+          <button onclick="shareDailyReport()" data-i18n="shareBtn" class="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold text-sm shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+            Dela Dagens Rapport
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPELNAVIGATIONSFLIKAR -->
+    <nav aria-label="Spelval" class="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+      <button onclick="switchTab('hub')" id="tab-hub" class="tab-btn flex items-center justify-center gap-2 p-3 rounded-2xl border font-bold text-sm transition-all bg-glacier-500/20 border-glacier-400 text-white shadow-lg shadow-glacier-500/10">
+        <span>🏔️</span> <span data-i18n="tabHub">Översikt</span>
+      </button>
+      <button onclick="switchTab('reflextornet')" id="tab-reflextornet" class="tab-btn relative flex items-center justify-center gap-2 p-3 rounded-2xl border border-white/10 bg-alpine-900/85 hover:bg-alpine-800 font-bold text-sm text-slate-300 transition-all">
+        <span>⚡</span> <span data-i18n="tabReflex">Reflextornet</span>
+        <span id="badge-reflextornet" class="hidden w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+      </button>
+      <button onclick="switchTab('fjallkoden')" id="tab-fjallkoden" class="tab-btn relative flex items-center justify-center gap-2 p-3 rounded-2xl border border-white/10 bg-alpine-900/85 hover:bg-alpine-800 font-bold text-sm text-slate-300 transition-all">
+        <span>🔐</span> <span data-i18n="tabFjall">Fjällkoden</span>
+        <span id="badge-fjallkoden" class="hidden w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+      </button>
+      <button onclick="switchTab('snostorm')" id="tab-snostorm" class="tab-btn relative flex items-center justify-center gap-2 p-3 rounded-2xl border border-white/10 bg-alpine-900/85 hover:bg-alpine-800 font-bold text-sm text-slate-300 transition-all">
+        <span>🚁</span> <span data-i18n="tabStorm">Snöstorm-Pilot</span>
+        <span id="badge-snostorm" class="hidden w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+      </button>
+      <button onclick="switchTab('sifferstafetten')" id="tab-sifferstafetten" class="tab-btn col-span-2 sm:col-span-1 relative flex items-center justify-center gap-2 p-3 rounded-2xl border border-white/10 bg-alpine-900/85 hover:bg-alpine-800 font-bold text-sm text-slate-300 transition-all">
+        <span>🔢</span> <span data-i18n="tabSiffer">Sifferminne</span>
+        <span id="badge-sifferstafetten" class="hidden w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+      </button>
+    </nav>
+
+    <!-- VY 0: ÖVERSIKT -->
+    <div id="view-hub" class="space-y-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Spelkort 1 -->
+        <div onclick="switchTab('reflextornet')" class="group cursor-pointer rounded-3xl bg-alpine-900/90 border border-white/10 hover:border-glacier-400/50 p-6 transition-all hover:-translate-y-1 shadow-xl">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">⚡</div>
+            <span id="hub-status-reflextornet" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">Ospelad idag</span>
+          </div>
+          <h3 class="text-xl font-extrabold text-white mb-1 group-hover:text-glacier-400 transition-colors">REFLEXTORNET</h3>
+          <p data-i18n="reflextornetDesc" class="text-sm text-slate-400 mb-4">Dynamisk reaktionstest! Dagens sekvens av blixtmönster slumpas fram på nytt varje midnatt.</p>
+          <div class="flex items-center justify-between text-xs font-mono text-slate-300 pt-3 border-t border-white/10">
+            <span>Bästa: <strong id="hub-score-reflextornet" class="text-glacier-400">—</strong></span>
+            <span data-i18n="playNow" class="text-glacier-400 font-bold group-hover:translate-x-1 transition-transform">Spela nu →</span>
+          </div>
+        </div>
+
+        <!-- Spelkort 2 -->
+        <div onclick="switchTab('fjallkoden')" class="group cursor-pointer rounded-3xl bg-alpine-900/90 border border-white/10 hover:border-summit-400/50 p-6 transition-all hover:-translate-y-1 shadow-xl">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🔐</div>
+            <span id="hub-status-fjallkoden" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">Ospelad idag</span>
+          </div>
+          <h3 class="text-xl font-extrabold text-white mb-1 group-hover:text-summit-400 transition-colors">FJÄLLKODEN</h3>
+          <p data-i18n="fjallkodenDesc" class="text-sm text-slate-400 mb-4">Dagens hemliga 3-siffriga kod och kluriga ledtrådar genereras dynamiskt efter dagens datum.</p>
+          <div class="flex items-center justify-between text-xs font-mono text-slate-300 pt-3 border-t border-white/10">
+            <span>Bästa: <strong id="hub-score-fjallkoden" class="text-summit-400">—</strong></span>
+            <span data-i18n="playNow" class="text-summit-400 font-bold group-hover:translate-x-1 transition-transform">Spela nu →</span>
+          </div>
+        </div>
+
+        <!-- Spelkort 3 -->
+        <div onclick="switchTab('snostorm')" class="group cursor-pointer rounded-3xl bg-alpine-900/90 border border-white/10 hover:border-sky-400/50 p-6 transition-all hover:-translate-y-1 shadow-xl">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🚁</div>
+            <span id="hub-status-snostorm" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30" data-i18n="playedToday">Ospelad idag</span>
+          </div>
+          <h3 class="text-xl font-extrabold text-white mb-1 group-hover:text-sky-400 transition-colors">SNÖSTORM-PILOTEN</h3>
+          <p data-i18n="snostormDesc" class="text-sm text-slate-400 mb-4">Dynamiska isblock i snöovädret! Klicka i tid för att hoppa över hindren.</p>
+          <div class="flex items-center justify-between text-xs font-mono text-slate-300 pt-3 border-t border-white/10">
+            <span>Bästa: <strong id="hub-score-snostorm" class="text-sky-400">—</strong></span>
+            <span data-i18n="playNow" class="text-sky-400 font-bold group-hover:translate-x-1 transition-transform">Spela nu →</span>
+          </div>
+        </div>
+
+        <!-- Spelkort 4 -->
+        <div onclick="switchTab('sifferstafetten')" class="group cursor-pointer rounded-3xl bg-alpine-900/90 border border-white/10 hover:border-purple-400/50 p-6 transition-all hover:-translate-y-1 shadow-xl">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-400/30 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🔢</div>
+            <span id="hub-status-sifferstafetten" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">Ospelad idag</span>
+          </div>
+          <h3 class="text-xl font-extrabold text-white mb-1 group-hover:text-purple-400 transition-colors">SIFFERSTAFETTEN</h3>
+          <p data-i18n="sifferstafettenDesc" class="text-sm text-slate-400 mb-4">Dynamisk siffersekvens som skapas unikt för dagens datum. Hur långt räcker ditt minne?</p>
+          <div class="flex items-center justify-between text-xs font-mono text-slate-300 pt-3 border-t border-white/10">
+            <span>Bästa: <strong id="hub-score-sifferstafetten" class="text-purple-400">—</strong></span>
+            <span data-i18n="playNow" class="text-purple-400 font-bold group-hover:translate-x-1 transition-transform">Spela nu →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPEL 1: REFLEXTORNET -->
+    <section id="view-reflextornet" class="hidden space-y-5">
+      <div class="rounded-3xl bg-alpine-900/95 border border-white/10 p-5 sm:p-8 shadow-2xl">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-white/10">
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-xl sm:text-2xl font-black text-white">⚡ REFLEXTORNET</h2>
+              <span data-i18n="dailyMode" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-glacier-500/20 text-glacier-400 border border-glacier-500/30">Dagens Utmaning</span>
+            </div>
+            <p data-i18n="reflextornetDesc" class="text-xs sm:text-sm text-slate-400">Reaktionstest på millisekunden!</p>
+          </div>
+        </div>
+
+        <div class="max-w-md mx-auto text-center space-y-6">
+          <div id="reflex-box" onclick="handleReflexClick()" class="cursor-pointer select-none h-64 rounded-3xl bg-alpine-950 border-2 border-white/15 flex flex-col items-center justify-center p-6 shadow-2xl transition-all">
+            <span id="reflex-emoji" class="text-5xl mb-3">⚡</span>
+            <h3 id="reflex-title" data-i18n="reflexStartTitle" class="text-xl sm:text-2xl font-black text-white">Tryck för att starta!</h3>
+            <p id="reflex-sub" data-i18n="reflexSub" class="text-xs font-mono text-slate-400 mt-2">Bana väg genom blixtarna</p>
+          </div>
+
+          <div class="flex justify-between items-center text-xs font-mono text-slate-400 px-2">
+            <span><span data-i18n="round">Runda</span>: <strong id="reflex-round" class="text-white">1</strong> / 5</span>
+            <span><span data-i18n="bestScore">Snitt / Bästa</span>: <strong id="reflex-best" class="text-glacier-400">—</strong></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPEL 2: FJÄLLKODEN -->
+    <section id="view-fjallkoden" class="hidden space-y-5">
+      <div class="rounded-3xl bg-alpine-900/95 border border-white/10 p-5 sm:p-8 shadow-2xl">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-white/10">
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-xl sm:text-2xl font-black text-white">🔐 FJÄLLKODEN</h2>
+              <span data-i18n="dailyMode" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-summit-500/20 text-summit-400 border border-summit-500/30">Dagens Utmaning</span>
+            </div>
+            <p data-i18n="fjallkodenDesc" class="text-xs sm:text-sm text-slate-400">Knäck den hemliga 3-siffriga koden...</p>
+          </div>
+        </div>
+
+        <div class="max-w-md mx-auto text-center space-y-5">
+          <div class="p-4 rounded-2xl bg-alpine-950 border border-white/10 space-y-2 text-left">
+            <h4 data-i18n="fjallHintTitle" class="text-xs font-bold font-mono uppercase text-summit-400">Dagens ledtrådar:</h4>
+            <div id="fjall-clues-list" class="space-y-1 text-xs text-slate-300 font-mono">
+              <!-- Fylls av JS -->
+            </div>
+          </div>
+
+          <div id="fjall-guess-display" class="font-mono text-3xl font-black tracking-widest text-summit-400 h-16 rounded-2xl bg-alpine-950 border-2 border-summit-500/40 flex items-center justify-center">
+            ___
+          </div>
+
+          <!-- Siffertangentbord -->
+          <div class="grid grid-cols-3 gap-2 max-w-[280px] mx-auto">
+            <button onclick="pressFjallDigit('1')" class="p-3.5 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">1</button>
+            <button onclick="pressFjallDigit('2')" class="p-3.5 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">2</button>
+            <button onclick="pressFjallDigit('3')" class="p-3.5 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">3</button>
+            <button onclick="pressFjallDigit('4')" class="p-3.5 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">4</button>
+            <button onclick="pressFjallDigit('5')" class="p-3.5 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">5</button>
+            <button onclick="pressFjallDigit('6')" class="p-3.5 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">6</button>
+            <button onclick="pressFjallDigit('7')" class="p-3.5 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">7</button>
+            <button onclick="pressFjallDigit('8')" class="p-3.5 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">8</button>
+            <button onclick="pressFjallDigit('9')" class="p-3.5 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">9</button>
+            <button onclick="clearFjallGuess()" class="p-3.5 rounded-xl bg-rose-500/20 text-rose-300 font-bold text-xs border border-rose-500/30">Rensa</button>
+            <button onclick="pressFjallDigit('0')" class="p-3.5 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">0</button>
+            <button onclick="submitFjallGuess()" class="p-3.5 rounded-xl bg-summit-500 text-alpine-950 font-black text-xs shadow-lg shadow-summit-500/25">KOD ✓</button>
+          </div>
+
+          <div id="fjall-feedback" class="text-xs font-mono text-slate-400 min-h-[24px]"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPEL 3: SNÖSTORM-PILOTEN -->
+    <section id="view-snostorm" class="hidden space-y-5">
+      <div class="rounded-3xl bg-alpine-900/95 border border-white/10 p-5 sm:p-8 shadow-2xl">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-white/10">
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-xl sm:text-2xl font-black text-white">🚁 SNÖSTORM-PILOTEN</h2>
+              <span data-i18n="dailyMode" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">Dagens Utmaning</span>
+            </div>
+            <p data-i18n="snostormDesc" class="text-xs sm:text-sm text-slate-400">Hoppa över isblocken i snöovädret!</p>
+          </div>
+        </div>
+
+        <div class="max-w-md mx-auto text-center space-y-6">
+          <div class="flex justify-between items-center px-4 py-2 rounded-2xl bg-alpine-950 border border-white/10 font-mono text-xs">
+            <span><span data-i18n="stormScore">Poäng</span>: <strong id="storm-score" class="text-sky-400">0</strong></span>
+            <span><span data-i18n="stormTime">Tid kvar</span>: <strong id="storm-time" class="text-white">25 s</strong></span>
+          </div>
+
+          <!-- Spelduk / Canvas för Snöstorm (Sidledshoppare) -->
+          <div id="storm-container" onclick="jumpStormHeli()" class="relative h-64 rounded-3xl bg-alpine-950 border-2 border-white/15 overflow-hidden select-none cursor-pointer shadow-inner flex items-end">
+            <!-- Mark -->
+            <div class="absolute bottom-0 inset-x-0 h-10 bg-slate-800 border-t border-white/10 flex items-center justify-around">
+              <div class="w-8 h-2 bg-slate-700 rounded-full"></div>
+              <div class="w-12 h-2 bg-slate-700 rounded-full"></div>
+              <div class="w-10 h-2 bg-slate-700 rounded-full"></div>
+            </div>
+            <!-- Helikopter vänd åt höger -->
+            <div id="storm-heli" class="absolute left-12 text-4xl transition-transform duration-75" style="bottom: 40px; transform: scaleX(-1);">🚁</div>
+            <!-- Isblock / hinder -->
+            <div id="storm-obstacle" class="absolute w-8 h-10 rounded-xl bg-sky-400/90 border border-sky-200 shadow-lg bottom-10" style="right: -40px;"></div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none" id="storm-overlay">
+              <span data-i18n="stormHint" class="text-xs font-mono font-bold text-slate-300 bg-alpine-900/90 px-4 py-2 rounded-xl border border-white/10 shadow-lg">Klicka eller tryck för att hoppa över isblocket!</span>
+            </div>
+          </div>
+
+          <button id="storm-start-btn" onclick="startStormGame()" data-i18n="startStorm" class="w-full py-4 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-alpine-950 font-black text-sm shadow-lg shadow-sky-500/25 active:scale-95 transition-all">
+            STARTA SNÖSTORM
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPEL 4: SIFFERSTAFETTEN -->
+    <section id="view-sifferstafetten" class="hidden space-y-5">
+      <div class="rounded-3xl bg-alpine-900/95 border border-white/10 p-5 sm:p-8 shadow-2xl">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-white/10">
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-xl sm:text-2xl font-black text-white">🔢 SIFFERSTAFETTEN</h2>
+              <span data-i18n="dailyMode" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">Dagens Utmaning</span>
+            </div>
+            <p data-i18n="sifferstafettenDesc" class="text-xs sm:text-sm text-slate-400">Memorera sifferkombinationen...</p>
+          </div>
+        </div>
+
+        <div class="max-w-md mx-auto text-center space-y-6">
+          <div class="flex justify-between items-center px-4 py-2 rounded-2xl bg-alpine-950 border border-white/10 font-mono text-xs">
+            <span><span data-i18n="sifferLevel">Nivå</span>: <strong id="siffer-level" class="text-purple-400">1</strong></span>
+            <span><span data-i18n="sifferScore">Poäng</span>: <strong id="siffer-score" class="text-white">0</strong></span>
+            <span><span data-i18n="sifferLives">Liv</span>: <span id="siffer-lives">❤️❤️❤️</span></span>
+          </div>
+
+          <div id="siffer-display-box" class="h-44 rounded-3xl bg-alpine-950 border-2 border-white/15 flex items-center justify-center p-6 shadow-inner">
+            <span id="siffer-text" class="font-mono text-4xl sm:text-5xl font-black tracking-widest text-glacier-400 animate-pop">—</span>
+          </div>
+
+          <div id="siffer-input-area" class="hidden space-y-3">
+            <div id="siffer-input-display" class="font-mono text-2xl font-black tracking-widest text-white h-12 rounded-xl bg-alpine-950 border border-white/15 flex items-center justify-center"></div>
+            <div class="grid grid-cols-5 gap-2">
+              <button onclick="pressSifferDigit('1')" class="p-3 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">1</button>
+              <button onclick="pressSifferDigit('2')" class="p-3 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">2</button>
+              <button onclick="pressSifferDigit('3')" class="p-3 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">3</button>
+              <button onclick="pressSifferDigit('4')" class="p-3 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">4</button>
+              <button onclick="pressSifferDigit('5')" class="p-3 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">5</button>
+              <button onclick="pressSifferDigit('6')" class="p-3 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">6</button>
+              <button onclick="pressSifferDigit('7')" class="p-3 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">7</button>
+              <button onclick="pressSifferDigit('8')" class="p-3 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">8</button>
+              <button onclick="pressSifferDigit('9')" class="p-3 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">9</button>
+              <button onclick="pressSifferDigit('0')" class="p-3 rounded-xl bg-alpine-800 hover:bg-alpine-700 font-mono font-bold text-lg text-white">0</button>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="clearSifferInput()" data-i18n="clear" class="p-3 rounded-xl bg-rose-500/20 text-rose-300 font-bold text-xs border border-rose-500/30">Rensa</button>
+              <button onclick="submitSifferGuess()" data-i18n="submit" class="p-3 rounded-xl bg-purple-500 text-alpine-950 font-black text-xs shadow-lg shadow-purple-500/25">SKICKA SVAR ✓</button>
+            </div>
+          </div>
+
+          <button id="siffer-start-btn" onclick="startSifferRound()" data-i18n="startSiffer" class="w-full py-4 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white font-black text-sm shadow-lg shadow-purple-500/25 active:scale-95 transition-all">
+            STARTA SIFFERSTAFETTEN
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GLOBALA TOPPLISTAN -->
+    <section class="rounded-3xl bg-alpine-900/90 border border-white/10 p-5 sm:p-7 shadow-2xl space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xl">🏆</span>
+            <h2 data-i18n="lbTitle" class="text-xl sm:text-2xl font-black text-white">Global Topplista (Dagens Expedition)</h2>
+          </div>
+          <p data-i18n="lbSub" class="text-xs sm:text-sm text-slate-400">Realtidslista över dagens spelare världen över. Klättra till toppen!</p>
+        </div>
+
+        <div class="flex flex-wrap gap-1.5" id="leaderboard-filters">
+          <button onclick="renderLeaderboard('total')" data-lb="total" data-i18n="lbTotal" class="lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-glacier-500 text-alpine-950">Totalt (Höjdmeter)</button>
+          <button onclick="renderLeaderboard('reflextornet')" data-lb="reflextornet" class="lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-alpine-800 text-slate-300 hover:bg-alpine-700">Reflextornet</button>
+          <button onclick="renderLeaderboard('fjallkoden')" data-lb="fjallkoden" class="lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-alpine-800 text-slate-300 hover:bg-alpine-700">Fjällkoden</button>
+          <button onclick="renderLeaderboard('snostorm')" data-lb="snostorm" class="lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-alpine-800 text-slate-300 hover:bg-alpine-700">Snöstorm</button>
+          <button onclick="renderLeaderboard('sifferstafetten')" data-lb="sifferstafetten" class="lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-alpine-800 text-slate-300 hover:bg-alpine-700">Sifferminne</button>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="text-[11px] font-mono uppercase tracking-wider text-slate-400 border-b border-white/10">
+              <th data-i18n="lbRank" class="py-2.5 px-3 w-14">Plats</th>
+              <th data-i18n="lbClimber" class="py-2.5 px-3">Klättrare</th>
+              <th data-i18n="lbDetail" class="py-2.5 px-3 hidden sm:table-cell">Detalj</th>
+              <th data-i18n="lbPoints" class="py-2.5 px-3 text-right">Poäng / Höjd</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body" class="divide-y divide-white/5 text-sm"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="max-w-6xl mx-auto px-4 mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-slate-300">8848.nu</span>
+      <span>•</span>
+      <span id="footer-text-el">Nya globala utmaningar varje midnatt</span>
+    </div>
+    <div id="footer-storage-el">Moln- &amp; Kaklagring aktiv 🔥</div>
+  </footer>
+
   <!-- MODAL: SPELARALIAS -->
   <div id="alias-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="w-full max-w-sm rounded-3xl bg-alpine-900 border border-white/15 p-6 shadow-2xl space-y-4 animate-pop">
@@ -263,7 +757,6 @@
       document.getElementById('anomaly-badge').textContent = `${anomLabel} ${anomName}`;
     }
 
-    // Automatiskt genererat klättrar-alias om inget finns
     const ADJECTIVES = ["Fjäll", "Isig", "Snabb", "Tapper", "Modig", "Vild", "Höga", "Stark", "Vind", "Stolt"];
     const NOUNS = ["Klättrare", "Vandrare", "Puls", "Skalbagge", "Alpinist", "Sherpa", "Pilote", "Kämpe", "Hjälte", "Fjällräv"];
     function generateRandomAlias() {
@@ -273,7 +766,6 @@
       return `${adj}${noun}_${num}`;
     }
 
-    // Robust profanity filter (Svenska, Engelska och vanliga internationella fulord)
     const BANNED_WORDS = [
       'fan', 'jävel', 'helvete', 'skit', 'hora', 'fitta', 'kuk', 'stövel', 'fuck', 'shit', 'bitch', 'asshole', 'cunt', 'dick', 'cock', 'pussy', 'bastard', 'slut', 'whore', 'scheisse', 'merde', 'putain', 'pendejo', 'mierda'
     ];
@@ -430,7 +922,7 @@
       }
       if (containsProfanity(val)) {
         SoundFX.error();
-        showToast(currentLang === 'sv' ? '⚠️ Olämpligt ord upptäckte! Välj ett annat namn.' : '⚠️ Profanity detected! Please choose another name.', 'error');
+        showToast(currentLang === 'sv' ? '⚠️ Olämpligt ord upptäckt! Välj ett annat namn.' : '⚠️ Profanity detected! Please choose another name.', 'error');
         return;
       }
       userProfile.alias = val;
@@ -786,7 +1278,3 @@
 </body>
 </html>
 ```eof
-
-### Vad som har lagts till i denna version:
-1. **Automatiskt namn:** Nya besökare tilldelas direkt ett unikt och roligt klättrar-alias (t.ex. *TapperAlpinist_45*).
-2. **Robust fulordsfilter:** Om spelaren klickar på sitt namn för att ändra det och försöker skriva in opassande ord (stötande ord på svenska, engelska och flera andra språk) blockeras det omedelbart med en varning.
