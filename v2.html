@@ -106,20 +106,20 @@
         playedToday: "Ospelad idag",
         completedToday: "Avklarad ✓",
         playNow: "Spela nu →",
-        reflextornetDesc: "Dynamiskt reaktionstest med nya blixtmönster varje midnatt.",
+        reflextornetDesc: "Extremt reaktionstest! Akta dig för röda falska blixtar och agera under 550 ms.",
         fjallkodenDesc: "Avancerad 4-siffrig logikgåta med matematiska villkor.",
-        snostormDesc: "Intensivt helikopterspel med multipla snabba isblock på tre höjder.",
+        snostormDesc: "Extremt helikopterspel: 4 snabba isblock på 3 höjder som byter bana i luften!",
         sifferstafettenDesc: "Utmanande sifferminne med ökande längd, farten uppskruvad & baklängesnivåer.",
         dailyMode: "Dagens Utmaning",
         reflexStartTitle: "Tryck för att starta dagens bana!",
-        reflexSub: "Dynamiska blixtar i en ny kombination",
+        reflexSub: "Tryck ENDAST på GRÖNT (aldrig på rött!) innan ljuset slocknar",
         round: "Runda",
         bestScore: "Snitt / Bästa",
         fjallHintTitle: "Dagens genererade kluriga ledtrådar:",
         startFjall: "STARTA FJÄLLKODEN",
         stormScore: "Poäng",
         stormTime: "Tid kvar",
-        stormHint: "Använd Piltangenter (Upp/Ner) eller W/S för att undvika isblocken!",
+        stormHint: "Använd Piltangenter (Upp/Ner) eller W/S! Akta dig för 4 snabba isblock som byter höjd!",
         startStorm: "STARTA SNÖSTORM",
         sifferLevel: "Nivå",
         sifferScore: "Poäng",
@@ -166,20 +166,20 @@
         playedToday: "Unplayed today",
         completedToday: "Completed ✓",
         playNow: "Play now →",
-        reflextornetDesc: "Dynamic reaction test with new lightning patterns every midnight.",
+        reflextornetDesc: "Extreme reaction test! Beware of red fake flashes and react within 550 ms.",
         fjallkodenDesc: "Advanced 4-digit logical deduction puzzle with mathematical conditions.",
-        snostormDesc: "Intense helicopter flight with multiple fast ice blocks across three heights.",
+        snostormDesc: "Extreme helicopter flight: 4 fast ice blocks across 3 heights that switch lanes mid-air!",
         sifferstafettenDesc: "Challenging digit memory with increasing length, faster pace & reverse levels.",
         dailyMode: "Daily Challenge",
         reflexStartTitle: "Tap to start today's track!",
-        reflexSub: "Dynamic lightning in a new combination",
+        reflexSub: "Tap ONLY on GREEN (never on red!) before the flash expires",
         round: "Round",
         bestScore: "Avg / Best",
         fjallHintTitle: "Today's Generated Logical Clues:",
         startFjall: "START MOUNTAIN CODE",
         stormScore: "Score",
         stormTime: "Time Left",
-        stormHint: "Use Arrow Keys (Up/Down) or W/S to dodge the ice blocks!",
+        stormHint: "Use Arrow Keys (Up/Down) or W/S! Dodge 4 fast ice blocks switching lanes!",
         startStorm: "START SNOW STORM",
         sifferLevel: "Level",
         sifferScore: "Score",
@@ -293,7 +293,7 @@
 
   <main class="max-w-6xl mx-auto px-4 pt-6 space-y-8">
 
-    <!-- DAGENS EXPEDITION & ANOMALI (Kortare rubrik så inget klipper) -->
+    <!-- DAGENS EXPEDITION & ANOMALI -->
     <section class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-alpine-900 via-alpine-800 to-alpine-900 border border-glacier-500/35 p-5 sm:p-7 shadow-2xl">
       <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         <div class="space-y-3 max-w-2xl">
@@ -371,7 +371,7 @@
             <span id="hub-status-reflextornet" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">Ospelad idag</span>
           </div>
           <h3 class="text-xl font-extrabold text-white mb-1 group-hover:text-glacier-400 transition-colors">REFLEXTORNET</h3>
-          <p data-i18n="reflextornetDesc" class="text-sm text-slate-400 mb-4">Dynamiskt reaktionstest med nya blixtmönster varje midnatt.</p>
+          <p data-i18n="reflextornetDesc" class="text-sm text-slate-400 mb-4">Extremt reaktionstest! Akta dig för röda falska blixtar och agera under 550 ms.</p>
           <div class="flex items-center justify-between text-xs font-mono text-slate-300 pt-3 border-t border-white/10">
             <span>Bästa: <strong id="hub-score-reflextornet" class="text-glacier-400">—</strong></span>
             <span data-i18n="playNow" class="text-glacier-400 font-bold group-hover:translate-x-1 transition-transform">Spela nu →</span>
@@ -399,7 +399,7 @@
             <span id="hub-status-snostorm" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30" data-i18n="playedToday">Ospelad idag</span>
           </div>
           <h3 class="text-xl font-extrabold text-white mb-1 group-hover:text-sky-400 transition-colors">SNÖSTORM-PILOTEN</h3>
-          <p data-i18n="snostormDesc" class="text-sm text-slate-400 mb-4">Intensivt helikopterspel med multipla snabba isblock på tre höjder.</p>
+          <p data-i18n="snostormDesc" class="text-sm text-slate-400 mb-4">Extremt helikopterspel: 4 snabba isblock på 3 höjder som byter bana i luften!</p>
           <div class="flex items-center justify-between text-xs font-mono text-slate-300 pt-3 border-t border-white/10">
             <span>Bästa: <strong id="hub-score-snostorm" class="text-sky-400">—</strong></span>
             <span data-i18n="playNow" class="text-sky-400 font-bold group-hover:translate-x-1 transition-transform">Spela nu →</span>
@@ -422,16 +422,16 @@
       </div>
     </div>
 
-    <!-- SPEL 1: REFLEXTORNET -->
+    <!-- SPEL 1: REFLEXTORNET (SVÅRARE: Falska blixtar + snabb tidsfrist under 550 ms) -->
     <section id="view-reflextornet" class="hidden space-y-5">
       <div class="rounded-3xl bg-alpine-900/95 border border-white/10 p-5 sm:p-8 shadow-2xl">
         <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-white/10">
           <div>
             <div class="flex items-center gap-2">
-              <h2 class="text-xl sm:text-2xl font-black text-white">⚡ REFLEXTORNET</h2>
+              <h2 class="text-xl sm:text-2xl font-black text-white">⚡ REFLEXTORNET (SVÅR)</h2>
               <span data-i18n="dailyMode" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-glacier-500/20 text-glacier-400 border border-glacier-500/30">Dagens Utmaning</span>
             </div>
-            <p data-i18n="reflextornetDesc" class="text-xs sm:text-sm text-slate-400">Reaktionstest på millisekunden!</p>
+            <p data-i18n="reflextornetDesc" class="text-xs sm:text-sm text-slate-400">Extremt reaktionstest! Akta dig för röda falska blixtar och agera under 550 ms.</p>
           </div>
         </div>
 
@@ -439,11 +439,11 @@
           <div id="reflex-box" onclick="handleReflexClick()" class="cursor-pointer select-none h-64 rounded-3xl bg-alpine-950 border-2 border-white/15 flex flex-col items-center justify-center p-6 shadow-2xl transition-all">
             <span id="reflex-emoji" class="text-5xl mb-3">⚡</span>
             <h3 id="reflex-title" data-i18n="reflexStartTitle" class="text-xl sm:text-2xl font-black text-white">Tryck för att starta!</h3>
-            <p id="reflex-sub" data-i18n="reflexSub" class="text-xs font-mono text-slate-400 mt-2">Bana väg genom blixtarna</p>
+            <p id="reflex-sub" data-i18n="reflexSub" class="text-xs font-mono text-slate-400 mt-2">Tryck ENDAST på GRÖNT (aldrig på rött!)</p>
           </div>
 
           <div class="flex justify-between items-center text-xs font-mono text-slate-400 px-2">
-            <span><span data-i18n="round">Runda</span>: <strong id="reflex-round" class="text-white">1</strong> / 5</span>
+            <span><span data-i18n="round">Runda</span>: <strong id="reflex-round" class="text-white">1</strong> / 6</span>
             <span><span data-i18n="bestScore">Snitt / Bästa</span>: <strong id="reflex-best" class="text-glacier-400">—</strong></span>
           </div>
         </div>
@@ -497,41 +497,42 @@
       </div>
     </section>
 
-    <!-- SPEL 3: SNÖSTORM-PILOTEN (3 isblock som gör det intensivt, piltangenter + W/S) -->
+    <!-- SPEL 3: SNÖSTORM-PILOTEN (SVÅRARE: 4 intensiva isblock på 3 höjder som byter bana i luften!) -->
     <section id="view-snostorm" class="hidden space-y-5">
       <div class="rounded-3xl bg-alpine-900/95 border border-white/10 p-5 sm:p-8 shadow-2xl">
         <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-white/10">
           <div>
             <div class="flex items-center gap-2">
-              <h2 class="text-xl sm:text-2xl font-black text-white">🚁 SNÖSTORM-PILOTEN</h2>
+              <h2 class="text-xl sm:text-2xl font-black text-white">🚁 SNÖSTORM-PILOTEN (SVÅR)</h2>
               <span data-i18n="dailyMode" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">Dagens Utmaning</span>
             </div>
-            <p data-i18n="snostormDesc" class="text-xs sm:text-sm text-slate-400">Intensivt helikopterspel med multipla snabba isblock på tre höjder!</p>
+            <p data-i18n="snostormDesc" class="text-xs sm:text-sm text-slate-400">Extremt helikopterspel: 4 snabba isblock på 3 höjder som byter bana i luften!</p>
           </div>
         </div>
 
         <div class="max-w-md mx-auto text-center space-y-6">
           <div class="flex justify-between items-center px-4 py-2 rounded-2xl bg-alpine-950 border border-white/10 font-mono text-xs">
             <span><span data-i18n="stormScore">Poäng</span>: <strong id="storm-score" class="text-sky-400">0</strong></span>
-            <span><span data-i18n="stormTime">Tid kvar</span>: <strong id="storm-time" class="text-white">25 s</strong></span>
+            <span><span data-i18n="stormTime">Tid kvar</span>: <strong id="storm-time" class="text-white">25.0 s</strong></span>
           </div>
 
-          <!-- Spelduk med 3 höjdlinjer och 3 olika isblock -->
+          <!-- Spelduk med 3 höjdlinjer och 4 olika isblock -->
           <div id="storm-container" class="relative h-64 rounded-3xl bg-alpine-950 border-2 border-white/15 overflow-hidden select-none shadow-inner flex items-center justify-between px-8">
             <div class="absolute inset-x-0 top-1/4 border-b border-white/5 pointer-events-none"></div>
             <div class="absolute inset-x-0 top-2/4 border-b border-white/5 pointer-events-none"></div>
             <div class="absolute inset-x-0 top-3/4 border-b border-white/5 pointer-events-none"></div>
 
             <!-- Helikopter -->
-            <div id="storm-heli" class="absolute left-14 text-4xl transition-all duration-100" style="top: 112px; transform: scaleX(-1);">🚁</div>
+            <div id="storm-heli" class="absolute left-14 text-4xl transition-all duration-75" style="top: 112px; transform: scaleX(-1);">🚁</div>
             
-            <!-- Tre isblock som flyger in samtidigt på olika höjder -->
-            <div id="storm-obstacle-1" class="absolute w-8 h-9 rounded-xl bg-sky-400 border border-sky-200 shadow-lg" style="top: 32px; right: -50px;"></div>
-            <div id="storm-obstacle-2" class="absolute w-8 h-9 rounded-xl bg-indigo-400 border border-indigo-200 shadow-lg" style="top: 192px; right: -220px;"></div>
-            <div id="storm-obstacle-3" class="absolute w-8 h-9 rounded-xl bg-cyan-300 border border-white shadow-lg" style="top: 112px; right: -380px;"></div>
+            <!-- Fyra isblock som flyger in tätt på olika höjder -->
+            <div id="storm-obstacle-1" class="absolute w-8 h-9 rounded-xl bg-sky-400 border border-sky-200 shadow-lg transition-all duration-200" style="top: 32px; right: -50px;"></div>
+            <div id="storm-obstacle-2" class="absolute w-8 h-9 rounded-xl bg-indigo-400 border border-indigo-200 shadow-lg transition-all duration-200" style="top: 192px; right: -170px;"></div>
+            <div id="storm-obstacle-3" class="absolute w-8 h-9 rounded-xl bg-cyan-300 border border-white shadow-lg transition-all duration-200" style="top: 112px; right: -290px;"></div>
+            <div id="storm-obstacle-4" class="absolute w-8 h-9 rounded-xl bg-rose-400 border border-rose-200 shadow-lg transition-all duration-200" style="top: 32px; right: -410px;"></div>
 
             <div class="absolute inset-0 flex flex-col items-center justify-center bg-alpine-950/85 backdrop-blur-sm transition-all" id="storm-overlay">
-              <span data-i18n="stormHint" class="text-xs font-mono font-bold text-slate-300 px-4 py-2 text-center">Använd Piltangenter (Upp/Ner) eller W/S för att undvika isblocken!</span>
+              <span data-i18n="stormHint" class="text-xs font-mono font-bold text-slate-300 px-4 py-2 text-center">Använd Piltangenter (Upp/Ner) eller W/S! Akta dig för 4 snabba isblock som byter höjd!</span>
             </div>
           </div>
 
@@ -548,7 +549,7 @@
       </div>
     </section>
 
-    <!-- SPEL 4: SIFFERSTAFETTEN (Klurigare: baklänges-nivåer & tangentbordsstöd) -->
+    <!-- SPEL 4: SIFFERSTAFETTEN -->
     <section id="view-sifferstafetten" class="hidden space-y-5">
       <div class="rounded-3xl bg-alpine-900/95 border border-white/10 p-5 sm:p-8 shadow-2xl">
         <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-white/10">
@@ -746,7 +747,7 @@
     ];
     const todaysAnomaly = ANOMALIES[Math.floor(DAILY_RNG() * ANOMALIES.length)];
 
-    const STORAGE_KEY = '8848_nu_profile_v5';
+    const STORAGE_KEY = '8848_nu_profile_v6';
     let userProfile = {
       alias: 'Klättraren',
       streak: 1,
@@ -928,9 +929,17 @@
       document.body.removeChild(ta);
     }
 
-    /* GLOBAL TANGENTBORDSLYSSNARE (Piltangenter, W/S, Siffror, Enter, Backspace) */
+    /* GLOBAL TANGENTBORDSLYSSNARE (Piltangenter, W/S, Siffror, Enter, Backspace, Space) */
     window.addEventListener('keydown', (e) => {
       if (document.activeElement && document.activeElement.tagName === 'INPUT') return;
+
+      // Reflextornet: Mellanslag eller Enter för att klicka blixtsnabbt
+      if (!document.getElementById('view-reflextornet').classList.contains('hidden')) {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          handleReflexClick();
+        }
+      }
 
       // Snöstorm: Piltangenter upp/ner samt W/S
       if (!document.getElementById('view-snostorm').classList.contains('hidden')) {
@@ -980,62 +989,122 @@
       }
     });
 
-    /* SPEL 1: REFLEXTORNET */
-    let reflexState = { round: 1, maxRounds: 5, state: 'idle', startTime: 0, timerId: null, times: [] };
+    /* SPEL 1: REFLEXTORNET (SVÅRARE: Falska röda blixtar + max 550 ms tidsfönster) */
+    let reflexState = { round: 1, maxRounds: 6, state: 'idle', startTime: 0, timerId: null, expireTimerId: null, times: [] };
+    
     function handleReflexClick() {
       const box = document.getElementById('reflex-box');
-      if (reflexState.state === 'idle' || reflexState.state === 'falseStart') {
+      if (reflexState.state === 'idle' || reflexState.state === 'falseStart' || reflexState.state === 'done') {
+        if (reflexState.state === 'done') {
+          reflexState.round = 1;
+          reflexState.times = [];
+        }
         startReflexRound();
       } else if (reflexState.state === 'waiting') {
         clearTimeout(reflexState.timerId);
+        clearTimeout(reflexState.expireTimerId);
         reflexState.state = 'falseStart';
         SoundFX.error();
         box.className = 'cursor-pointer select-none h-64 rounded-3xl bg-rose-950 border-2 border-rose-500 flex flex-col items-center justify-center p-6 shadow-2xl transition-all animate-shake';
         document.getElementById('reflex-emoji').textContent = '❌';
-        document.getElementById('reflex-title').textContent = currentLang === 'sv' ? 'FALSK START!' : 'FALSE START!';
-        document.getElementById('reflex-sub').textContent = currentLang === 'sv' ? 'Tryck igen' : 'Tap again';
-        reflexState.times.push(800);
+        document.getElementById('reflex-title').textContent = currentLang === 'sv' ? 'FALSK START! (+900 ms)' : 'FALSE START! (+900 ms)';
+        document.getElementById('reflex-sub').textContent = currentLang === 'sv' ? 'Tryck för att fortsätta' : 'Tap to continue';
+        reflexState.times.push(900);
+      } else if (reflexState.state === 'decoy') {
+        // Spelaren tryckte på en falsk röd fälla!
+        clearTimeout(reflexState.timerId);
+        clearTimeout(reflexState.expireTimerId);
+        reflexState.state = 'falseStart';
+        SoundFX.error();
+        box.className = 'cursor-pointer select-none h-64 rounded-3xl bg-rose-950 border-2 border-rose-500 flex flex-col items-center justify-center p-6 shadow-2xl transition-all animate-shake';
+        document.getElementById('reflex-emoji').textContent = '🚨';
+        document.getElementById('reflex-title').textContent = currentLang === 'sv' ? 'FÄLLA! DET VAR RÖTT!' : 'TRAP! IT WAS RED!';
+        document.getElementById('reflex-sub').textContent = currentLang === 'sv' ? '+1000 ms straff! Tryck igen' : '+1000 ms penalty! Tap again';
+        reflexState.times.push(1000);
       } else if (reflexState.state === 'ready') {
+        clearTimeout(reflexState.expireTimerId);
         const ms = Math.round(performance.now() - reflexState.startTime);
         reflexState.times.push(ms);
         SoundFX.pop();
-        if (reflexState.round < reflexState.maxRounds) {
-          reflexState.round++;
-          reflexState.state = 'idle';
-          startReflexRound();
-        } else {
-          reflexState.state = 'done';
-          const avg = Math.round(reflexState.times.reduce((a, b) => a + b, 0) / reflexState.times.length);
-          const pts = Math.max(100, Math.round(1000 - avg * 1.5));
-          markGameDone('reflextornet', pts, `Snitt ${avg} ms`);
-          box.className = 'cursor-pointer select-none h-64 rounded-3xl bg-emerald-950 border-2 border-emerald-400 flex flex-col items-center justify-center p-6 shadow-2xl transition-all';
-          document.getElementById('reflex-emoji').textContent = '🏆';
-          document.getElementById('reflex-title').textContent = `KLART! ${avg} ms`;
-          document.getElementById('reflex-sub').textContent = `+${Math.round(pts * todaysAnomaly.mult)} p`;
-        }
+        advanceReflexOrFinish(ms);
       }
       renderReflexUI();
     }
+
+    function advanceReflexOrFinish(lastMs) {
+      const box = document.getElementById('reflex-box');
+      if (reflexState.round < reflexState.maxRounds) {
+        reflexState.round++;
+        reflexState.state = 'idle';
+        startReflexRound();
+      } else {
+        reflexState.state = 'done';
+        const avg = Math.round(reflexState.times.reduce((a, b) => a + b, 0) / reflexState.times.length);
+        const pts = Math.max(150, Math.round(1400 - avg * 1.9));
+        markGameDone('reflextornet', pts, `Snitt ${avg} ms`);
+        box.className = 'cursor-pointer select-none h-64 rounded-3xl bg-emerald-950 border-2 border-emerald-400 flex flex-col items-center justify-center p-6 shadow-2xl transition-all';
+        document.getElementById('reflex-emoji').textContent = '🏆';
+        document.getElementById('reflex-title').textContent = `KLART! Snitt ${avg} ms`;
+        document.getElementById('reflex-sub').textContent = `+${Math.round(pts * todaysAnomaly.mult)} p (Tryck för att spela igen)`;
+      }
+    }
+
     function startReflexRound() {
+      clearTimeout(reflexState.timerId);
+      clearTimeout(reflexState.expireTimerId);
       reflexState.state = 'waiting';
       const box = document.getElementById('reflex-box');
       box.className = 'cursor-pointer select-none h-64 rounded-3xl bg-alpine-950 border-2 border-amber-500 flex flex-col items-center justify-center p-6 shadow-2xl transition-all glow-glacier';
       document.getElementById('reflex-emoji').textContent = '⏳';
-      document.getElementById('reflex-title').textContent = currentLang === 'sv' ? 'Vänta på grönt...' : 'Wait for green...';
-      document.getElementById('reflex-sub').textContent = '...';
-      const dynamicRngVal = DAILY_RNG();
-      const delay = 1000 + (reflexState.round * 200) + (dynamicRngVal * 1500);
+      document.getElementById('reflex-title').textContent = currentLang === 'sv' ? 'Vänta på GRÖNT...' : 'Wait for GREEN...';
+      document.getElementById('reflex-sub').textContent = currentLang === 'sv' ? 'Akta dig för röda falska blixtar!' : 'Beware of red fake flashes!';
+      
+      const delay = 900 + (Math.random() * 1600);
+      // 45% chans för en falsk röd fälla innan det gröna kommer!
+      const showDecoy = Math.random() < 0.45;
+
       reflexState.timerId = setTimeout(() => {
         if (reflexState.state !== 'waiting') return;
-        reflexState.state = 'ready';
-        reflexState.startTime = performance.now();
-        SoundFX.win();
-        box.className = 'cursor-pointer select-none h-64 rounded-3xl bg-emerald-600 border-2 border-emerald-300 flex flex-col items-center justify-center p-6 shadow-2xl transition-all';
-        document.getElementById('reflex-emoji').textContent = '⚡';
-        document.getElementById('reflex-title').textContent = currentLang === 'sv' ? 'TRYCK NU!' : 'TAP NOW!';
-        document.getElementById('reflex-sub').textContent = '!';
+
+        if (showDecoy) {
+          reflexState.state = 'decoy';
+          SoundFX.error();
+          box.className = 'cursor-pointer select-none h-64 rounded-3xl bg-rose-600 border-2 border-rose-300 flex flex-col items-center justify-center p-6 shadow-2xl transition-all';
+          document.getElementById('reflex-emoji').textContent = '🛑';
+          document.getElementById('reflex-title').textContent = currentLang === 'sv' ? 'TRYCK INTE! (RÖTT)' : 'DO NOT TAP! (RED)';
+          document.getElementById('reflex-sub').textContent = currentLang === 'sv' ? 'Håll fingret borta...' : 'Hold your finger...';
+
+          reflexState.timerId = setTimeout(() => {
+            if (reflexState.state !== 'decoy') return;
+            triggerGreenFlash();
+          }, 850 + Math.random() * 700);
+        } else {
+          triggerGreenFlash();
+        }
       }, delay);
     }
+
+    function triggerGreenFlash() {
+      const box = document.getElementById('reflex-box');
+      reflexState.state = 'ready';
+      reflexState.startTime = performance.now();
+      SoundFX.win();
+      box.className = 'cursor-pointer select-none h-64 rounded-3xl bg-emerald-600 border-2 border-emerald-300 flex flex-col items-center justify-center p-6 shadow-2xl transition-all';
+      document.getElementById('reflex-emoji').textContent = '⚡';
+      document.getElementById('reflex-title').textContent = currentLang === 'sv' ? 'TRYCK NU!' : 'TAP NOW!';
+      document.getElementById('reflex-sub').textContent = '< 550 ms!';
+
+      // Tidsgräns: Om spelaren är långsammare än 550 ms slocknar blixten!
+      reflexState.expireTimerId = setTimeout(() => {
+        if (reflexState.state !== 'ready') return;
+        SoundFX.error();
+        reflexState.times.push(750);
+        showToast(currentLang === 'sv' ? 'För långsamt (>550 ms)! +750 ms' : 'Too slow (>550 ms)! +750 ms', 'error');
+        advanceReflexOrFinish(750);
+        renderReflexUI();
+      }, 550);
+    }
+
     function renderReflexUI() {
       document.getElementById('reflex-round').textContent = reflexState.round;
       document.getElementById('reflex-best').textContent = reflexState.times.length > 0 ? Math.min(...reflexState.times) + ' ms' : '—';
@@ -1120,18 +1189,19 @@
       }
     }
 
-    /* SPEL 3: SNÖSTORM-PILOTEN (3 intensiva isblock på 3 höjder, tangentbordsstöd) */
+    /* SPEL 3: SNÖSTORM-PILOTEN (EXTREM: 4 snabba isblock på 3 höjder som byter bana i luften!) */
     let stormState = {
       active: false,
       score: 0,
       timeLeft: 25.0,
       lane: 1,
       obstacles: [
-        { lane: 0, x: 400 },
-        { lane: 2, x: 560 },
-        { lane: 1, x: 720 }
+        { lane: 0, x: 420, shifted: false },
+        { lane: 2, x: 540, shifted: false },
+        { lane: 1, x: 660, shifted: false },
+        { lane: 0, x: 780, shifted: false }
       ],
-      obsSpeed: 330,
+      obsSpeed: 410,
       animId: null,
       lastTime: 0
     };
@@ -1161,11 +1231,12 @@
       stormState.score = 0;
       stormState.timeLeft = 25.0;
       stormState.lane = 1;
-      stormState.obsSpeed = 330;
+      stormState.obsSpeed = 410;
       stormState.obstacles = [
-        { lane: 0, x: 420 },
-        { lane: 2, x: 570 },
-        { lane: 1, x: 720 }
+        { lane: 0, x: 430, shifted: false },
+        { lane: 2, x: 555, shifted: false },
+        { lane: 1, x: 680, shifted: false },
+        { lane: 0, x: 805, shifted: false }
       ];
       stormState.lastTime = performance.now();
       document.getElementById('storm-start-btn').classList.add('hidden');
@@ -1181,17 +1252,25 @@
           let obs = stormState.obstacles[i];
           obs.x -= stormState.obsSpeed * dt;
 
+          // Vindkast: Vissa isblock byter höjd mitt i banan vid x ~ 240!
+          if (!obs.shifted && obs.x < 245 && obs.x > 210 && Math.random() < 0.35) {
+            obs.shifted = true;
+            obs.lane = (obs.lane + (Math.random() < 0.5 ? 1 : 2)) % 3;
+          }
+
           if (obs.x < -50) {
-            obs.x = 430 + (Math.random() * 90);
-            // Slumpa ny höjdlinje så banan varierar intensivt
+            // Placera bakom det isblock som ligger längst bort så de aldrig bildar en omöjlig vägg
+            const maxRight = Math.max(...stormState.obstacles.map(o => o.x));
+            obs.x = Math.max(430, maxRight + 125 + Math.random() * 45);
             obs.lane = Math.floor(Math.random() * 3);
-            stormState.score += 40;
-            stormState.obsSpeed += 6;
+            obs.shifted = false;
+            stormState.score += 50;
+            stormState.obsSpeed += 8;
             SoundFX.pop();
           }
 
           // Kollisionskontroll mot helikoptern på vänster sida (x kring 65)
-          if (Math.abs(obs.x - 65) < 25 && stormState.lane === obs.lane) {
+          if (Math.abs(obs.x - 65) < 26 && stormState.lane === obs.lane) {
             stormState.active = false;
             SoundFX.error();
             showToast(currentLang === 'sv' ? 'Krasch mot ett isblock i stormen!' : 'Crashed into an ice block!', 'error');
@@ -1209,7 +1288,7 @@
         if (stormState.timeLeft <= 0) {
           stormState.active = false;
           SoundFX.win();
-          markGameDone('snostorm', 400 + stormState.score, `${stormState.score}p i storm`);
+          markGameDone('snostorm', 500 + stormState.score, `${stormState.score}p i storm`);
           document.getElementById('storm-start-btn').classList.remove('hidden');
           document.getElementById('storm-overlay').classList.remove('hidden');
         } else {
@@ -1236,7 +1315,6 @@
         sifferState.sequence += Math.floor(levelRng() * 10);
       }
 
-      // Varannan nivå (jämna nivåer) kräver att spelaren skriver in siffrorna BAKLÄNGES!
       sifferState.isReverse = (sifferState.level % 2 === 0);
       sifferState.targetAnswer = sifferState.isReverse
         ? sifferState.sequence.split('').reverse().join('')
@@ -1258,7 +1336,6 @@
       const txt = document.getElementById('siffer-text');
       txt.textContent = sifferState.sequence;
       
-      // Snabbare visningstid ju högre nivå
       const showDuration = Math.max(850, 2100 - sifferState.level * 220);
       setTimeout(() => {
         if (sifferState.phase !== 'showing') return;
@@ -1391,3 +1468,6 @@
   </script>
 </body>
 </html>
+```eof
+
+All kod finns nu samlad i filen ovan – det är bara att kopiera hela blocket och klistra in i din `index.html`. Hör av dig om du vill justera något mer!
