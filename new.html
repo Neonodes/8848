@@ -116,7 +116,7 @@
 </head>
 <body class="relative min-h-screen text-slate-100 selection:bg-sky-500 selection:text-white">
 
-    <!-- Canvas Background for Atmosphere & Themes -->
+    <!-- Canvas Background with Gravity & Dynamic Time-Based Themes -->
     <canvas id="mountainCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
     <!-- Binoculars Spotlight Overlay -->
@@ -138,18 +138,7 @@
             </a>
 
             <!-- Navigation Links & Action Buttons -->
-            <div class="flex items-center gap-2 sm:gap-3">
-                
-                <!-- Theme Selector Dropdown (Auto, Gryning, Sommar, Norrsken) -->
-                <div class="relative">
-                    <select id="themeSelect" onchange="changeTheme(this.value)" class="px-3 py-2 rounded-xl text-xs font-mono font-bold bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-sky-300 transition-all cursor-pointer focus:outline-none focus:border-sky-500">
-                        <option value="auto">✨ Auto (Klocka)</option>
-                        <option value="dawn">🌅 Gryning</option>
-                        <option value="summer">☀️ Sommar</option>
-                        <option value="aurora">🌌 Norrsken</option>
-                    </select>
-                </div>
-
+            <div class="flex items-center gap-2 sm:gap-4">
                 <!-- Language Toggle Button -->
                 <button onclick="toggleLanguage()" id="langToggleBtn" class="px-3 py-2 rounded-xl text-xs font-mono font-bold bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-sky-400 transition-all flex items-center gap-1.5 cursor-pointer" title="Byt språk / Change Language">
                     <i class="fa-solid fa-globe"></i>
@@ -485,43 +474,41 @@
         setLanguage(currentLang);
 
         /* =========================================================
-           1. CANVAS DYNAMIC ATMOSPHERE & THEMES (Auto, Dawn, Summer, Aurora)
+           1. CANVAS GRAVITY & DYNAMIC TIME-BASED ATMOSPHERE
            ========================================================= */
         const canvas = document.getElementById('mountainCanvas');
         const ctx = canvas.getContext('2d');
 
         let particles = [];
-        const particleCount = 100;
-        let currentTheme = 'auto';
+        const particleCount = 110;
+        
+        let mouseX = -1000;
+        let mouseY = -1000;
 
-        function changeTheme(theme) {
-            currentTheme = theme;
-            initParticles();
-        }
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
 
-        function getActiveThemeColors() {
-            if (currentTheme === 'dawn') {
+        window.addEventListener('mouseleave', () => {
+            mouseX = -1000;
+            mouseY = -1000;
+        });
+
+        function getDynamicThemeColors() {
+            const hour = new Date().getHours();
+            if (hour >= 5 && hour < 9) {
+                // Gryning
                 return { skyTop: '#1e1b4b', skyBottom: '#4c1d95', mountain: '#111827', peakGlow: 'rgba(244, 114, 182, 0.35)', particleColor: '254, 226, 226' };
-            } else if (currentTheme === 'summer') {
+            } else if (hour >= 9 && hour < 18) {
+                // Dag / Sommar
                 return { skyTop: '#0f172a', skyBottom: '#0369a1', mountain: '#0a1128', peakGlow: 'rgba(56, 189, 248, 0.4)', particleColor: '224, 242, 254' };
-            } else if (currentTheme === 'aurora') {
+            } else if (hour >= 18 && hour < 22) {
+                // Norrskenskväll
                 return { skyTop: '#022c22', skyBottom: '#064e3b', mountain: '#02100d', peakGlow: 'rgba(52, 211, 153, 0.45)', particleColor: '167, 243, 208' };
             } else {
-                // Auto (Klockstyrd)
-                const hour = new Date().getHours();
-                if (hour >= 5 && hour < 9) {
-                    // Gryning
-                    return { skyTop: '#1e1b4b', skyBottom: '#4c1d95', mountain: '#111827', peakGlow: 'rgba(244, 114, 182, 0.35)', particleColor: '254, 226, 226' };
-                } else if (hour >= 9 && hour < 18) {
-                    // Dag / Sommar
-                    return { skyTop: '#0f172a', skyBottom: '#0369a1', mountain: '#0a1128', peakGlow: 'rgba(56, 189, 248, 0.4)', particleColor: '224, 242, 254' };
-                } else if (hour >= 18 && hour < 22) {
-                    // Norrskenskväll
-                    return { skyTop: '#022c22', skyBottom: '#064e3b', mountain: '#02100d', peakGlow: 'rgba(52, 211, 153, 0.45)', particleColor: '167, 243, 208' };
-                } else {
-                    // Natt
-                    return { skyTop: '#030712', skyBottom: '#0b132b', mountain: '#050914', peakGlow: 'rgba(56, 189, 248, 0.25)', particleColor: '224, 242, 254' };
-                }
+                // Natt
+                return { skyTop: '#030712', skyBottom: '#0b132b', mountain: '#050914', peakGlow: 'rgba(56, 189, 248, 0.25)', particleColor: '224, 242, 254' };
             }
         }
 
@@ -537,16 +524,16 @@
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
+                    vx: Math.random() * 0.6 - 0.3,
+                    vy: Math.random() * 1.2 + 0.3,
                     radius: Math.random() * 2.5 + 0.5,
-                    opacity: Math.random() * 0.7 + 0.2,
-                    speedY: Math.random() * 1.2 + 0.3,
-                    speedX: Math.random() * 0.6 - 0.3
+                    opacity: Math.random() * 0.7 + 0.2
                 });
             }
         }
 
         function drawScene() {
-            const themeColors = getActiveThemeColors();
+            const themeColors = getDynamicThemeColors();
             const w = canvas.width;
             const h = canvas.height;
 
@@ -584,22 +571,39 @@
             ctx.closePath();
             ctx.fill();
 
-            // Partiklar / Snö
+            // Gravitationsfält & Partikelrörelse
             for (let i = 0; i < particles.length; i++) {
                 const p = particles[i];
+
+                // Beräkna avstånd till muspekaren (Gravitationsbrunn)
+                const dx = mouseX - p.x;
+                const dy = mouseY - p.y;
+                const distSq = dx * dx + dy * dy;
+                const maxDist = 200;
+
+                if (distSq < maxDist * maxDist && distSq > 100) {
+                    const dist = Math.sqrt(distSq);
+                    const force = (1 - dist / maxDist) * 0.3;
+                    p.x += (dx / dist) * force * 3;
+                    p.y += (dy / dist) * force * 3;
+                }
+
+                p.x += p.vx;
+                p.y += p.vy;
+
                 ctx.fillStyle = `rgba(${themeColors.particleColor}, ${p.opacity})`;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2, true);
                 ctx.fill();
 
-                p.y += p.speedY;
-                p.x += p.speedX;
-
                 if (p.y > h) {
                     p.y = -10;
                     p.x = Math.random() * w;
                 }
+                if (p.x < 0) p.x = w;
+                if (p.x > w) p.x = 0;
             }
+
             requestAnimationFrame(drawScene);
         }
 
