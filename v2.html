@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title id="page-title">8848.nu — Globala Klurigheter & Toppen</title>
+  <title id="page-title">8848.nu — Dagens Klurigheter & Toppen</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,7 +78,6 @@
     button { touch-action: manipulation; }
   </style>
 
-  <!-- Globala översättningar och funktioner -->
   <script>
     let currentLang = 'sv';
 
@@ -107,7 +106,6 @@
         completedToday: "Avklarad ✓",
         playNow: "Spela nu →",
         
-        // Spelnamn
         game1Name: "REFLEXTORNET",
         game2Name: "FJÄLLKODEN",
         game3Name: "SNÖSTORM-PILOTEN",
@@ -115,36 +113,34 @@
 
         reflextornetDesc: "Dynamiskt reaktionstest med nya blixtmönster varje midnatt.",
         fjallkodenDesc: "Dagens hemliga 3-siffriga kod och kluriga ledtrådar.",
-        snostormDesc: "Flyg helikoptern upprepade gånger och undvik hinder på alla nivåer!",
+        snostormDesc: "Extrem helikopterflygning! Undvik snöstormens hinder på tre höjder.",
         sifferstafettenDesc: "Dynamisk siffersekvens. Hur långt räcker ditt minne?",
         dailyMode: "Dagens Dynamiska Utmaning",
-        freeMode: "Fritt läge ↻",
         reflexStartTitle: "Tryck för att starta dagens bana!",
         reflexSub: "Dynamiska blixtar i en ny kombination",
         round: "Runda",
         bestScore: "Snitt / Bästa",
         fjallHintTitle: "Dagens genererade ledtrådar:",
-        fjallGuessPlaceholder: "Ange 3 siffror...",
         startFjall: "STARTA DAGENS FJÄLLKOD",
         stormScore: "Poäng",
         stormTime: "Tid kvar",
-        stormHint: "Klicka flera gånger för att flyga upp och undvika hinder!",
-        startStorm: "STARTA SNÖSTORM",
+        stormHint: "Klicka eller använd piltangenter (Upp/Ner) för att undvika snöhinder!",
+        startStorm: "STARTA EXTREM SNÖSTORM",
         sifferLevel: "Nivå",
         sifferScore: "Poäng",
         sifferLives: "Liv",
         startSiffer: "STARTA SIFFERSTAFETTEN",
         clear: "Rensa",
         submit: "SKICKA SVAR ✓",
-        lbTitle: "Global Topplista",
-        lbSub: "Realtidslista över dagens spelare världen över.",
-        lbTotal: "Totalt (Höjd)",
+        lbTitle: "Global Highscore-lista",
+        lbSub: "Realtidslista över dagens poängsatta prestationer.",
+        lbTotal: "Total Poäng",
         lbRank: "Plats",
         lbClimber: "Klättrare",
         lbDetail: "Detalj",
-        lbPoints: "Poäng / Höjd",
+        lbPoints: "Poäng",
         aliasTitle: "Välj ditt klättrar-alias",
-        aliasSub: "Ditt namn visas på den globala topplistan. Fula ord blockeras automatiskt.",
+        aliasSub: "Ditt namn visas på den globala topplistan. Fula ord blockeras.",
         cancel: "Avbryt",
         saveName: "Spara namn",
         cookieTitle: "Kakor & Sparade Resultat 🍪",
@@ -178,7 +174,6 @@
         completedToday: "Completed ✓",
         playNow: "Play now →",
 
-        // Game Names
         game1Name: "REFLEX TOWER",
         game2Name: "MOUNTAIN CODE",
         game3Name: "SNOW STORM PILOT",
@@ -186,34 +181,32 @@
 
         reflextornetDesc: "Dynamic reaction test with new lightning patterns every midnight.",
         fjallkodenDesc: "Today's secret 3-digit code and smart clues.",
-        snostormDesc: "Fly the helicopter repeatedly and dodge obstacles at all heights!",
+        snostormDesc: "Extreme helicopter flight! Dodge snow obstacles across three heights.",
         sifferstafettenDesc: "Dynamic digit sequence. How far does your memory go?",
         dailyMode: "Today's Dynamic Challenge",
-        freeMode: "Free Play ↻",
         reflexStartTitle: "Tap to start today's track!",
         reflexSub: "Dynamic lightning in a new combination",
         round: "Round",
         bestScore: "Avg / Best",
         fjallHintTitle: "Today's Generated Clues:",
-        fjallGuessPlaceholder: "Enter 3 digits...",
         startFjall: "START TODAY'S MOUNTAIN CODE",
         stormScore: "Score",
         stormTime: "Time Left",
-        stormHint: "Click repeatedly to fly up and avoid obstacles!",
-        startStorm: "START SNOW STORM",
+        stormHint: "Tap or use Arrow Keys (Up/Down) to dodge snow obstacles!",
+        startStorm: "START EXTREME SNOW STORM",
         sifferLevel: "Level",
         sifferScore: "Score",
         sifferLives: "Lives",
         startSiffer: "START DIGIT STACK",
         clear: "Clear",
         submit: "SUBMIT ANSWER ✓",
-        lbTitle: "Global Leaderboard",
-        lbSub: "Real-time list of players worldwide for today's challenge.",
-        lbTotal: "Total (Altitude)",
+        lbTitle: "Global Highscore Leaderboard",
+        lbSub: "Real-time list of today's scored achievements.",
+        lbTotal: "Total Score",
         lbRank: "Rank",
         lbClimber: "Climber",
         lbDetail: "Detail",
-        lbPoints: "Score / Alt",
+        lbPoints: "Score",
         aliasTitle: "Choose your climber alias",
         aliasSub: "Your name will be displayed on the global leaderboard. Profanity is automatically filtered.",
         cancel: "Cancel",
@@ -426,7 +419,7 @@
             <span id="hub-status-snostorm" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">Ospelad idag</span>
           </div>
           <h3 id="card-name-3" class="text-xl font-extrabold text-white mb-1 group-hover:text-sky-400 transition-colors">SNÖSTORM-PILOTEN</h3>
-          <p id="card-desc-3" class="text-sm text-slate-400 mb-4">Flyg helikoptern upprepade gånger och undvik hinder på alla nivåer!</p>
+          <p id="card-desc-3" class="text-sm text-slate-400 mb-4">Extrem helikopterflygning! Undvik snöstormens hinder på tre höjder.</p>
           <div class="flex items-center justify-between text-xs font-mono text-slate-300 pt-3 border-t border-white/10">
             <span>Bästa: <strong id="hub-score-snostorm" class="text-sky-400">—</strong></span>
             <span data-i18n="playNow" class="text-sky-400 font-bold group-hover:translate-x-1 transition-transform">Spela nu →</span>
@@ -517,6 +510,7 @@
       </div>
     </section>
 
+    <!-- SPEL 3: SNÖSTORM-PILOTEN (OMGJORT TILL EXTREMT HINDBANESPEL MED 3 BANOR) -->
     <section id="view-snostorm" class="hidden space-y-5">
       <div class="rounded-3xl bg-alpine-900/95 border border-white/10 p-5 sm:p-8 shadow-2xl">
         <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-white/10">
@@ -525,7 +519,7 @@
               <h2 class="text-xl sm:text-2xl font-black text-white">🚁 SNÖSTORM-PILOTEN</h2>
               <span data-i18n="dailyMode" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">Dagens Utmaning</span>
             </div>
-            <p class="text-xs sm:text-sm text-slate-400">Klicka flera gånger för att flyga upp och undvika hinder på alla nivåer!</p>
+            <p data-i18n="snostormDesc" class="text-xs sm:text-sm text-slate-400">Extrem helikopterflygning! Undvik snöstormens hinder på tre höjder.</p>
           </div>
         </div>
 
@@ -535,22 +529,28 @@
             <span><span data-i18n="stormTime">Tid kvar</span>: <strong id="storm-time" class="text-white">25 s</strong></span>
           </div>
 
-          <div id="storm-container" onclick="jumpStormHeli()" class="relative h-64 rounded-3xl bg-alpine-950 border-2 border-white/15 overflow-hidden select-none cursor-pointer shadow-inner flex items-end">
-            <div class="absolute bottom-0 inset-x-0 h-8 bg-slate-800 border-t border-white/10 flex items-center justify-around">
-              <div class="w-8 h-2 bg-slate-700 rounded-full"></div>
-              <div class="w-12 h-2 bg-slate-700 rounded-full"></div>
-              <div class="w-10 h-2 bg-slate-700 rounded-full"></div>
-            </div>
-            <div id="storm-heli" class="absolute left-12 text-4xl transition-transform duration-75" style="bottom: 40px; transform: scaleX(-1);">🚁</div>
-            <div id="storm-obstacle" class="absolute w-8 h-10 rounded-xl bg-sky-400/90 border border-sky-200 shadow-lg" style="bottom: 35px; right: -40px;"></div>
+          <!-- Spelduk med tre fasta höjdnivåer (Låg, Mellan, Hög) -->
+          <div id="storm-container" class="relative h-64 rounded-3xl bg-alpine-950 border-2 border-white/15 overflow-hidden select-none shadow-inner flex items-center justify-between px-8">
+            <!-- Stiglinjer / Höjder -->
+            <div class="absolute inset-x-0 top-1/4 border-b border-white/5 pointer-events-none"></div>
+            <div class="absolute inset-x-0 top-2/4 border-b border-white/5 pointer-events-none"></div>
+            <div class="absolute inset-x-0 top-3/4 border-b border-white/5 pointer-events-none"></div>
 
-            <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none" id="storm-overlay">
-              <span data-i18n="stormHint" class="text-xs font-mono font-bold text-slate-300 bg-alpine-900/90 px-4 py-2 rounded-xl border border-white/10 shadow-lg">Klicka flera gånger för att flyga upp och undvika hinder!</span>
+            <div id="storm-heli" class="absolute left-16 text-4xl transition-all duration-150" style="top: 130px; transform: scaleX(-1);">🚁</div>
+            <div id="storm-obstacle" class="absolute w-9 h-12 rounded-xl bg-sky-400 border border-sky-200 shadow-xl" style="top: 130px; right: -40px;"></div>
+
+            <div class="absolute inset-0 flex flex-col items-center justify-center bg-alpine-950/80 backdrop-blur-sm transition-all" id="storm-overlay">
+              <span data-i18n="stormHint" class="text-xs font-mono font-bold text-slate-300 px-4 py-2 text-center">Klicka eller använd piltangenter (Upp/Ner) för att byta höjd och undvika hinder!</span>
             </div>
           </div>
 
+          <div class="grid grid-cols-2 gap-3">
+            <button onclick="moveStormLane(-1)" class="py-3.5 rounded-2xl bg-alpine-800 hover:bg-alpine-700 text-white font-black text-sm border border-white/10">⬆️ UPP</button>
+            <button onclick="moveStormLane(1)" class="py-3.5 rounded-2xl bg-alpine-800 hover:bg-alpine-700 text-white font-black text-sm border border-white/10">⬇️ NER</button>
+          </div>
+
           <button id="storm-start-btn" onclick="startStormGame()" data-i18n="startStorm" class="w-full py-4 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-alpine-950 font-black text-sm shadow-lg shadow-sky-500/25 active:scale-95 transition-all">
-            STARTA SNÖSTORM
+            STARTA EXTREM SNÖSTORM
           </button>
         </div>
       </div>
@@ -606,18 +606,19 @@
       </div>
     </section>
 
+    <!-- GLOBALA HIGHSCORE-LISTAN -->
     <section class="rounded-3xl bg-alpine-900/90 border border-white/10 p-5 sm:p-7 shadow-2xl space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
         <div>
           <div class="flex items-center gap-2">
             <span class="text-xl">🏆</span>
-            <h2 data-i18n="lbTitle" class="text-xl sm:text-2xl font-black text-white">Global Topplista</h2>
+            <h2 data-i18n="lbTitle" class="text-xl sm:text-2xl font-black text-white">Global Highscore-lista</h2>
           </div>
-          <p data-i18n="lbSub" class="text-xs sm:text-sm text-slate-400">Realtidslista över dagens spelare världen över.</p>
+          <p data-i18n="lbSub" class="text-xs sm:text-sm text-slate-400">Realtidslista över dagens poängsatta prestationer.</p>
         </div>
 
         <div class="flex flex-wrap gap-1.5" id="leaderboard-filters">
-          <button onclick="renderLeaderboard('total')" data-lb="total" data-i18n="lbTotal" class="lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-glacier-500 text-alpine-950">Totalt (Höjd)</button>
+          <button onclick="renderLeaderboard('total')" data-lb="total" data-i18n="lbTotal" class="lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-glacier-500 text-alpine-950">Total Poäng</button>
           <button onclick="renderLeaderboard('reflextornet')" data-lb="reflextornet" class="lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-alpine-800 text-slate-300 hover:bg-alpine-700">Reflextornet</button>
           <button onclick="renderLeaderboard('fjallkoden')" data-lb="fjallkoden" class="lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-alpine-800 text-slate-300 hover:bg-alpine-700">Fjällkoden</button>
           <button onclick="renderLeaderboard('snostorm')" data-lb="snostorm" class="lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-alpine-800 text-slate-300 hover:bg-alpine-700">Snöstorm</button>
@@ -632,7 +633,7 @@
               <th data-i18n="lbRank" class="py-2.5 px-3 w-14">Plats</th>
               <th data-i18n="lbClimber" class="py-2.5 px-3">Klättrare</th>
               <th data-i18n="lbDetail" class="py-2.5 px-3 hidden sm:table-cell">Detalj</th>
-              <th data-i18n="lbPoints" class="py-2.5 px-3 text-right">Poäng / Höjd</th>
+              <th data-i18n="lbPoints" class="py-2.5 px-3 text-right">Poäng</th>
             </tr>
           </thead>
           <tbody id="leaderboard-body" class="divide-y divide-white/5 text-sm"></tbody>
@@ -772,7 +773,7 @@
       return BANNED_WORDS.some(word => clean.includes(word));
     }
 
-    const STORAGE_KEY = '8848_nu_profile_v7';
+    const STORAGE_KEY = '8848_nu_profile_v8';
     let userProfile = {
       alias: 'Klättraren',
       streak: 1,
@@ -834,7 +835,7 @@
         userProfile.lastPlayedDate = TODAY_KEY;
       }
       saveProfile();
-      showToast(currentLang === 'sv' ? `Etapp klarad! +${finalScore} poäng mot toppen 🏔️` : `Stage completed! +${finalScore} pts towards summit 🏔️`);
+      showToast(currentLang === 'sv' ? `Etapp klarad! +${finalScore} poäng 🏔️` : `Stage completed! +${finalScore} pts 🏔️`);
     }
 
     function getTotalDailyScore() {
@@ -842,24 +843,23 @@
       return (d.reflextornet.score || 0) + (d.fjallkoden.score || 0) + (d.snostorm.score || 0) + (d.sifferstafetten.score || 0);
     }
 
-    // Höjdmeter baseras strikt på ackumulerad poäng. Kräver ca 4000+ poäng för att nå toppen (8848m)
     function getCurrentAltitude() {
       const total = getTotalDailyScore();
-      if (total <= 0) return 5364; // Baslägret
-      const meters = 5364 + Math.round((total / 4000) * (8848 - 5364));
-      return Math.min(8848, meters);
+      if (total <= 0) return 5364;
+      return Math.min(8848, 5364 + Math.round((total / 4500) * (8848 - 5364)));
     }
 
     function updateGlobalUI() {
       document.getElementById('header-alias').textContent = userProfile.alias;
       document.getElementById('header-streak').textContent = userProfile.streak;
-      const alt = getCurrentAltitude();
-      document.getElementById('header-altitude').textContent = `${alt.toLocaleString('sv-SE')} m`;
+      const totalScore = getTotalDailyScore();
+      document.getElementById('header-altitude').textContent = `${totalScore.toLocaleString('sv-SE')} p`;
 
       const d = userProfile.daily;
       const completed = [d.reflextornet.done, d.fjallkoden.done, d.snostorm.done, d.sifferstafetten.done].filter(Boolean).length;
       document.getElementById('daily-progress-count').textContent = completed;
 
+      const alt = getCurrentAltitude();
       const pct = Math.max(0, Math.round(((alt - 5364) / (8848 - 5364)) * 100));
       document.getElementById('altitude-progress-bar').style.width = `${pct}%`;
 
@@ -936,10 +936,10 @@
     function shareDailyReport() {
       SoundFX.pop();
       const d = userProfile.daily;
-      const alt = getCurrentAltitude();
+      const totalScore = getTotalDailyScore();
       const report = [
         `🏔️ 8848.nu — ${TODAY_KEY}`,
-        `Höjd / Altitude: ${alt.toLocaleString('sv-SE')} / 8 848 m (🔥 ${userProfile.streak}d)`,
+        `Total Poäng / Score: ${totalScore.toLocaleString('sv-SE')} p (🔥 ${userProfile.streak}d)`,
         `⚡ Reflextornet: ${d.reflextornet.done ? d.reflextornet.score + 'p' : '⏳'}`,
         `🔐 Fjällkoden: ${d.fjallkoden.done ? d.fjallkoden.score + 'p' : '⏳'}`,
         `🚁 Snöstorm: ${d.snostorm.done ? d.snostorm.score + 'p' : '⏳'}`,
@@ -1070,74 +1070,80 @@
       }
     }
 
-    let stormState = { active: false, score: 0, timeLeft: 25.0, heliY: 40, jumpVy: 0, obsX: 380, obsSpeed: 230, obsHeight: 'low', animId: null, lastTime: 0 };
-    function jumpStormHeli() {
+    /* SPEL 3: SNÖSTORM-PILOTEN (EXREMT SVÅRT 3-SPÅRSLÄGE) */
+    let stormState = { active: false, score: 0, timeLeft: 25.0, lane: 1, obsLane: 1, obsX: 380, obsSpeed: 300, animId: null, lastTime: 0 };
+    
+    function moveStormLane(dir) {
       if (!stormState.active) return;
       SoundFX.click();
-      stormState.jumpVy = 9.5;
+      stormState.lane += dir;
+      if (stormState.lane < 0) stormState.lane = 0;
+      if (stormState.lane > 2) stormState.lane = 2;
+      updateStormPositions();
     }
+
+    window.addEventListener('keydown', (e) => {
+      if (!stormState.active) return;
+      if (e.key === 'ArrowUp') { e.preventDefault(); moveStormLane(-1); }
+      if (e.key === 'ArrowDown') { e.preventDefault(); moveStormLane(1); }
+    });
+
+    function updateStormPositions() {
+      // 3 höjder: Top (45px), Middle (130px), Bottom (215px)
+      const topVals = [45, 130, 215];
+      document.getElementById('storm-heli').style.top = `${topVals[stormState.lane]}px`;
+      document.getElementById('storm-obstacle').style.top = `${topVals[stormState.obsLane]}px`;
+    }
+
     function startStormGame() {
       SoundFX.pop();
       stormState.active = true;
       stormState.score = 0;
       stormState.timeLeft = 25.0;
-      stormState.heliY = 40;
-      stormState.jumpVy = 0;
+      stormState.lane = 1;
+      stormState.obsLane = Math.floor(DAILY_RNG() * 3);
       stormState.obsX = 380;
-      stormState.obsSpeed = 220 + (DAILY_RNG() * 50);
-      stormState.obsHeight = 'low';
+      stormState.obsSpeed = 320;
       stormState.lastTime = performance.now();
       document.getElementById('storm-start-btn').classList.add('hidden');
       document.getElementById('storm-overlay').classList.add('hidden');
+      updateStormPositions();
 
       const loop = (now) => {
         if (!stormState.active) return;
         const dt = (now - stormState.lastTime) / 1000;
         stormState.lastTime = now;
 
-        stormState.jumpVy -= 32 * dt;
-        stormState.heliY += stormState.jumpVy * dt * 30;
-        if (stormState.heliY < 40) {
-          stormState.heliY = 40;
-          stormState.jumpVy = 0;
-        }
-        if (stormState.heliY > 185) {
-          stormState.heliY = 185;
-          stormState.jumpVy = 0;
-        }
-
         stormState.obsX -= stormState.obsSpeed * dt;
         if (stormState.obsX < -40) {
-          stormState.obsX = 360 + (DAILY_RNG() * 50);
-          stormState.score += 60;
-          const heights = ['low', 'mid', 'high'];
-          stormState.obsHeight = heights[Math.floor(DAILY_RNG() * heights.length)];
+          stormState.obsX = 360 + (DAILY_RNG() * 60);
+          stormState.obsLane = Math.floor(Math.random() * 3);
+          stormState.score += 80;
+          stormState.obsSpeed += 8; // Ökar successivt i svårighetsgrad
           SoundFX.pop();
         }
 
-        let obsBottom = 35;
-        if (stormState.obsHeight === 'mid') obsBottom = 85;
-        if (stormState.obsHeight === 'high') obsBottom = 135;
-        document.getElementById('storm-obstacle').style.bottom = `${obsBottom}px`;
-
-        if (Math.abs(stormState.obsX - 55) < 24) {
-          let heliBottom = stormState.heliY;
-          if (stormState.obsHeight === 'low' && heliBottom < 75) triggerStormCrash();
-          if (stormState.obsHeight === 'mid' && heliBottom >= 60 && heliBottom <= 125) triggerStormCrash();
-          if (stormState.obsHeight === 'high' && heliBottom >= 110) triggerStormCrash();
+        // Kollision om helikoptern och hindret är i samma spår och nära i x-led
+        if (Math.abs(stormState.obsX - 70) < 28 && stormState.lane === stormState.obsLane) {
+          stormState.active = false;
+          SoundFX.error();
+          showToast(currentLang === 'sv' ? 'Krasch i snöstormen!' : 'Crash in the storm!', 'error');
+          document.getElementById('storm-start-btn').classList.remove('hidden');
+          document.getElementById('storm-overlay').classList.remove('hidden');
+          return;
         }
 
         stormState.timeLeft -= dt;
         document.getElementById('storm-score').textContent = stormState.score;
         document.getElementById('storm-time').textContent = Math.max(0, stormState.timeLeft).toFixed(1) + ' s';
 
-        document.getElementById('storm-heli').style.bottom = `${stormState.heliY}px`;
         document.getElementById('storm-obstacle').style.right = `${380 - stormState.obsX}px`;
+        updateStormPositions();
 
         if (stormState.timeLeft <= 0) {
           stormState.active = false;
           SoundFX.win();
-          markGameDone('snostorm', 300 + stormState.score, `${stormState.score}p i storm`);
+          markGameDone('snostorm', 400 + stormState.score, `${stormState.score}p i storm`);
           document.getElementById('storm-start-btn').classList.remove('hidden');
           document.getElementById('storm-overlay').classList.remove('hidden');
         } else {
@@ -1145,13 +1151,6 @@
         }
       };
       stormState.animId = requestAnimationFrame(loop);
-    }
-    function triggerStormCrash() {
-      stormState.active = false;
-      SoundFX.error();
-      showToast(currentLang === 'sv' ? 'Krasch i snöstormen!' : 'Crash in the storm!', 'error');
-      document.getElementById('storm-start-btn').classList.remove('hidden');
-      document.getElementById('storm-overlay').classList.remove('hidden');
     }
 
     let sifferState = { level: 1, score: 0, lives: 3, sequence: '', playerInput: '', phase: 'idle' };
@@ -1220,11 +1219,11 @@
 
     let currentLeaderboardTab = 'total';
     const MOCK_BOTS = [
-      { name: 'Fjällräven99', altitude: 8100, games: {} },
-      { name: 'SarekVandrare', altitude: 7800, games: {} },
-      { name: 'KebnekaiseKungen', altitude: 7600, games: {} },
-      { name: 'Isyxa_Sthlm', altitude: 7200, games: {} },
-      { name: 'ÅreSkidåkare', altitude: 6800, games: {} }
+      { name: 'Fjällräven99', score: 3450, games: {} },
+      { name: 'SarekVandrare', score: 2890, games: {} },
+      { name: 'KebnekaiseKungen', score: 2450, games: {} },
+      { name: 'Isyxa_Sthlm', score: 1980, games: {} },
+      { name: 'ÅreSkidåkare', score: 1420, games: {} }
     ];
 
     function renderLeaderboard(category = 'total') {
@@ -1234,23 +1233,25 @@
         btn.className = active ? 'lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-glacier-500 text-alpine-950 transition-all' : 'lb-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-alpine-800 text-slate-300 hover:bg-alpine-700 transition-all';
       });
 
+      const myTotalScore = getTotalDailyScore();
       const myEntry = {
         name: `${userProfile.alias} (${currentLang === 'sv' ? 'Du' : 'You'})`,
         isMe: true,
-        altitude: getCurrentAltitude(),
+        score: category === 'total' ? myTotalScore : (userProfile.daily?.[category]?.score || 0),
         games: userProfile.daily
       };
 
-      const list = [myEntry, ...MOCK_BOTS];
-      list.sort((a, b) => {
-        if (category === 'total') return b.altitude - a.altitude;
-        return (b.games?.[category]?.score || 0) - (a.games?.[category]?.score || 0);
-      });
+      const list = [myEntry, ...MOCK_BOTS.map(b => ({
+        ...b,
+        score: category === 'total' ? b.score : Math.round(b.score * (0.6 + DAILY_RNG() * 0.4))
+      }))];
+
+      list.sort((a, b) => b.score - a.score);
 
       document.getElementById('leaderboard-body').innerHTML = list.map((row, idx) => {
         const rank = idx + 1;
         const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `#${rank}`;
-        const scoreVal = category === 'total' ? `${row.altitude.toLocaleString('sv-SE')} m` : `${row.games?.[category]?.score || 0} p`;
+        const scoreVal = `${row.score.toLocaleString('sv-SE')} p`;
         const detail = category === 'total' ? `${Object.values(row.games || {}).filter(g => g.done).length}/4` : (row.games?.[category]?.detail || '—');
 
         return `
