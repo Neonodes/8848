@@ -90,9 +90,9 @@
         streakTitle: "Dagar i rad",
         altitudeTitle: "Din höjd mot toppen (8848m)",
         climber: "Klättrare",
-        dailyExpedition: "Klara dagens etapper & nå",
+        dailyExpedition: "Klara dagens etapper & nå toppen",
         summitMeters: "8 848 meter",
-        expeditionDesc: "Unika dynamiska utmaningar varje dag. Slå ditt personbästa och nå toppen!",
+        expeditionDesc: "Varje midnatt skapas nya unika dynamiska utmaningar för hela världen. Samla poäng för att nå toppen!",
         baseCamp: "Baslägret (5 364 m)",
         summit: "Toppen (8 848 m)",
         completedCount: "avklarade idag",
@@ -101,14 +101,21 @@
         tabHub: "Översikt",
         tabReflex: "Reflextornet",
         tabFjall: "Fjällkoden",
-        tabStorm: "Snöstorm",
+        tabStorm: "Snöstorm-Pilot",
         tabSiffer: "Sifferminne",
         playedToday: "Ospelad idag",
         completedToday: "Avklarad ✓",
         playNow: "Spela nu →",
+        
+        // Spelnamn
+        game1Name: "REFLEXTORNET",
+        game2Name: "FJÄLLKODEN",
+        game3Name: "SNÖSTORM-PILOTEN",
+        game4Name: "SIFFERSTAFETTEN",
+
         reflextornetDesc: "Dynamiskt reaktionstest med nya blixtmönster varje midnatt.",
         fjallkodenDesc: "Dagens hemliga 3-siffriga kod och kluriga ledtrådar.",
-        snostormDesc: "Hoppa över de mötande isblocken i snöovädret!",
+        snostormDesc: "Flyg helikoptern upprepade gånger och undvik hinder på alla nivåer!",
         sifferstafettenDesc: "Dynamisk siffersekvens. Hur långt räcker ditt minne?",
         dailyMode: "Dagens Dynamiska Utmaning",
         freeMode: "Fritt läge ↻",
@@ -121,7 +128,7 @@
         startFjall: "STARTA DAGENS FJÄLLKOD",
         stormScore: "Poäng",
         stormTime: "Tid kvar",
-        stormHint: "Klicka eller tryck för att hoppa över isblocket!",
+        stormHint: "Klicka flera gånger för att flyga upp och undvika hinder!",
         startStorm: "STARTA SNÖSTORM",
         sifferLevel: "Nivå",
         sifferScore: "Poäng",
@@ -130,18 +137,18 @@
         clear: "Rensa",
         submit: "SKICKA SVAR ✓",
         lbTitle: "Global Topplista",
-        lbSub: "Realtidslista över dagens dynamiska utmaning.",
+        lbSub: "Realtidslista över dagens spelare världen över.",
         lbTotal: "Totalt (Höjd)",
         lbRank: "Plats",
         lbClimber: "Klättrare",
         lbDetail: "Detalj",
         lbPoints: "Poäng / Höjd",
         aliasTitle: "Välj ditt klättrar-alias",
-        aliasSub: "Ditt namn visas på den globala topplistan.",
+        aliasSub: "Ditt namn visas på den globala topplistan. Fula ord blockeras automatiskt.",
         cancel: "Avbryt",
         saveName: "Spara namn",
         cookieTitle: "Kakor & Sparade Resultat 🍪",
-        cookieDesc: "Vi sparar dina poäng och höjdmeter i webbläsaren så att du kan komma tillbaka senare!",
+        cookieDesc: "Vi sparar dina poäng och höjdmeter i webbläsaren så att du kan återkomma senare!",
         cookieAccept: "Godkänn",
         statusUnplayed: "Ospelad idag",
         footerText: "Nya globala utmaningar varje midnatt",
@@ -154,9 +161,9 @@
         streakTitle: "Streak (Days)",
         altitudeTitle: "Your altitude towards summit (8848m)",
         climber: "Climber",
-        dailyExpedition: "Complete today's stages & reach",
+        dailyExpedition: "Complete today's stages & reach summit",
         summitMeters: "8,848 meters",
-        expeditionDesc: "Unique dynamic challenges every day. Beat your personal best and reach the summit!",
+        expeditionDesc: "Every midnight unique dynamic challenges are generated worldwide. Score points to reach the summit!",
         baseCamp: "Base Camp (5,364 m)",
         summit: "Summit (8,848 m)",
         completedCount: "completed today",
@@ -170,9 +177,16 @@
         playedToday: "Unplayed today",
         completedToday: "Completed ✓",
         playNow: "Play now →",
+
+        // Game Names
+        game1Name: "REFLEX TOWER",
+        game2Name: "MOUNTAIN CODE",
+        game3Name: "SNOW STORM PILOT",
+        game4Name: "DIGIT STACK",
+
         reflextornetDesc: "Dynamic reaction test with new lightning patterns every midnight.",
         fjallkodenDesc: "Today's secret 3-digit code and smart clues.",
-        snostormDesc: "Jump over the incoming ice blocks in the snowstorm!",
+        snostormDesc: "Fly the helicopter repeatedly and dodge obstacles at all heights!",
         sifferstafettenDesc: "Dynamic digit sequence. How far does your memory go?",
         dailyMode: "Today's Dynamic Challenge",
         freeMode: "Free Play ↻",
@@ -185,7 +199,7 @@
         startFjall: "START TODAY'S MOUNTAIN CODE",
         stormScore: "Score",
         stormTime: "Time Left",
-        stormHint: "Click or tap to jump over the ice block!",
+        stormHint: "Click repeatedly to fly up and avoid obstacles!",
         startStorm: "START SNOW STORM",
         sifferLevel: "Level",
         sifferScore: "Score",
@@ -201,7 +215,7 @@
         lbDetail: "Detail",
         lbPoints: "Score / Alt",
         aliasTitle: "Choose your climber alias",
-        aliasSub: "Your name will be displayed on the global leaderboard.",
+        aliasSub: "Your name will be displayed on the global leaderboard. Profanity is automatically filtered.",
         cancel: "Cancel",
         saveName: "Save Name",
         cookieTitle: "Cookies & Saved Progress 🍪",
@@ -226,10 +240,16 @@
         if (t[key]) el.textContent = t[key];
       });
 
+      // Spelnamn och beskrivningar
+      document.getElementById('card-name-1').textContent = t.game1Name;
       document.getElementById('card-desc-1').textContent = t.reflextornetDesc;
+      document.getElementById('card-name-2').textContent = t.game2Name;
       document.getElementById('card-desc-2').textContent = t.fjallkodenDesc;
+      document.getElementById('card-name-3').textContent = t.game3Name;
       document.getElementById('card-desc-3').textContent = t.snostormDesc;
+      document.getElementById('card-name-4').textContent = t.game4Name;
       document.getElementById('card-desc-4').textContent = t.sifferstafettenDesc;
+
       document.getElementById('footer-text-el').textContent = t.footerText;
       document.getElementById('footer-storage-el').textContent = t.footerStorage;
 
@@ -249,9 +269,9 @@
       <span class="text-3xl">🍪</span>
       <div class="space-y-2">
         <h4 data-i18n="cookieTitle" class="text-sm font-black text-white">Kakor & Sparade Resultat 🍪</h4>
-        <p data-i18n="cookieDesc" class="text-xs text-slate-300 leading-relaxed">Vi sparar dina poäng och höjdmeter i en säker webbläsarkaka så att du kan lämna sidan och komma tillbaka senare!</p>
+        <p data-i18n="cookieDesc" class="text-xs text-slate-300 leading-relaxed">Vi sparar dina poäng och höjdmeter i webbläsaren så att du kan återkomma senare!</p>
         <button onclick="acceptCookies()" data-i18n="cookieAccept" class="w-full py-2.5 rounded-xl bg-glacier-500 hover:bg-glacier-400 text-alpine-950 font-black text-xs shadow-lg shadow-glacier-500/20 transition-all">
-          Godkänn &amp; Fortsätt klättra
+          Godkänn
         </button>
       </div>
     </div>
@@ -325,10 +345,10 @@
           </div>
 
           <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white">
-            <span data-i18n="dailyExpedition">Klara dagens etapper &amp; nå</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-glacier-400 to-summit-400">8 848 meter</span>
+            <span data-i18n="dailyExpedition">Klara dagens etapper &amp; nå toppen</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-glacier-400 to-summit-400">8 848 meter</span>
           </h1>
           <p data-i18n="expeditionDesc" class="text-sm sm:text-base text-slate-300 leading-relaxed">
-            Unika dynamiska utmaningar varje dag. Slå ditt personbästa och nå toppen!
+            Varje midnatt skapas nya unika dynamiska utmaningar för hela världen. Samla poäng för att nå toppen!
           </p>
 
           <div class="pt-2">
@@ -338,7 +358,7 @@
               <span data-i18n="summit">Toppen (8 848 m)</span>
             </div>
             <div class="w-full h-3 rounded-full bg-alpine-950/90 border border-white/10 overflow-hidden p-0.5">
-              <div id="altitude-progress-bar" class="h-full rounded-full bg-gradient-to-r from-glacier-500 via-sky-400 to-summit-400 transition-all duration-700" style="width: 15%"></div>
+              <div id="altitude-progress-bar" class="h-full rounded-full bg-gradient-to-r from-glacier-500 via-sky-400 to-summit-400 transition-all duration-700" style="width: 0%"></div>
             </div>
           </div>
         </div>
@@ -387,7 +407,7 @@
             <div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">⚡</div>
             <span id="hub-status-reflextornet" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">Ospelad idag</span>
           </div>
-          <h3 class="text-xl font-extrabold text-white mb-1 group-hover:text-glacier-400 transition-colors">REFLEXTORNET</h3>
+          <h3 id="card-name-1" class="text-xl font-extrabold text-white mb-1 group-hover:text-glacier-400 transition-colors">REFLEXTORNET</h3>
           <p id="card-desc-1" class="text-sm text-slate-400 mb-4">Dynamiskt reaktionstest med nya blixtmönster varje midnatt.</p>
           <div class="flex items-center justify-between text-xs font-mono text-slate-300 pt-3 border-t border-white/10">
             <span>Bästa: <strong id="hub-score-reflextornet" class="text-glacier-400">—</strong></span>
@@ -401,7 +421,7 @@
             <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🔐</div>
             <span id="hub-status-fjallkoden" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">Ospelad idag</span>
           </div>
-          <h3 class="text-xl font-extrabold text-white mb-1 group-hover:text-summit-400 transition-colors">FJÄLLKODEN</h3>
+          <h3 id="card-name-2" class="text-xl font-extrabold text-white mb-1 group-hover:text-summit-400 transition-colors">FJÄLLKODEN</h3>
           <p id="card-desc-2" class="text-sm text-slate-400 mb-4">Dagens hemliga 3-siffriga kod och kluriga ledtrådar.</p>
           <div class="flex items-center justify-between text-xs font-mono text-slate-300 pt-3 border-t border-white/10">
             <span>Bästa: <strong id="hub-score-fjallkoden" class="text-summit-400">—</strong></span>
@@ -415,8 +435,8 @@
             <div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🚁</div>
             <span id="hub-status-snostorm" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">Ospelad idag</span>
           </div>
-          <h3 class="text-xl font-extrabold text-white mb-1 group-hover:text-sky-400 transition-colors">SNÖSTORM-PILOTEN</h3>
-          <p id="card-desc-3" class="text-sm text-slate-400 mb-4">Hoppa över de mötande isblocken i snöovädret!</p>
+          <h3 id="card-name-3" class="text-xl font-extrabold text-white mb-1 group-hover:text-sky-400 transition-colors">SNÖSTORM-PILOTEN</h3>
+          <p id="card-desc-3" class="text-sm text-slate-400 mb-4">Flyg helikoptern upprepade gånger och undvik hinder på alla nivåer!</p>
           <div class="flex items-center justify-between text-xs font-mono text-slate-300 pt-3 border-t border-white/10">
             <span>Bästa: <strong id="hub-score-snostorm" class="text-sky-400">—</strong></span>
             <span data-i18n="playNow" class="text-sky-400 font-bold group-hover:translate-x-1 transition-transform">Spela nu →</span>
@@ -429,7 +449,7 @@
             <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-400/30 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🔢</div>
             <span id="hub-status-sifferstafetten" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">Ospelad idag</span>
           </div>
-          <h3 class="text-xl font-extrabold text-white mb-1 group-hover:text-purple-400 transition-colors">SIFFERSTAFETTEN</h3>
+          <h3 id="card-name-4" class="text-xl font-extrabold text-white mb-1 group-hover:text-purple-400 transition-colors">SIFFERSTAFETTEN</h3>
           <p id="card-desc-4" class="text-sm text-slate-400 mb-4">Dynamisk siffersekvens. Hur långt räcker ditt minne?</p>
           <div class="flex items-center justify-between text-xs font-mono text-slate-300 pt-3 border-t border-white/10">
             <span>Bästa: <strong id="hub-score-sifferstafetten" class="text-purple-400">—</strong></span>
@@ -510,7 +530,7 @@
       </div>
     </section>
 
-    <!-- SPEL 3: SNÖSTORM-PILOTEN (Hoppar UPPÅT) -->
+    <!-- SPEL 3: SNÖSTORM-PILOTEN (Flerskellsflygning & hinder nertill, mitten, upptill) -->
     <section id="view-snostorm" class="hidden space-y-5">
       <div class="rounded-3xl bg-alpine-900/95 border border-white/10 p-5 sm:p-8 shadow-2xl">
         <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-white/10">
@@ -519,7 +539,7 @@
               <h2 class="text-xl sm:text-2xl font-black text-white">🚁 SNÖSTORM-PILOTEN</h2>
               <span data-i18n="dailyMode" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">Dagens Utmaning</span>
             </div>
-            <p class="text-xs sm:text-sm text-slate-400">Hoppa över isblocken i snöovädret!</p>
+            <p class="text-xs sm:text-sm text-slate-400">Klicka flera gånger för att flyga upp och undvika hinder på alla nivåer!</p>
           </div>
         </div>
 
@@ -529,16 +549,20 @@
             <span><span data-i18n="stormTime">Tid kvar</span>: <strong id="storm-time" class="text-white">25 s</strong></span>
           </div>
 
+          <!-- Spelduk med dynamiska hinder (låg, mellan, hög) -->
           <div id="storm-container" onclick="jumpStormHeli()" class="relative h-64 rounded-3xl bg-alpine-950 border-2 border-white/15 overflow-hidden select-none cursor-pointer shadow-inner flex items-end">
-            <div class="absolute bottom-0 inset-x-0 h-10 bg-slate-800 border-t border-white/10 flex items-center justify-around">
+            <div class="absolute bottom-0 inset-x-0 h-8 bg-slate-800 border-t border-white/10 flex items-center justify-around">
               <div class="w-8 h-2 bg-slate-700 rounded-full"></div>
               <div class="w-12 h-2 bg-slate-700 rounded-full"></div>
               <div class="w-10 h-2 bg-slate-700 rounded-full"></div>
             </div>
             <div id="storm-heli" class="absolute left-12 text-4xl transition-transform duration-75" style="bottom: 40px; transform: scaleX(-1);">🚁</div>
-            <div id="storm-obstacle" class="absolute w-8 h-10 rounded-xl bg-sky-400/90 border border-sky-200 shadow-lg bottom-10" style="right: -40px;"></div>
+            
+            <!-- Hinder som dynamiskt byter höjd (botten, mitten eller toppen) -->
+            <div id="storm-obstacle" class="absolute w-8 h-10 rounded-xl bg-sky-400/90 border border-sky-200 shadow-lg" style="bottom: 35px; right: -40px;"></div>
+
             <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none" id="storm-overlay">
-              <span data-i18n="stormHint" class="text-xs font-mono font-bold text-slate-300 bg-alpine-900/90 px-4 py-2 rounded-xl border border-white/10 shadow-lg">Klicka eller tryck för att hoppa över isblocket!</span>
+              <span data-i18n="stormHint" class="text-xs font-mono font-bold text-slate-300 bg-alpine-900/90 px-4 py-2 rounded-xl border border-white/10 shadow-lg">Klicka flera gånger för att flyga upp och undvika hinder!</span>
             </div>
           </div>
 
@@ -558,7 +582,7 @@
               <h2 class="text-xl sm:text-2xl font-black text-white">🔢 SIFFERSTAFETTEN</h2>
               <span data-i18n="dailyMode" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">Dagens Utmaning</span>
             </div>
-            <p class="text-xs sm:text-sm text-slate-400">Memorera sifferkombinationen...</p>
+            <p data-i18n="sifferstafettenDesc" class="text-xs sm:text-sm text-slate-400">Memorera sifferkombinationen...</p>
           </div>
         </div>
 
@@ -646,11 +670,11 @@
     <div id="footer-storage-el">Moln- &amp; Kaklagring aktiv 🔥</div>
   </footer>
 
-  <!-- MODAL: SPELARALIAS -->
+  <!-- MODAL: SPELARALIAS MED FULORDSFILTER -->
   <div id="alias-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="w-full max-w-sm rounded-3xl bg-alpine-900 border border-white/15 p-6 shadow-2xl space-y-4 animate-pop">
       <h3 data-i18n="aliasTitle" class="text-lg font-black text-white">Välj ditt klättrar-alias</h3>
-      <p data-i18n="aliasSub" class="text-xs text-slate-400">Ditt namn visas på den globala topplistan.</p>
+      <p data-i18n="aliasSub" class="text-xs text-slate-400">Ditt namn visas på den globala topplistan. Fula ord blockeras.</p>
       <input id="alias-input" type="text" maxlength="18" placeholder="T.ex. FikaKungen" class="w-full px-4 py-3 rounded-xl bg-alpine-950 border border-white/15 text-white font-semibold focus:outline-none focus:border-glacier-400" />
       <div class="flex justify-end gap-2 pt-2">
         <button onclick="closeAliasModal()" data-i18n="cancel" class="px-4 py-2 rounded-xl bg-alpine-800 text-slate-300 text-xs font-bold hover:bg-alpine-700">Avbryt</button>
@@ -762,7 +786,14 @@
       document.getElementById('anomaly-badge').textContent = `${anomLabel} ${anomName}`;
     }
 
-    const STORAGE_KEY = '8848_nu_profile_v5';
+    // Fulordsfilter
+    const BANNED_WORDS = ['fan', 'jävel', 'helvete', 'skit', 'hora', 'fitta', 'kuk', 'stövel', 'fuck', 'shit', 'bitch', 'asshole', 'cunt', 'dick', 'cock', 'pussy', 'bastard', 'slut', 'whore', 'scheisse', 'merde', 'putain', 'pendejo', 'mierda'];
+    function containsProfanity(text) {
+      const clean = text.toLowerCase().replace(/[^a-zåäö0-9]/g, '');
+      return BANNED_WORDS.some(word => clean.includes(word));
+    }
+
+    const STORAGE_KEY = '8848_nu_profile_v6';
     let userProfile = {
       alias: 'Klättraren',
       streak: 1,
@@ -832,9 +863,12 @@
       return (d.reflextornet.score || 0) + (d.fjallkoden.score || 0) + (d.snostorm.score || 0) + (d.sifferstafetten.score || 0);
     }
 
+    // Höjdmeter beräknas dynamiskt baserat på poäng (max 8848 m nås vid ca 4500+ poäng)
     function getCurrentAltitude() {
       const total = getTotalDailyScore();
-      return Math.min(8848, 5364 + Math.round(total * 0.8));
+      if (total <= 0) return 5364; // Baslägret
+      const meters = 5364 + Math.round((total / 4500) * (8848 - 5364));
+      return Math.min(8848, meters);
     }
 
     function updateGlobalUI() {
@@ -847,7 +881,7 @@
       const completed = [d.reflextornet.done, d.fjallkoden.done, d.snostorm.done, d.sifferstafetten.done].filter(Boolean).length;
       document.getElementById('daily-progress-count').textContent = completed;
 
-      const pct = Math.max(8, Math.round(((alt - 5364) / (8848 - 5364)) * 100));
+      const pct = Math.max(0, Math.round(((alt - 5364) / (8848 - 5364)) * 100));
       document.getElementById('altitude-progress-bar').style.width = `${pct}%`;
 
       const games = ['reflextornet', 'fjallkoden', 'snostorm', 'sifferstafetten'];
@@ -904,15 +938,20 @@
     function closeAliasModal() { document.getElementById('alias-modal').classList.add('hidden'); }
     function saveAlias() {
       const val = document.getElementById('alias-input').value.trim();
-      if (val.length >= 2) {
-        userProfile.alias = val;
-        saveProfile();
-        closeAliasModal();
-        SoundFX.pop();
-        showToast(currentLang === 'sv' ? `Alias uppdaterat till ${val}!` : `Alias updated to ${val}!`);
-      } else {
+      if (val.length < 2) {
         showToast(currentLang === 'sv' ? 'Ange minst 2 tecken.' : 'Enter at least 2 characters.', 'error');
+        return;
       }
+      if (containsProfanity(val)) {
+        SoundFX.error();
+        showToast(currentLang === 'sv' ? '⚠️ Olämpligt ord upptäckt! Välj ett annat namn.' : '⚠️ Profanity detected! Please choose another name.', 'error');
+        return;
+      }
+      userProfile.alias = val;
+      saveProfile();
+      closeAliasModal();
+      SoundFX.pop();
+      showToast(currentLang === 'sv' ? `Alias uppdaterat till ${val}!` : `Alias updated to ${val}!`);
     }
 
     function shareDailyReport() {
@@ -1054,13 +1093,12 @@
       }
     }
 
-    /* SPEL 3: SNÖSTORM-PILOTEN (Hoppar UPPÅT) */
-    let stormState = { active: false, score: 0, timeLeft: 25.0, heliY: 40, isJumping: false, jumpVy: 0, obsX: 380, obsSpeed: 230, animId: null, lastTime: 0 };
+    /* SPEL 3: SNÖSTORM-PILOTEN (Flerskellsflygning & hinder på alla nivåer: nertill, mitten, upptill) */
+    let stormState = { active: false, score: 0, timeLeft: 25.0, heliY: 40, jumpVy: 0, obsX: 380, obsSpeed: 230, obsHeight: 'low', animId: null, lastTime: 0 };
     function jumpStormHeli() {
-      if (!stormState.active || stormState.isJumping) return;
+      if (!stormState.active) return;
       SoundFX.click();
-      stormState.isJumping = true;
-      stormState.jumpVy = 13.5; // Positiv hastighet för att flyga UPPÅT
+      stormState.jumpVy = 9.5; // Klicka flera gånger för att flyga uppåt
     }
     function startStormGame() {
       SoundFX.pop();
@@ -1068,10 +1106,10 @@
       stormState.score = 0;
       stormState.timeLeft = 25.0;
       stormState.heliY = 40;
-      stormState.isJumping = false;
       stormState.jumpVy = 0;
       stormState.obsX = 380;
-      stormState.obsSpeed = 210 + (DAILY_RNG() * 60);
+      stormState.obsSpeed = 220 + (DAILY_RNG() * 50);
+      stormState.obsHeight = 'low';
       stormState.lastTime = performance.now();
       document.getElementById('storm-start-btn').classList.add('hidden');
       document.getElementById('storm-overlay').classList.add('hidden');
@@ -1081,30 +1119,40 @@
         const dt = (now - stormState.lastTime) / 1000;
         stormState.lastTime = now;
 
-        if (stormState.isJumping) {
-          stormState.jumpVy -= 38 * dt; // Gravitation drar nedåt
-          stormState.heliY += stormState.jumpVy * dt * 25;
-          if (stormState.heliY <= 40) {
-            stormState.heliY = 40;
-            stormState.isJumping = false;
-            stormState.jumpVy = 0;
-          }
+        // Fysik med gravitation som drar nedåt, men tillåter multipel klick-acceleration
+        stormState.jumpVy -= 32 * dt;
+        stormState.heliY += stormState.jumpVy * dt * 30;
+        if (stormState.heliY < 40) {
+          stormState.heliY = 40;
+          stormState.jumpVy = 0;
+        }
+        if (stormState.heliY > 185) {
+          stormState.heliY = 185;
+          stormState.jumpVy = 0;
         }
 
         stormState.obsX -= stormState.obsSpeed * dt;
         if (stormState.obsX < -40) {
-          stormState.obsX = 380 + (DAILY_RNG() * 40);
-          stormState.score += 50;
+          stormState.obsX = 360 + (DAILY_RNG() * 50);
+          stormState.score += 60;
+          // Slumpa om hindrets höjd (låg, mellan, hög)
+          const heights = ['low', 'mid', 'high'];
+          stormState.obsHeight = heights[Math.floor(DAILY_RNG() * heights.length)];
           SoundFX.pop();
         }
 
-        if (Math.abs(stormState.obsX - 55) < 22 && stormState.heliY < 75) {
-          stormState.active = false;
-          SoundFX.error();
-          showToast(currentLang === 'sv' ? 'Krasch i snöstormen!' : 'Crash in the storm!', 'error');
-          document.getElementById('storm-start-btn').classList.remove('hidden');
-          document.getElementById('storm-overlay').classList.remove('hidden');
-          return;
+        // Sätt CSS-bottenposition beroende på hinderhöjd
+        let obsBottom = 35;
+        if (stormState.obsHeight === 'mid') obsBottom = 85;
+        if (stormState.obsHeight === 'high') obsBottom = 135;
+        document.getElementById('storm-obstacle').style.bottom = `${obsBottom}px`;
+
+        // Kollisionsdetektering
+        if (Math.abs(stormState.obsX - 55) < 24) {
+          let heliBottom = stormState.heliY;
+          if (stormState.obsHeight === 'low' && heliBottom < 75) triggerStormCrash();
+          if (stormState.obsHeight === 'mid' && heliBottom >= 60 && heliBottom <= 125) triggerStormCrash();
+          if (stormState.obsHeight === 'high' && heliBottom >= 110) triggerStormCrash();
         }
 
         stormState.timeLeft -= dt;
@@ -1125,6 +1173,13 @@
         }
       };
       stormState.animId = requestAnimationFrame(loop);
+    }
+    function triggerStormCrash() {
+      stormState.active = false;
+      SoundFX.error();
+      showToast(currentLang === 'sv' ? 'Krasch i snöstormen!' : 'Crash in the storm!', 'error');
+      document.getElementById('storm-start-btn').classList.remove('hidden');
+      document.getElementById('storm-overlay').classList.remove('hidden');
     }
 
     /* SPEL 4: SIFFERSTAFETTEN */
